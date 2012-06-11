@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project name="LabSetup" default="pull_git_repos" basedir=".">
+	<target name="pull_git_repos">
+		<exec dir="/home/bugs/git/lyo.innovate.workshop" executable="git">
+			<arg line="stash" />
+		</exec>
+		<exec dir="/home/bugs/git/lyo.innovate.workshop" executable="git">
+			<arg line="pull origin master" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.rio" executable="git">
+			<arg line="stash" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.rio" executable="git">
+			<arg line="pull origin master" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.testsuite" executable="git">
+			<arg line="stash" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.testsuite" executable="git">
+			<arg line="pull origin master" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.core" executable="git">
+			<arg line="stash" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.core" executable="git">
+			<arg line="pull origin master" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.server" executable="git">
+			<arg line="stash" />
+		</exec>
+		<exec dir="/home/bugs/git/org.eclipse.lyo.server" executable="git">
+			<arg line="pull origin master" />
+		</exec>
+	</target>
+</project>

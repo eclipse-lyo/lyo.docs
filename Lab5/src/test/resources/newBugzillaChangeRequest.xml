@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:oslc="http://open-services.net/ns/core#"
+    xmlns:bugz="http://www.bugzilla.org/rdf#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:oslc_cm="http://open-services.net/ns/cm#">
+  <oslc_cm:ChangeRequest>
+    <bugz:operatingSystem>Linux</bugz:operatingSystem>
+    <rdf:type rdf:resource="http://open-services.net/ns/cm#BugzillaChangeRequest"/>
+    <oslc_cm:status>NEW</oslc_cm:status>
+    <bugz:priority>---</bugz:priority>
+    <dcterms:title>New bug entered from OSLC Adapter</dcterms:title>
+    <bugz:version>unspecified</bugz:version>
+    <bugz:platform>PC</bugz:platform>
+    <dcterms:contributor>
+      <foaf:Person rdf:about="http://oslc:8080/OSLC4JBugzilla/person?mbox=bugs%40localhost.here">
+        <foaf:mbox>bugs@localhost.here</foaf:mbox>
+      </foaf:Person>
+    </dcterms:contributor>
+    <bugz:component>Server</bugz:component>
+    <oslc_cm:severity>Unclassified</oslc_cm:severity>
+  </oslc_cm:ChangeRequest>
+</rdf:RDF>

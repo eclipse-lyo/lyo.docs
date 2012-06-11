@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion> 
+	<groupId>oslc.workshop</groupId> 
+	<artifactId>build-all</artifactId> 
+	<version>0.1.1-SNAPSHOT</version> 
+	<packaging>pom</packaging> 
+	<modules>
+
+	<module>../../org.eclipse.lyo.core/OSLC4J</module>
+	<module>../OSLC4JBugzilla</module>
+	<module>../../org.eclipse.lyo.core/OSLC4JJenaProvider</module>
+	<module>../../org.eclipse.lyo.core/OSLC4JJson4JProvider</module>
+	<module>../../org.eclipse.lyo.core/OSLC4JRegistry</module>
+	<module>../../org.eclipse.lyo.core/OSLC4JWink</module>
+	<module>
+		../../org.eclipse.lyo.server/org.eclipse.lyo.server.oauth.consumerstore
+	</module>
+	<module>
+		../../org.eclipse.lyo.server/org.eclipse.lyo.server.oauth.core
+	</module>
+	<module>
+		../../org.eclipse.lyo.server/org.eclipse.lyo.server.oauth.webapp
+	</module>
+	<module>../Lab1</module>
+	<module>../Lab2</module>
+	<module>../Lab3</module>
+	<module>../Lab4</module>
+	<module>../Lab5</module>
+	<module>../Lab6</module>
+	</modules> 
+</project>
