@@ -199,6 +199,18 @@ public class CredentialsFilter implements Filter {
 			public String getRealm(HttpServletRequest request) {
 				return BugzillaManager.REALM;
 			}
+			
+			@Override
+			public boolean isAuthenticated(HttpServletRequest request) {
+				BugzillaConnector bc = (BugzillaConnector) request.getSession()
+						.getAttribute(CONNECTOR_ATTRIBUTE);
+				if (bc == null) {
+					return false;
+				}
+				
+				request.setAttribute(CONNECTOR_ATTRIBUTE, bc);
+				return true;
+			}
 		});
 
 		/*
@@ -223,6 +235,8 @@ public class CredentialsFilter implements Filter {
 				super.generateAccessToken(oAuthRequest);
 				keyToConnectorCache.put(oAuthRequest.getAccessor().accessToken, bc);
 			}
+			
+			
 		});
 
 		try {
