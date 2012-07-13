@@ -22,9 +22,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,24 +46,28 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.eclipse.lyo.core.query.ParseException;
+import org.eclipse.lyo.core.query.Properties;
+import org.eclipse.lyo.core.query.QueryUtils;
+import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Constants;
 import org.eclipse.lyo.oslc4j.bugzilla.jbugzx.rpc.GetLegalValues;
 import org.eclipse.lyo.oslc4j.bugzilla.resources.BugzillaChangeRequest;
 import org.eclipse.lyo.oslc4j.bugzilla.resources.ChangeRequest;
 import org.eclipse.lyo.oslc4j.bugzilla.servlet.ServiceProviderCatalogSingleton;
+import org.eclipse.lyo.oslc4j.core.OSLC4JConstants;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcCreationFactory;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcDialog;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcDialogs;
+import org.eclipse.lyo.oslc4j.core.annotation.OslcNamespaceDefinition;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcQueryCapability;
+import org.eclipse.lyo.oslc4j.core.annotation.OslcSchema;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcService;
 import org.eclipse.lyo.oslc4j.core.model.Compact;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
 import org.eclipse.lyo.oslc4j.core.model.Preview;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
-import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
-
-
 
 import com.j2bugzilla.base.Bug;
 import com.j2bugzilla.base.BugzillaConnector;
@@ -117,6 +120,8 @@ public class BugzillaChangeRequestService
      * 
      * @param productId
      * @param where
+     * @param select
+     * @param prefix
      * @param pageString
      * @return
      * @throws IOException
@@ -124,18 +129,93 @@ public class BugzillaChangeRequestService
      */
     @GET
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-    public BugzillaChangeRequest[] getChangeRequests(@PathParam("productId")   final String productId,
-    		                                 		 @QueryParam("oslc.where") final String where,
-    		                                 		 @QueryParam("page")       final String pageString) throws IOException, ServletException 
+    public List<BugzillaChangeRequest> getChangeRequests(@PathParam("productId")        final String productId,
+    		                                 	     	 @QueryParam("oslc.where")      final String where,
+    		                                 		     @QueryParam("oslc.select")     final String select,
+    		                                 		     @QueryParam("oslc.prefix")     final String prefix,
+    		                                             @QueryParam("page")            final String pageString) throws IOException, ServletException 
     {
-    	int page=0;   //paging not supported yet for rdf, xml or JSON
+    	int page=0;
+    	
+        if (null != pageString) {
+            page = Integer.parseInt(pageString);
+        }
+        
     	int limit=999;
+    	Map<String, String> prefixMap;
+    	
+        try {
+            prefixMap = QueryUtils.parsePrefixes(prefix);
+        } catch (ParseException e) {
+           throw new IOException(e);
+        }
         
+        addDefaultPrefixes(prefixMap);
         
-        final List<Bug> bugList = BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit);      
+        final List<Bug> bugList = BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
+                                                                   where, prefixMap);
+        
+        Properties properties;
+        
+        if (select == null) {
+            properties = QueryUtils.WILDCARD_PROPERTY_LIST;
+        } else {
+            try {
+                properties = QueryUtils.parseSelect(select, prefixMap);
+            } catch (ParseException e) {
+                throw new IOException(e);
+            }
+        }
+        
         final List<BugzillaChangeRequest> results = changeRequestsFromBugList(httpServletRequest, bugList, productId);
+        
+        httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
+                                        QueryUtils.invertSelectedProperties(properties));
 
-        return results.toArray(new BugzillaChangeRequest[results.size()]);
+        return results;
+    }
+    
+    private static void addDefaultPrefixes(final Map<String, String> prefixMap)
+    {
+        recursivelyCollectNamespaceMappings(prefixMap, BugzillaChangeRequest.class);
+    }    
+
+    private static void recursivelyCollectNamespaceMappings(final Map<String, String>     prefixMap,
+                                                            final Class<? extends Object> resourceClass)
+    {
+        final OslcSchema oslcSchemaAnnotation = resourceClass.getPackage().getAnnotation(OslcSchema.class);
+
+        if (oslcSchemaAnnotation != null)
+        {
+            final OslcNamespaceDefinition[] oslcNamespaceDefinitionAnnotations = oslcSchemaAnnotation.value();
+
+            for (final OslcNamespaceDefinition oslcNamespaceDefinitionAnnotation : oslcNamespaceDefinitionAnnotations)
+            {
+                final String prefix       = oslcNamespaceDefinitionAnnotation.prefix();
+                final String namespaceURI = oslcNamespaceDefinitionAnnotation.namespaceURI();
+
+                prefixMap.put(prefix, namespaceURI);
+            }
+        }
+
+        final Class<?> superClass = resourceClass.getSuperclass();
+
+        if (superClass != null)
+        {
+            recursivelyCollectNamespaceMappings(prefixMap,
+                                                superClass);
+        }
+
+        final Class<?>[] interfaces = resourceClass.getInterfaces();
+
+        if (interfaces != null)
+        {
+            for (final Class<?> interfac : interfaces)
+            {
+                recursivelyCollectNamespaceMappings(prefixMap,
+                                                    interfac);
+            }
+        }
     }
     
     /**
@@ -144,7 +224,8 @@ public class BugzillaChangeRequestService
      * Forwards to changerequest_collection_html.jsp to build the html page
      * 
      * @param productId
-     * @param changeRequestId
+     * @param where
+     * @param prefix
      * @param pageString
      * @return
      * @throws ServletException
@@ -152,18 +233,31 @@ public class BugzillaChangeRequestService
      */
 	@GET
 	@Produces({ MediaType.TEXT_HTML })
-	public Response getHtmlCollection(@PathParam("productId")       final String productId,
-			                          @PathParam("changeRequestId") final String changeRequestId,
-			                          @QueryParam("page")           final String pageString) throws ServletException, IOException
+	public Response getHtmlCollection(@PathParam("productId")        final String productId,
+			                          @QueryParam("oslc.where")      final String where,
+                                      @QueryParam("oslc.prefix")     final String prefix,
+                                      @QueryParam("page")            final String pageString) throws ServletException, IOException
 	{
 		int page=0;
+        
+        if (null != pageString) {
+            page = Integer.parseInt(pageString);
+        }
+        
 		int limit=20;
 		
-		if (null != pageString) {
-			page = Integer.parseInt(pageString);
-		}
-		
-		List<Bug> bugList = BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit);
+        Map<String, String> prefixMap;
+        
+        try {
+            prefixMap = QueryUtils.parsePrefixes(prefix);
+        } catch (ParseException e) {
+           throw new IOException(e);
+        }
+        
+        addDefaultPrefixes(prefixMap);
+        
+		List<Bug> bugList = BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
+                                                             where, prefixMap);
 		final List<BugzillaChangeRequest> results = changeRequestsFromBugList(httpServletRequest, bugList, productId);
 
         if (bugList != null) {
@@ -194,6 +288,8 @@ public class BugzillaChangeRequestService
 	 * 
 	 * @param productId
 	 * @param changeRequestId
+	 * @param propertiesString
+	 * @param prefix
 	 * @return
 	 * @throws IOException
 	 * @throws ServletException
@@ -202,9 +298,33 @@ public class BugzillaChangeRequestService
     @GET
     @Path("{changeRequestId}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-    public BugzillaChangeRequest getChangeRequest(@PathParam("productId")       final String productId,
-                                                  @PathParam("changeRequestId") final String changeRequestId) throws IOException, ServletException, URISyntaxException
+    public BugzillaChangeRequest getChangeRequest(@PathParam("productId")        final String productId,
+                                                  @PathParam("changeRequestId")  final String changeRequestId,
+                                                  @QueryParam("oslc.properties") final String propertiesString,
+                                                  @QueryParam("oslc.prefix")     final String prefix) throws IOException, ServletException, URISyntaxException
     {
+        Map<String, String> prefixMap;
+        
+        try {
+            prefixMap = QueryUtils.parsePrefixes(prefix);
+        } catch (ParseException e) {
+           throw new IOException(e);
+        }
+        
+        addDefaultPrefixes(prefixMap);
+        
+        Properties properties;
+        
+        if (propertiesString == null) {
+            properties = QueryUtils.WILDCARD_PROPERTY_LIST;
+        } else {
+            try {
+                properties = QueryUtils.parseSelect(propertiesString, prefixMap);
+            } catch (ParseException e) {
+                throw new IOException(e);
+            }
+        }
+        
         final Bug bug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
 
         if (bug != null) {
@@ -216,6 +336,9 @@ public class BugzillaChangeRequestService
         	changeRequest.setAbout(getAboutURI(productId + "/changeRequests/" + changeRequest.getIdentifier()));
         	setETagHeader(getETagFromChangeRequest(changeRequest), httpServletResponse);
 
+            httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
+                                            QueryUtils.invertSelectedProperties(properties));
+            
             return changeRequest;
         }
 
