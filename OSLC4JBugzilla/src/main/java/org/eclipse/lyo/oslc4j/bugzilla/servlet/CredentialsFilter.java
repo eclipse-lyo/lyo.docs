@@ -37,7 +37,6 @@ import net.oauth.server.OAuthServlet;
 
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Credentials;
-import org.eclipse.lyo.oslc4j.bugzilla.exception.BugzillaOAuthException;
 import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.HttpUtils;
 import org.eclipse.lyo.server.oauth.consumerstore.RdfConsumerStore;
@@ -58,6 +57,7 @@ public class CredentialsFilter implements Filter {
 
 	
     public static final String CONNECTOR_ATTRIBUTE = "org.eclipse.lyo.oslc4j.bugzilla.BugzillaConnector";
+    public static final String CREDENTIALS_ATTRIBUTE = "org.eclipse.lyo.oslc4j.bugzilla.Credentials";
     private static final String ADMIN_SESSION_ATTRIBUTE = "org.eclipse.lyo.oslc4j.bugzilla.AdminSession";
     public static final String JAZZ_INVALID_EXPIRED_TOKEN_OAUTH_PROBLEM = "invalid_expired_token";
     public static final String OAUTH_REALM = "Bugzilla";
@@ -129,6 +129,8 @@ public class CredentialsFilter implements Filter {
 						}
 						connector = getBugzillaConnector(credentials);
 						session.setAttribute(CONNECTOR_ATTRIBUTE, connector);
+						session.setAttribute(CREDENTIALS_ATTRIBUTE,
+						        credentials);
 				
 					} catch (UnauthorizedException e)
 					{
@@ -179,6 +181,11 @@ public class CredentialsFilter implements Filter {
 					String admin = BugzillaManager.getAdmin();
 					request.getSession().setAttribute(ADMIN_SESSION_ATTRIBUTE,
 							admin != null && admin.equals(id));
+					Credentials creds = new Credentials();
+					creds.setUsername(id);
+					creds.setPassword(password);
+                    request.getSession().setAttribute(CREDENTIALS_ATTRIBUTE,
+                            creds);
 				} catch (Exception e) {
 					throw new AuthenticationException(e.getCause().getMessage(), e);
 				}

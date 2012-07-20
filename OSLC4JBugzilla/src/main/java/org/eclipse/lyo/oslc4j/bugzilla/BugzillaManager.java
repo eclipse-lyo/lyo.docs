@@ -18,9 +18,17 @@
 package org.eclipse.lyo.oslc4j.bugzilla;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +41,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.lyo.core.query.ComparisonTerm;
 import org.eclipse.lyo.core.query.CompoundTerm;
+import org.eclipse.lyo.core.query.InTerm;
 import org.eclipse.lyo.core.query.PName;
 import org.eclipse.lyo.core.query.ParseException;
 import org.eclipse.lyo.core.query.QueryUtils;
@@ -43,16 +54,23 @@ import org.eclipse.lyo.core.query.SimpleTerm;
 import org.eclipse.lyo.core.query.Value;
 import org.eclipse.lyo.core.query.WhereClause;
 import org.eclipse.lyo.oslc4j.bugzilla.resources.BugzillaChangeRequest;
+import org.eclipse.lyo.oslc4j.bugzilla.resources.Person;
 import org.eclipse.lyo.oslc4j.bugzilla.servlet.CredentialsFilter;
+import org.eclipse.lyo.oslc4j.bugzilla.servlet.ServiceProviderCatalogSingleton;
+import org.eclipse.lyo.oslc4j.bugzilla.utils.BugzillaHttpClient;
 import org.eclipse.lyo.oslc4j.client.ServiceProviderRegistryURIs;
+import org.eclipse.lyo.oslc4j.core.SingletonWildcardProperties;
 import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
+import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import com.j2bugzilla.base.Bug;
 import com.j2bugzilla.base.BugFactory;
 import com.j2bugzilla.base.BugzillaConnector;
 import com.j2bugzilla.base.Product;
-import com.j2bugzilla.rpc.BugSearch;
 import com.j2bugzilla.rpc.CommentBug;
 import com.j2bugzilla.rpc.GetBug;
 import com.j2bugzilla.rpc.GetProduct;
@@ -73,7 +91,19 @@ public class BugzillaManager implements ServletContextListener  {
 	private static final String PROPERTY_SCHEME = BugzillaManager.class.getPackage().getName() + ".scheme";
     private static final String PROPERTY_PORT   = BugzillaManager.class.getPackage().getName() + ".port";
     private static final String SYSTEM_PROPERTY_NAME_REGISTRY_URI = ServiceProviderRegistryURIs.class.getPackage().getName() + ".registryuri";
-
+    private static final String QUERY_PREFIX =
+        "buglist.cgi?query_format=advanced&ctype=rdf&columnlist=" +
+            "short_desc," +
+            "bug_status," +
+            "assigned_to," +
+            "product," +
+            "component," +
+            "version," +
+            "priority," +
+            "rep_platform," +
+            "op_sys";
+    private static final String BUGZ_NS = "http://www.bugzilla.org/rdf#";
+    private static final String BUGZ_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
 
     private static final String HOST = getHost();
 	
@@ -193,68 +223,214 @@ public class BugzillaManager implements ServletContextListener  {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public static List<Bug> getBugsByProduct(final HttpServletRequest httpServletRequest, final String productIdString, int page, int limit, String oslcWhere, Map<String, String> prefixMap) throws IOException, ServletException 
+	public static List<BugzillaChangeRequest>
+	getBugsByProduct(final HttpServletRequest httpServletRequest,
+	                 final String productIdString,
+	                 int page,
+	                 int limit,
+	                 String oslcWhere,
+	                 Map<String, String> prefixMap,
+	                 Map<String, Object> propMap) throws IOException, ServletException 
     {
-    	List<Bug> results=null;		
+    	List<BugzillaChangeRequest> results=new ArrayList<BugzillaChangeRequest>();		
 
 		try {
+		    
 			final BugzillaConnector bc = BugzillaManager.getBugzillaConnector(httpServletRequest);
-			int productId = Integer.parseInt(productIdString);
-			
-			final GetProduct getProducts = new GetProduct(productId);
 			
 			if (bc != null) {
 				
-				bc.executeMethod(getProducts);
-				final Product product = getProducts.getProduct();
-		
-				final BugSearch bugSearch = createBugSearch(page, limit, product, oslcWhere, prefixMap);			
-				bc.executeMethod(bugSearch);
-				results = bugSearch.getSearchResults();
+	            final ServiceProvider serviceProvider =
+	                ServiceProviderCatalogSingleton.getServiceProvider(
+	                        httpServletRequest, productIdString);
+	            StringBuffer buffer = new StringBuffer();
+	            
+	            buffer.append(QUERY_PREFIX);
+	            
+				createBugSearch(page, limit, serviceProvider, oslcWhere, prefixMap, buffer);
+				
+				Credentials credentials = (Credentials)httpServletRequest.getSession().getAttribute(CredentialsFilter.CREDENTIALS_ATTRIBUTE);
+				
+				BugzillaHttpClient client = new BugzillaHttpClient(getBugzillaUri(), credentials);
+				
+				InputStream response = client.httpGet(buffer.toString());
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		        factory.setNamespaceAware(true);
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document document = builder.parse(response);		        
+		        Element root = document.getDocumentElement();
+		        NodeList list = root.getElementsByTagNameNS(BUGZ_NS, "bug");
+		        
+                factory.setNamespaceAware(false);
+                
+                builder = factory.newDocumentBuilder();
+                
+		        for (int idx = 0; idx < list.getLength(); idx++) {
+		            
+                    Element p = (Element)list.item(idx);
+                    
+                    BugzillaChangeRequest changeRequest = createChangeRequest(p);                   
+
+                    if (propMap instanceof SingletonWildcardProperties ||
+                        propMap.get(OslcConstants.DCTERMS_NAMESPACE + "created") != null ||
+                        propMap.get(OslcConstants.DCTERMS_NAMESPACE + "modified") != null) {
+                        
+                        buffer = new StringBuffer();
+                        
+                        buffer.append("show_bug.cgi?id=");
+                        buffer.append(changeRequest.getIdentifier());
+                        buffer.append("&ctype=xml&field=creation_ts&field=delta_ts");
+                        
+                        response = client.httpGet(buffer.toString());
+                        
+                        document = builder.parse(response);
+                        root = document.getDocumentElement();
+                        
+                        NodeList innerList = root.getElementsByTagName("creation_ts");
+                        
+                        if (innerList.getLength() == 1) {
+                            changeRequest.setCreated(convertBugzillaDate(innerList.item(0).getTextContent()));
+                        }
+                        
+                        innerList = root.getElementsByTagName("delta_ts");
+                        
+                        if (innerList.getLength() == 1) {
+                            changeRequest.setModified(convertBugzillaDate(innerList.item(0).getTextContent()));
+                        }
+                    }
+                    
+                    changeRequest.setServiceProvider(ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productIdString).getAbout());
+                    
+                    URI about;
+                    
+                    try {
+                        about = new URI(getBugzServiceBase() + "/" + productIdString + "/changeRequests/"+ changeRequest.getIdentifier());
+                    } catch (URISyntaxException e) {
+                        throw new WebApplicationException(e);
+                    }
+                     
+                    changeRequest.setAbout(about);
+                    
+                    results.add(changeRequest);
+                }
+		        
 			} else {
 				System.err.println("Bugzilla Connector not initialized - check bugz.properties");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new WebApplicationException(e);
+			throw ((e instanceof WebApplicationException) ?
+			    (WebApplicationException)e :
+			    new WebApplicationException(e));
 		}
     	
     	return results;
     }
 	
-	
-	protected static BugSearch createBugSearch(int page, int limit, Product product, String oslcWhere,
-	                                           Map<String, String> prefixMap) throws ParseException
+	private static Date convertBugzillaDate(String dateString) throws IOException
 	{
-	    List<BugSearch.SearchQuery> queries = new ArrayList<BugSearch.SearchQuery>();
-		BugSearch.SearchQuery productQuery = new BugSearch.SearchQuery(
-				BugSearch.SearchLimiter.PRODUCT, product.getName());
-		
-		queries.add(productQuery);
-		
-		BugSearch.SearchQuery limitQuery = new BugSearch.SearchQuery(
-				BugSearch.SearchLimiter.LIMIT, (limit + 1) + "");
-		
-		queries.add(limitQuery);
-		
-		BugSearch.SearchQuery offsetQuery = new BugSearch.SearchQuery(
-				BugSearch.SearchLimiter.OFFSET, (page * limit) + "");
-		
-		queries.add(offsetQuery);
-		
+	    if (dateString == null) {
+	        return null;
+	    }
+	    
+	    DateFormat format = new SimpleDateFormat(BUGZ_DATE_FORMAT);
+	    
+	    try {
+            return format.parse(dateString);
+        } catch (java.text.ParseException e) {
+            throw new IOException(e);
+        }
+	}
+	
+	private static BugzillaChangeRequest createChangeRequest(Element bug) throws IOException, URISyntaxException
+	{
+        BugzillaChangeRequest changeRequest = new BugzillaChangeRequest();
+        
+        changeRequest.setIdentifier(elementText(bug, "id"));
+        changeRequest.setTitle(elementText(bug, "short_desc"));
+        changeRequest.setStatus(elementText(bug, "bug_status"));
+
+        //Map contributor to the person this bug is assigned to
+        String email = elementText(bug, "assigned_to");
+        if (email != null) {
+            Person contributor = new Person();
+            contributor.setUri(new URI(BugzillaManager.getServletBase() + "/person?mbox=" + URLEncoder.encode(email, "UTF-8")));
+            contributor.setMbox(email);
+            contributor.setAbout(contributor.getUri());
+            ArrayList<Person> contributors = new ArrayList<Person>();
+            contributors.add(contributor);
+            changeRequest.setContributors(contributors);
+        }
+        
+        changeRequest.setProduct(elementText(bug, "product"));
+        changeRequest.setComponent(elementText(bug, "component"));        
+        changeRequest.setVersion(elementText(bug, "version"));        
+        changeRequest.setPriority(elementText(bug, "priority"));        
+        changeRequest.setPlatform(elementText(bug, "rep_platform"));
+        changeRequest.setOperatingSystem(elementText(bug, "op_sys"));
+        
+        return changeRequest;
+	}
+	
+	private static String elementText(Element parent, String localName)
+	{
+	    NodeList list = parent.getElementsByTagNameNS(BUGZ_NS, localName);
+	    
+	    if (list.getLength() > 1) {
+	        throw new IllegalStateException("More than one " + BUGZ_NS +
+	                localName + " child");
+	    }
+	    
+	    return list.getLength() == 0 ? null : list.item(0).getTextContent();
+	}
+	
+	private static void createBugSearch(int page, int limit, final ServiceProvider serviceProvider , String oslcWhere,
+	                                    Map<String, String> prefixMap, final StringBuffer buffer) throws ParseException
+	{
+	    buffer.append("&limit=");
+	    buffer.append(limit);
+	    
+	    buffer.append("&offset=");
+	    buffer.append(page * limit);
+	    
+	    addSearchTerm(0, "product", "equals", serviceProvider.getTitle(), buffer);
+	    
 		if (oslcWhere != null) {
 		    
     		WhereClause whereClause = QueryUtils.parseWhere(oslcWhere, prefixMap);
     		
-    		createSearchQueries(queries, whereClause, toplevelQueryProperties);
+    		createSearchQueries(buffer, 1, whereClause, toplevelQueryProperties);
 		}
-		
-		return new BugSearch(queries.toArray(new BugSearch.SearchQuery[queries.size()]));
 	}
 	
-	protected static void createSearchQueries(List<BugSearch.SearchQuery> queries,
-	                                          CompoundTerm compoundTerm,
-	                                          Map<String, Object> queryProperties)
+	private static void
+	addSearchTerm(int index, String field, String operator, String value,
+	              final StringBuffer buffer)
+	{
+	    buffer.append("&field");
+	    buffer.append(index);
+	    buffer.append("-0-0=");
+	    buffer.append(field);
+	    
+        buffer.append("&type");
+        buffer.append(index);
+        buffer.append("-0-0=");
+        buffer.append(operator);
+        
+        buffer.append("&value");
+        buffer.append(index);
+        buffer.append("-0-0=");
+        
+        try {
+            buffer.append(URLEncoder.encode(value, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            // XXX - can't happen
+        }
+	}	
+	
+	private static int createSearchQueries(final StringBuffer buffer, int index,
+	                                       CompoundTerm compoundTerm,
+	                                       Map<String, Object> queryProperties)
 	{
 	    for (SimpleTerm term : compoundTerm.children()) {
 	        
@@ -263,43 +439,56 @@ public class BugzillaManager implements ServletContextListener  {
 	            break;
 	        case NESTED:
 	            PName property = term.property();
-	            Object limiter = queryProperties.get(property.namespace + property.local);
+	            Object field = queryProperties.get(property.namespace + property.local);
 	            
-	            if (limiter == null || limiter instanceof BugSearch.SearchLimiter) {
+	            if (field == null || field instanceof String) {
 	                throw new WebApplicationException(
 	                        new UnsupportedOperationException("Unsupported oslc.where nested term property term: " + term),
 	                        Status.BAD_REQUEST);
 	            }
 	            
 	            @SuppressWarnings("unchecked")
-                Map<String, Object> nestedQueryProperties = (Map<String, Object>)limiter;
+                Map<String, Object> nestedQueryProperties = (Map<String, Object>)field;
 	            
-                createSearchQueries(queries, (CompoundTerm)term, nestedQueryProperties);
+                index = createSearchQueries(buffer, index, (CompoundTerm)term, nestedQueryProperties);
                 
 	            continue;
 	            
 	        default:
-	            throw new WebApplicationException(
-	                    new UnsupportedOperationException("Unsupported oslc.where term type: " + term),
-	                    Status.BAD_REQUEST);
+	            createInQuery(buffer, index++, (InTerm)term, queryProperties);
+	            continue;
 	        }
 	        
 	        ComparisonTerm comparison = (ComparisonTerm)term;
+	        String operator;
 	        
 	        switch (comparison.operator()) {
 	        case EQUALS:
+	            operator = "equals";
 	            break;
+	        case NOT_EQUALS:
+                operator = "notequals";
+                break;
+            case LESS_THAN:
+                operator = "lessthan";
+                break;
+            case LESS_EQUALS:
+                operator = "lessthaneq";
+                break;
+            case GREATER_THAN:
+                operator = "greaterthan";
+                break;
             default:
-                throw new WebApplicationException(
-                        new UnsupportedOperationException("Unsupported oslc.where comparison operator: " + term),
-                        Status.BAD_REQUEST);	            
+            case GREATER_EQUALS:
+                operator = "greaterhaneq";
+                break;
 	        }
 	        
 	        PName property = comparison.property();	        
-	        Object limiter =
+	        Object field =
 	            queryProperties.get(property.namespace + property.local);
 	        
-	        if (limiter == null || ! (limiter instanceof BugSearch.SearchLimiter)) {
+	        if (field == null || ! (field instanceof String)) {
                 throw new WebApplicationException(
                         new UnsupportedOperationException("Unsupported oslc.where comparison property: " + term),
                         Status.BAD_REQUEST);                
@@ -322,11 +511,73 @@ public class BugzillaManager implements ServletContextListener  {
                         Status.BAD_REQUEST);                
 	        }
 	        
-	        BugSearch.SearchQuery query = new BugSearch.SearchQuery(
-	                (BugSearch.SearchLimiter)limiter, value);
-	        
-	        queries.add(query);
+	        addSearchTerm(index++, (String)field, operator, value, buffer);
 	    }
+	    
+	    return index;
+	}
+	
+	private static void createInQuery(final StringBuffer buffer, int index,
+                                      InTerm inTerm,
+                                      Map<String, Object> queryProperties)
+	{
+        PName property = inTerm.property();         
+        Object field = queryProperties.get(property.namespace + property.local);
+        
+        if (field == null || ! (field instanceof String)) {
+            throw new WebApplicationException(
+                    new UnsupportedOperationException("Unsupported oslc.where comparison property: " + inTerm),
+                    Status.BAD_REQUEST);                
+        }
+        
+        int subIndex = 0;
+        
+        for (Value operand : inTerm.values()) {
+            
+            String value = operand.toString();
+            
+            switch (operand.type()) {
+            case STRING:
+            case URI_REF:
+                value = value.substring(1, value.length() - 1);
+                break;
+            case BOOLEAN:
+            case DECIMAL:
+                break;
+            default:
+                throw new WebApplicationException(
+                        new UnsupportedOperationException("Unsupported oslc.where comparison operand: " + value),
+                        Status.BAD_REQUEST);                
+            }
+            
+            
+            buffer.append("&field");
+            buffer.append(index);
+            buffer.append("-0-");
+            buffer.append(subIndex);
+            buffer.append('=');
+            buffer.append(field);
+            
+            buffer.append("&type");
+            buffer.append(index);
+            buffer.append("-0-");
+            buffer.append(subIndex);
+            buffer.append("=equals");
+            
+            buffer.append("&value");
+            buffer.append(index);
+            buffer.append("-0-");
+            buffer.append(subIndex);
+            buffer.append('=');
+            
+            try {
+                buffer.append(URLEncoder.encode(value, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                // XXX - can't happen
+            }
+            
+            subIndex++;
+        }
 	}
 	
 	/**
@@ -512,29 +763,36 @@ public class BugzillaManager implements ServletContextListener  {
 	
 	static {
 	    
+        toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "identifier",
+                                    "big_id");
+        toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "title",
+                                    "short_desc");
+        toplevelQueryProperties.put(Constants.CHANGE_MANAGEMENT_NAMESPACE + "status",
+                                    "bug_status");
+        
 	    Map<String, Object> nestedQueryProperties =
 	        new HashMap<String, Object>(1);
 	    
 	    nestedQueryProperties.put(Constants.FOAF_NAMESPACE + "mbox",
-	                              BugSearch.SearchLimiter.OWNER);
+	                              "assigned_to");
 	    
         toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "contributor",
                                     nestedQueryProperties);
 	    
+        toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "created",
+                                    "creation_ts");
+        toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "modified",
+                                    "delta_ts");
 	    toplevelQueryProperties.put(Constants.BUGZILLA_NAMESPACE + "component",
-	                                BugSearch.SearchLimiter.COMPONENT);
+	                                "component");
         toplevelQueryProperties.put(Constants.BUGZILLA_NAMESPACE + "version",
-                                    BugSearch.SearchLimiter.VERSION);
+                                    "version");
         toplevelQueryProperties.put(Constants.BUGZILLA_NAMESPACE + "priority",
-                                    BugSearch.SearchLimiter.PRIORITY);
+                                    "priority");
         toplevelQueryProperties.put(Constants.BUGZILLA_NAMESPACE + "platform",
-                                    BugSearch.SearchLimiter.PLATFORM);
+                                    "rep_platform");
         toplevelQueryProperties.put(Constants.BUGZILLA_NAMESPACE + "operatingSystem",
-                                    BugSearch.SearchLimiter.OPERATING_SYSTEM);
-        toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "title",
-                                    BugSearch.SearchLimiter.SUMMARY);
-        toplevelQueryProperties.put(Constants.CHANGE_MANAGEMENT_NAMESPACE + "status",
-                                    BugSearch.SearchLimiter.STATUS);
+                                    "op_sys");
 	}
 
 }
