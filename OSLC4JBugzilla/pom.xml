@@ -86,6 +86,11 @@
 			<artifactId>org.eclipse.lyo.core.query</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.1</version>
+		</dependency>
 	</dependencies>
   
   <build>

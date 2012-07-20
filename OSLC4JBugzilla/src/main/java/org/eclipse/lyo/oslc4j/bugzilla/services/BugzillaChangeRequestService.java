@@ -141,7 +141,7 @@ public class BugzillaChangeRequestService
             page = Integer.parseInt(pageString);
         }
         
-    	int limit=999;
+    	int limit=10;
     	Map<String, String> prefixMap;
     	
         try {
@@ -151,9 +151,6 @@ public class BugzillaChangeRequestService
         }
         
         addDefaultPrefixes(prefixMap);
-        
-        final List<Bug> bugList = BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
-                                                                   where, prefixMap);
         
         Properties properties;
         
@@ -167,10 +164,16 @@ public class BugzillaChangeRequestService
             }
         }
         
-        final List<BugzillaChangeRequest> results = changeRequestsFromBugList(httpServletRequest, bugList, productId);
+        Map<String, Object> propMap =
+            QueryUtils.invertSelectedProperties(properties);
+        
+        final List<BugzillaChangeRequest> results =
+            BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
+                                             where, prefixMap,
+                                             propMap);
         
         httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
-                                        QueryUtils.invertSelectedProperties(properties));
+                                        propMap);
 
         return results;
     }
@@ -256,11 +259,22 @@ public class BugzillaChangeRequestService
         
         addDefaultPrefixes(prefixMap);
         
-		List<Bug> bugList = BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
-                                                             where, prefixMap);
-		final List<BugzillaChangeRequest> results = changeRequestsFromBugList(httpServletRequest, bugList, productId);
+        Properties properties;
+        
+        try {
+            properties = QueryUtils.parseSelect("dcterms:title", prefixMap);
+        } catch (ParseException e) {
+            throw new IOException(e);
+        }
+        
+        Map<String, Object> propMap =
+            QueryUtils.invertSelectedProperties(properties);
+        
+        final List<BugzillaChangeRequest> results =
+            BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
+                                             where, prefixMap, propMap);
 
-        if (bugList != null) {
+        if (results != null) {
         	final String bugzillaUri = BugzillaManager.getBugzillaUri().toString();
         	httpServletRequest.setAttribute("results", results);
         	httpServletRequest.setAttribute("bugzillaUri", bugzillaUri);
