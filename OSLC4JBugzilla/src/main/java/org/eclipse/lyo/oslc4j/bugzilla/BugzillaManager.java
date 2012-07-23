@@ -41,6 +41,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -111,6 +112,8 @@ public class BugzillaManager implements ServletContextListener  {
     private static final String BUGZ_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
 
     private static final String HOST = getHost();
+    
+    private static QName OSLC_SCORE = new QName(OslcConstants.OSLC_CORE_NAMESPACE, "score");
 	
     //Bugzilla adapter properties from bugz.properties 
     static {
@@ -226,6 +229,7 @@ public class BugzillaManager implements ServletContextListener  {
 	 * @param prefixMap
 	 * @param propMap
 	 * @param orderBy
+	 * @param searchTerms
 	 * 
 	 * @return The list of change requests, paged if necessary
 	 * 
@@ -240,7 +244,8 @@ public class BugzillaManager implements ServletContextListener  {
 	                 String oslcWhere,
 	                 Map<String, String> prefixMap,
 	                 Map<String, Object> propMap,
-	                 String orderBy) throws IOException, ServletException 
+	                 String orderBy,
+	                 String searchTerms) throws IOException, ServletException 
     {
     	List<BugzillaChangeRequest> results=new ArrayList<BugzillaChangeRequest>();		
 
@@ -255,8 +260,29 @@ public class BugzillaManager implements ServletContextListener  {
 	                        httpServletRequest, productIdString);
 	            StringBuffer buffer = new StringBuffer();
 	            
-	            buffer.append(QUERY_PREFIX);
-	            
+                boolean fulltextSearch = searchTerms != null &&
+                searchTerms.length() != 0;
+            
+                buffer.append(QUERY_PREFIX);
+                
+                if (fulltextSearch) {
+                    
+                    buffer.append(",relevance&content=");
+                    
+                    boolean first = true;
+                    
+                    for (String searchTerm : QueryUtils.parseSearchTerms(searchTerms)) {
+                        
+                        if (first) {
+                            first = false;
+                        } else {
+                            buffer.append('+');
+                        }
+                        
+                        buffer.append(URLEncoder.encode('"' + searchTerm + '"', "UTF-8"));
+                    }
+                }
+                
 				createBugSearch(page, limit, serviceProvider, oslcWhere, prefixMap, buffer);
 				
 				if (orderBy != null && orderBy.length() != 0) {
@@ -266,7 +292,15 @@ public class BugzillaManager implements ServletContextListener  {
 				    
 				    buffer.append("&order=");
 				    
-				    addSort(buffer, orderByClause, toplevelQueryProperties, true);
+				    if (fulltextSearch) {
+				        buffer.append("relevance+DESC");
+				    }
+				    
+				    addSort(buffer, orderByClause, toplevelQueryProperties, ! fulltextSearch);
+				    
+				} else if (fulltextSearch) {
+				    
+				    buffer.append("&order=relevance+DESC");
 				}
 				
 				Credentials credentials = (Credentials)httpServletRequest.getSession().getAttribute(CredentialsFilter.CREDENTIALS_ATTRIBUTE);
@@ -289,7 +323,8 @@ public class BugzillaManager implements ServletContextListener  {
 		            
                     Element p = (Element)list.item(idx);
                     
-                    BugzillaChangeRequest changeRequest = createChangeRequest(p);                   
+                    BugzillaChangeRequest changeRequest =
+                        createChangeRequest(p, fulltextSearch);                   
 
                     if (propMap instanceof SingletonWildcardProperties ||
                         propMap.get(OslcConstants.DCTERMS_NAMESPACE + "created") != null ||
@@ -362,7 +397,7 @@ public class BugzillaManager implements ServletContextListener  {
         }
 	}
 	
-	private static BugzillaChangeRequest createChangeRequest(Element bug) throws IOException, URISyntaxException
+	private static BugzillaChangeRequest createChangeRequest(Element bug, boolean fulltextSearch) throws IOException, URISyntaxException
 	{
         BugzillaChangeRequest changeRequest = new BugzillaChangeRequest();
         
@@ -388,6 +423,20 @@ public class BugzillaManager implements ServletContextListener  {
         changeRequest.setPriority(elementText(bug, "priority"));        
         changeRequest.setPlatform(elementText(bug, "rep_platform"));
         changeRequest.setOperatingSystem(elementText(bug, "op_sys"));
+        
+        if (fulltextSearch) {
+            
+            String relevance = elementText(bug, "relevance");
+            
+            if (relevance != null) {
+                
+                Map<QName, Object> extProps = new HashMap<QName, Object>(1);
+                
+                extProps.put(OSLC_SCORE, Float.valueOf(relevance));
+                
+                changeRequest.setExtendedProperties(extProps);
+            }
+        }
         
         return changeRequest;
 	}
