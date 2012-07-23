@@ -123,6 +123,7 @@ public class BugzillaChangeRequestService
      * @param select
      * @param prefix
      * @param pageString
+     * @param orderBy
      * @return
      * @throws IOException
      * @throws ServletException
@@ -133,7 +134,8 @@ public class BugzillaChangeRequestService
     		                                 	     	 @QueryParam("oslc.where")      final String where,
     		                                 		     @QueryParam("oslc.select")     final String select,
     		                                 		     @QueryParam("oslc.prefix")     final String prefix,
-    		                                             @QueryParam("page")            final String pageString) throws IOException, ServletException 
+    		                                             @QueryParam("page")            final String pageString,
+    		                                             @QueryParam("oslc.orderBy")    final String orderBy) throws IOException, ServletException 
     {
     	int page=0;
     	
@@ -170,7 +172,7 @@ public class BugzillaChangeRequestService
         final List<BugzillaChangeRequest> results =
             BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
                                              where, prefixMap,
-                                             propMap);
+                                             propMap, orderBy);
         
         httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
                                         propMap);
@@ -230,6 +232,7 @@ public class BugzillaChangeRequestService
      * @param where
      * @param prefix
      * @param pageString
+     * @param orderBy
      * @return
      * @throws ServletException
      * @throws IOException
@@ -239,7 +242,8 @@ public class BugzillaChangeRequestService
 	public Response getHtmlCollection(@PathParam("productId")        final String productId,
 			                          @QueryParam("oslc.where")      final String where,
                                       @QueryParam("oslc.prefix")     final String prefix,
-                                      @QueryParam("page")            final String pageString) throws ServletException, IOException
+                                      @QueryParam("page")            final String pageString,
+                                      @QueryParam("oslc.orderBy")    final String orderBy) throws ServletException, IOException
 	{
 		int page=0;
         
@@ -272,7 +276,7 @@ public class BugzillaChangeRequestService
         
         final List<BugzillaChangeRequest> results =
             BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
-                                             where, prefixMap, propMap);
+                                             where, prefixMap, propMap, orderBy);
 
         if (results != null) {
         	final String bugzillaUri = BugzillaManager.getBugzillaUri().toString();

@@ -47,10 +47,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.eclipse.lyo.core.query.ComparisonTerm;
 import org.eclipse.lyo.core.query.CompoundTerm;
 import org.eclipse.lyo.core.query.InTerm;
+import org.eclipse.lyo.core.query.OrderByClause;
 import org.eclipse.lyo.core.query.PName;
 import org.eclipse.lyo.core.query.ParseException;
 import org.eclipse.lyo.core.query.QueryUtils;
+import org.eclipse.lyo.core.query.ScopedSortTerm;
+import org.eclipse.lyo.core.query.SimpleSortTerm;
 import org.eclipse.lyo.core.query.SimpleTerm;
+import org.eclipse.lyo.core.query.SortTerm;
+import org.eclipse.lyo.core.query.SortTerms;
 import org.eclipse.lyo.core.query.Value;
 import org.eclipse.lyo.core.query.WhereClause;
 import org.eclipse.lyo.oslc4j.bugzilla.resources.BugzillaChangeRequest;
@@ -219,7 +224,11 @@ public class BugzillaManager implements ServletContextListener  {
 	 * @param limit
 	 * @param oslcWhere
 	 * @param prefixMap
-	 * @return The list of bugs, paged if necessary
+	 * @param propMap
+	 * @param orderBy
+	 * 
+	 * @return The list of change requests, paged if necessary
+	 * 
 	 * @throws IOException
 	 * @throws ServletException
 	 */
@@ -230,7 +239,8 @@ public class BugzillaManager implements ServletContextListener  {
 	                 int limit,
 	                 String oslcWhere,
 	                 Map<String, String> prefixMap,
-	                 Map<String, Object> propMap) throws IOException, ServletException 
+	                 Map<String, Object> propMap,
+	                 String orderBy) throws IOException, ServletException 
     {
     	List<BugzillaChangeRequest> results=new ArrayList<BugzillaChangeRequest>();		
 
@@ -248,6 +258,16 @@ public class BugzillaManager implements ServletContextListener  {
 	            buffer.append(QUERY_PREFIX);
 	            
 				createBugSearch(page, limit, serviceProvider, oslcWhere, prefixMap, buffer);
+				
+				if (orderBy != null && orderBy.length() != 0) {
+				    
+				    OrderByClause orderByClause =
+				        QueryUtils.parseOrderBy(orderBy, prefixMap);
+				    
+				    buffer.append("&order=");
+				    
+				    addSort(buffer, orderByClause, toplevelQueryProperties, true);
+				}
 				
 				Credentials credentials = (Credentials)httpServletRequest.getSession().getAttribute(CredentialsFilter.CREDENTIALS_ATTRIBUTE);
 				
@@ -517,6 +537,65 @@ public class BugzillaManager implements ServletContextListener  {
 	    return index;
 	}
 	
+    private static void addSort(final StringBuffer buffer,
+                                final SortTerms orderByClause,
+                                final Map<String, Object> queryProperties,
+                                boolean first)
+    {
+        for (SortTerm term : orderByClause.children()) {
+            
+            switch (term.type())
+            {
+            case SIMPLE:
+                break;
+            case SCOPED:
+                PName property = term.identifier();
+                Object field = queryProperties.get(property.namespace
+                        + property.local);
+
+                if (field == null || field instanceof String) {
+                    throw new WebApplicationException(
+                            new UnsupportedOperationException(
+                                    "Unsupported oslc.orderBy scoped term sort term: "
+                                            + term), Status.BAD_REQUEST);
+                }
+
+                @SuppressWarnings("unchecked")
+                Map<String, Object> nestedQueryProperties = (Map<String, Object>) field;
+
+                addSort(buffer, ((ScopedSortTerm) term).sortTerms(),
+                        nestedQueryProperties, first);
+                
+                first = false;
+
+                continue;
+            }
+
+            PName property = term.identifier();
+            Object field = queryProperties.get(property.namespace
+                    + property.local);
+
+            if (field == null || !(field instanceof String)) {
+                throw new WebApplicationException(
+                        new UnsupportedOperationException(
+                                "Unsupported oslc.orderBy property: "
+                                        + term), Status.BAD_REQUEST);
+            }
+
+            if (first) {
+                first = false;
+            } else {
+                buffer.append(',');
+            }
+
+            buffer.append((String)field);
+            
+            if (! ((SimpleSortTerm)term).ascending()) {
+                buffer.append("+DESC");
+            }
+        }
+    }
+
 	private static void createInQuery(final StringBuffer buffer, int index,
                                       InTerm inTerm,
                                       Map<String, Object> queryProperties)
@@ -764,7 +843,7 @@ public class BugzillaManager implements ServletContextListener  {
 	static {
 	    
         toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "identifier",
-                                    "big_id");
+                                    "bug_id");
         toplevelQueryProperties.put(OslcConstants.DCTERMS_NAMESPACE + "title",
                                     "short_desc");
         toplevelQueryProperties.put(Constants.CHANGE_MANAGEMENT_NAMESPACE + "status",
