@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -125,6 +126,8 @@ public class BugzillaChangeRequestService
      * @param pageString
      * @param orderBy
      * @param searchTerms
+     * @param paging
+     * @param pageSize
      * @return
      * @throws IOException
      * @throws ServletException
@@ -137,8 +140,16 @@ public class BugzillaChangeRequestService
     		                                 		     @QueryParam("oslc.prefix")      final String prefix,
     		                                             @QueryParam("page")             final String pageString,
     		                                             @QueryParam("oslc.orderBy")     final String orderBy,
-    		                                             @QueryParam("oslc.searchTerms") final String searchTerms) throws IOException, ServletException 
+    		                                             @QueryParam("oslc.searchTerms") final String searchTerms,
+    		                                             @QueryParam("oslc.paging")      final String paging,
+    		                                             @QueryParam("oslc.pageSize")    final String pageSize) throws IOException, ServletException 
     {
+        boolean isPaging = false;
+        
+        if (paging != null) {
+            isPaging = Boolean.parseBoolean(paging);
+        }
+        
     	int page=0;
     	
         if (null != pageString) {
@@ -146,6 +157,11 @@ public class BugzillaChangeRequestService
         }
         
     	int limit=10;
+    	
+    	if (isPaging && pageSize != null) {
+    	    limit = Integer.parseInt(pageSize);
+    	}
+    	
     	Map<String, String> prefixMap;
     	
         try {
@@ -176,8 +192,45 @@ public class BugzillaChangeRequestService
                                              where, prefixMap,
                                              propMap, orderBy, searchTerms);
         
+        Object nextPageAttr = httpServletRequest.getAttribute(Constants.NEXT_PAGE);
+        
+        if (! isPaging && nextPageAttr != null) {
+            
+            String location = 
+                uriInfo.getBaseUri().toString() + uriInfo.getPath() + '?' +
+                (where != null ? ("oslc.where=" + URLEncoder.encode(where, "UTF-8") + '&') : "") +
+                (select != null ? ("oslc.select=" + URLEncoder.encode(select, "UTF-8") + '&') : "") +
+                (prefix != null ? ("oslc.prefix=" + URLEncoder.encode(prefix, "UTF-8") + '&') : "") +
+                (orderBy != null ? ("oslc.orderBy=" + URLEncoder.encode(orderBy, "UTF-8") + '&') : "") +
+                (searchTerms != null ? ("oslc.searchTerms=" + URLEncoder.encode(searchTerms, "UTF-8") + '&') : "") +
+                "oslc.paging=true&oslc.pageSize=" + limit;
+                
+            try {
+                throw new WebApplicationException(Response.temporaryRedirect(new URI(location)).build());
+            } catch (URISyntaxException e) {
+                // XXX - Can't happen
+                throw new IllegalStateException(e);
+            }
+        }
+        
         httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
                                         propMap);
+        
+        if (nextPageAttr != null) {
+            
+            String location = 
+                uriInfo.getBaseUri().toString() + uriInfo.getPath() + '?' +
+                (where != null ? ("oslc.where=" + URLEncoder.encode(where, "UTF-8") + '&') : "") +
+                (select != null ? ("oslc.select=" + URLEncoder.encode(select, "UTF-8") + '&') : "") +
+                (prefix != null ? ("oslc.prefix=" + URLEncoder.encode(prefix, "UTF-8") + '&') : "") +
+                (orderBy != null ? ("oslc.orderBy=" + URLEncoder.encode(orderBy, "UTF-8") + '&') : "") +
+                (searchTerms != null ? ("oslc.searchTerms=" + URLEncoder.encode(searchTerms, "UTF-8") + '&') : "") +
+                "oslc.paging=true&oslc.pageSize=" + limit + "&page=" + nextPageAttr;
+                
+            httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_NEXT_PAGE,
+                                            location);
+
+        }
 
         return results;
     }
@@ -290,10 +343,12 @@ public class BugzillaChangeRequestService
 
         	httpServletRequest.setAttribute("queryUri", 
                     uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
-        	if (results.size() > limit) {
-        		results.remove(results.size() - 1);
+        	
+            Object nextPageAttr = httpServletRequest.getAttribute(Constants.NEXT_PAGE);
+            
+            if (nextPageAttr != null) {
         		httpServletRequest.setAttribute("nextPageUri", 
-        				uriInfo.getAbsolutePath().toString() + "?oslc.paging=true&amp;page=" + (page + 1));
+        				uriInfo.getAbsolutePath().toString() + "?oslc.paging=true&amp;page=" + nextPageAttr);
         	}
         	
         	ServiceProvider serviceProvider = ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId);
