@@ -301,6 +301,12 @@ public class BugzillaManager implements ServletContextListener  {
 				} else if (fulltextSearch) {
 				    
 				    buffer.append("&order=relevance+DESC");
+				    
+				} else {
+				    
+				    // Always order at least by bug id, so we get
+				    // non-random returns across pages
+				    buffer.append("&order=bug_id");
 				}
 				
 				Credentials credentials = (Credentials)httpServletRequest.getSession().getAttribute(CredentialsFilter.CREDENTIALS_ATTRIBUTE);
@@ -319,7 +325,14 @@ public class BugzillaManager implements ServletContextListener  {
                 
                 builder = factory.newDocumentBuilder();
                 
-		        for (int idx = 0; idx < list.getLength(); idx++) {
+                int length = list.getLength();
+                
+                if (length > limit) {
+                    httpServletRequest.setAttribute(Constants.NEXT_PAGE, page + 1);
+                    length--;
+                }
+                
+		        for (int idx = 0; idx < length; idx++) {
 		            
                     Element p = (Element)list.item(idx);
                     
@@ -457,7 +470,7 @@ public class BugzillaManager implements ServletContextListener  {
 	                                    Map<String, String> prefixMap, final StringBuffer buffer) throws ParseException
 	{
 	    buffer.append("&limit=");
-	    buffer.append(limit);
+	    buffer.append(limit + 1);
 	    
 	    buffer.append("&offset=");
 	    buffer.append(page * limit);

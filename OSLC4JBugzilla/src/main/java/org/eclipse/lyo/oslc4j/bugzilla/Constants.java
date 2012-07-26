@@ -56,4 +56,6 @@ public interface Constants
     public static String USAGE_LIST = CHANGE_MANAGEMENT_NAMESPACE + "list";
     
     public static final String HDR_OSLC_VERSION = "OSLC-Core-Version";
+    
+    public static final String NEXT_PAGE = "org.eclipse.lyo.oslc4j.bugzilla.NextPage";
 }
