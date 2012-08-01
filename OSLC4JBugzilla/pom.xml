@@ -81,6 +81,11 @@
 			<version>2.2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.lyo.core.query</groupId>
+			<artifactId>org.eclipse.lyo.core.query</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
   
   <build>
