@@ -20,30 +20,24 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-core</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>[0.1.1-SNAPSHOT,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-wink</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>[0.1.1-SNAPSHOT,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-json4j-provider</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>[0.1.1-SNAPSHOT,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-jena-provider</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>[0.1.1-SNAPSHOT,)</version>
 		</dependency>
 		<dependency>
 			<groupId>com.j2bugzilla</groupId>
@@ -80,6 +74,12 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
   
