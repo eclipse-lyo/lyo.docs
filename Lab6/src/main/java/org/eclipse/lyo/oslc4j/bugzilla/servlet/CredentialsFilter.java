@@ -40,7 +40,7 @@ import org.eclipse.lyo.oslc4j.bugzilla.Credentials;
 import org.eclipse.lyo.oslc4j.bugzilla.exception.BugzillaOAuthException;
 import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.HttpUtils;
-import org.eclipse.lyo.server.oauth.consumerstore.RdfConsumerStore;
+import org.eclipse.lyo.server.oauth.consumerstore.FileSystemConsumerStore;
 import org.eclipse.lyo.server.oauth.core.Application;
 import org.eclipse.lyo.server.oauth.core.AuthenticationException;
 import org.eclipse.lyo.server.oauth.core.OAuthConfiguration;
@@ -244,7 +244,7 @@ public class CredentialsFilter implements Filter {
 
 		try {
 			// For now, hard-code the consumers.
-			config.setConsumerStore(new RdfConsumerStore());
+			config.setConsumerStore(new FileSystemConsumerStore("bugzillaOAuthStore.xml"));
 		} catch (Throwable t) {
 			System.err.println("Error initializing the OAuth consumer store: " +  t.getMessage());
 		
