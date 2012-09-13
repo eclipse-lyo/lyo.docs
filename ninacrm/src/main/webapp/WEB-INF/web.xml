@@ -4,7 +4,7 @@
     <filter>
         <display-name>DataLoader</display-name>
         <filter-name>DataLoader</filter-name>
-        <filter-class>ninacrm.DataLoader</filter-class>
+        <filter-class>org.eclipse.lyo.samples.ninacrm.DataLoader</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>DataLoader</filter-name>
@@ -13,12 +13,12 @@
     <servlet>
         <display-name>Simple Proxy Servlet</display-name>
         <servlet-name>ProxyServlet</servlet-name>
-        <servlet-class>ninacrm.ProxyServlet</servlet-class>
+        <servlet-class>org.eclipse.lyo.samples.ninacrm.ProxyServlet</servlet-class>
     </servlet>
     <servlet>
         <display-name>DataServlet</display-name>
         <servlet-name>DataServlet</servlet-name>
-        <servlet-class>ninacrm.DataServlet</servlet-class>
+        <servlet-class>org.eclipse.lyo.samples.ninacrm.DataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProxyServlet</servlet-name>
