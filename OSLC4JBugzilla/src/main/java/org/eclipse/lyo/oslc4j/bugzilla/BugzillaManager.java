@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -65,6 +66,7 @@ import org.eclipse.lyo.oslc4j.bugzilla.servlet.CredentialsFilter;
 import org.eclipse.lyo.oslc4j.bugzilla.servlet.ServiceProviderCatalogSingleton;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.BugzillaHttpClient;
 import org.eclipse.lyo.oslc4j.client.ServiceProviderRegistryURIs;
+import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.SingletonWildcardProperties;
 import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
@@ -187,12 +189,15 @@ public class BugzillaManager implements ServletContextListener  {
     {
         try
         {
-            return InetAddress.getLocalHost().getCanonicalHostName();
+        	OSLC4JUtils.setPublicURI("http://mffiedler.raleigh.ibm.com:8080/OSLC4JBugzilla");
+        	OSLC4JUtils.setHostResolutionDisabled(true);
+        	return("mffiedler.raleigh.ibm.com");
+            //return InetAddress.getLocalHost().getCanonicalHostName();
         }
-        catch (final UnknownHostException exception)
+        catch (final Exception exception)
         {
             return "localhost";
-        }
+        } 
     }
 	
 
