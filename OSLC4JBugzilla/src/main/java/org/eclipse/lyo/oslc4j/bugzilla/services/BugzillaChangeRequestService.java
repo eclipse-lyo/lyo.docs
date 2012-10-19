@@ -819,6 +819,8 @@ public class BugzillaChangeRequestService
         		final BugzillaChangeRequest originalChangeRequest = BugzillaChangeRequest.fromBug(originalBug);
         		final String originalETag = getETagFromChangeRequest(originalChangeRequest);
         		
+        		changeRequest.setIdentifier(originalChangeRequest.getIdentifier());
+        		
                 if ((eTagHeader == null) || (originalETag.equals(eTagHeader))) {
                 	
                 	BugzillaManager.updateBug(httpServletRequest,changeRequest);
