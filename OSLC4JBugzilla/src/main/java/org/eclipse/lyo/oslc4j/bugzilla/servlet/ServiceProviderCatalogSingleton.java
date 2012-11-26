@@ -171,7 +171,6 @@ public class ServiceProviderCatalogSingleton
         serviceProvider.setAbout(serviceProviderURI);
         serviceProvider.setIdentifier(productId);
         serviceProvider.setCreated(new Date());
-        serviceProvider.setDetails(new URI[] {serviceProviderURI});
 
         serviceProviderCatalog.addServiceProvider(serviceProvider);
         serviceProviderCatalog.addDomains(serviceProviderDomains);

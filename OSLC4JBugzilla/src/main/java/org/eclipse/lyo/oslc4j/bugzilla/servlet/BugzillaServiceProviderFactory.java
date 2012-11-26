@@ -64,7 +64,7 @@ public class BugzillaServiceProviderFactory
                                                                                              new Publisher("Eclipse Lyo", "urn:oslc:ServiceProvider"),
                                                                                              RESOURCE_CLASSES,
                                                                                              parameterValueMap);
-        URI detailsURIs[] = {new URI(baseURI)};
+        URI detailsURIs[] = {new URI(baseURI + "/details")};
         serviceProvider.setDetails(detailsURIs);
 
         final PrefixDefinition[] prefixDefinitions =
