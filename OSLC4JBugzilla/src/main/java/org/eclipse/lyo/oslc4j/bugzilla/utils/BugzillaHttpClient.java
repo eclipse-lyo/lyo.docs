@@ -73,7 +73,7 @@ public class BugzillaHttpClient
     public InputStream
     httpGet(String path) throws IOException
     {
-        HttpGet get = new HttpGet(rootURL + path + authorization);
+        HttpGet get = new HttpGet(rootURL + "/" + path + authorization);
         
         HttpResponse response = httpClient.execute(get, cntxt);
         StatusLine status = response.getStatusLine();
