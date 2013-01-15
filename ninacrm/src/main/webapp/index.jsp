@@ -95,7 +95,7 @@ Add link by entering URL and name
 			</tr>
 			<tr>
 				<td>URL:</td>
-				<td><input name="linkurl" id="linkurl" type="text" name="linkurl" value="http://oslc/bugzilla/show_bug.cgi?id=1"
+				<td><input name="linkurl" id="linkurl" type="text" name="linkurl" value="http://localhost/bugzilla/show_bug.cgi?id=1"
 					dojoType="dijit.form.TextBox" /></td>
 			</tr>
 		</table>
@@ -166,7 +166,7 @@ Code for OSLC UI Preview
 <script language="JavaScript">
 
 dojo.addOnLoad(addPreviewMouseOverHandlers);	
-var hostname ="oslc";
+var hostname ="localhost";
 
 function addPreviewMouseOverHandlers() {
    dojo.query("a").forEach(function(elem) {
