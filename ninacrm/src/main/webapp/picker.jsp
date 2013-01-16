@@ -29,8 +29,8 @@
 <span id="status"></span>
 
 <script type="text/javascript">
-	var pickerURL = "http://oslc:8080/OSLC4JBugzilla/services/1/selector";
-	var returnURL = "http://oslc:8181/ninacrm/picked.jsp";
+	var pickerURL = "http://localhost:8080/OSLC4JBugzilla/services/1/selector";
+	var returnURL = "http://localhost:8181/ninacrm/picked.jsp";
     var frame = document.createElement('iframe');
     
 	function windowNameProtocol() {
