@@ -82,14 +82,14 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.lyo.core.query</groupId>
-			<artifactId>org.eclipse.lyo.core.query</artifactId>
-			<version>[0.1.1-SNAPSHOT,)</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.lyo.core.query</groupId>
+			<artifactId>oslc-query</artifactId>
+			<version>[1.1,)</version>
 		</dependency>
 	</dependencies>
   
