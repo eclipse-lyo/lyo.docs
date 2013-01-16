@@ -35,7 +35,7 @@ import javax.servlet.ServletResponse;
  */
 public class DataLoader implements Filter {
 	
-	private static final String HOSTNAME="oslc";
+	private static final String HOSTNAME="localhost";
 	
 	ServletContext context = null;
 		

@@ -31,7 +31,7 @@ import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class NewDefect {
-	private static final String HOSTNAME="oslc";
+	private static final String HOSTNAME="localhost";
 	
 	public static void main(String[] args) {
 	    String bug = formNewBug( // (1)
