@@ -123,9 +123,13 @@ public class CredentialsFilter implements Filter {
 						.getAttribute(CONNECTOR_ATTRIBUTE);
 				if (connector == null) {
 					try {
-						Credentials credentials = HttpUtils.getCredentials(request);
-						if (credentials == null) {
-							throw new UnauthorizedException();
+						Credentials credentials = (Credentials) request.getSession().getAttribute(CREDENTIALS_ATTRIBUTE);
+						if (credentials == null)
+						{
+							credentials = HttpUtils.getCredentials(request);
+							if (credentials == null) {
+								throw new UnauthorizedException();
+							}
 						}
 						connector = getBugzillaConnector(credentials);
 						session.setAttribute(CONNECTOR_ATTRIBUTE, connector);
