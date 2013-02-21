@@ -133,7 +133,7 @@ public class BugzillaChangeRequestService
      * @throws ServletException
      */
     @GET
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
     public List<BugzillaChangeRequest> getChangeRequests(@PathParam("productId")         final String productId,
     		                                 	     	 @QueryParam("oslc.where")       final String where,
     		                                 		     @QueryParam("oslc.select")      final String select,
@@ -375,7 +375,7 @@ public class BugzillaChangeRequestService
 	 */
     @GET
     @Path("{changeRequestId}")
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
     public BugzillaChangeRequest getChangeRequest(@PathParam("productId")        final String productId,
                                                   @PathParam("changeRequestId")  final String changeRequestId,
                                                   @QueryParam("oslc.properties") final String propertiesString,
@@ -646,8 +646,8 @@ public class BugzillaChangeRequestService
          usages = {OslcConstants.OSLC_USAGE_DEFAULT}
     )
     @POST
-    @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+    @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
+    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
     public Response addChangeRequest(@PathParam("productId") final String productId,
                                                              final BugzillaChangeRequest changeRequest) throws IOException, ServletException
 
@@ -803,7 +803,7 @@ public class BugzillaChangeRequestService
      * @throws ServletException
      */
     @PUT
-    @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+    @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
     @Path("{changeRequestId}")
     public Response updateChangeRequest(@HeaderParam("If-Match")      final String              eTagHeader,
                                         @PathParam("changeRequestId") final String              changeRequestId,
