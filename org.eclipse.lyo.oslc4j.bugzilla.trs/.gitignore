@@ -1,0 +1,7 @@
+/target
+/RDFStore
+/bin
+/bugzillaOAuthStore.xml
+/consumerStore
+
+/derby.log
