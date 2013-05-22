@@ -81,7 +81,7 @@ public class GetHistory implements BugzillaMethod {
 		if (hash.containsKey("bugs")) { //$NON-NLS-1$
 			Object[] bugs = (Object[]) hash.get("bugs"); //$NON-NLS-1$
 			if (bugs.length == 0) {
-				return (Date[]) result.toArray(); // early return if map is empty
+				return new Date[0]; // early return if map is empty
 			}
 			for (Object o : bugs) {
 				@SuppressWarnings("unchecked")
