@@ -52,7 +52,7 @@ import com.j2bugzilla.rpc.GetProduct;
  * This class represents the list of History data in Bugzilla
  */
 public class ChangeBugzillaHistories {
-	private static final int MAXNUMBEROGBUGS = 100;
+	private static final int MAXNUMBEROFBUGS = 100;
 	private static final SimpleDateFormat XSD_DATETIME_FORMAT;
 	static {
 		XSD_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");//$NON-NLS-1$
@@ -84,7 +84,7 @@ public class ChangeBugzillaHistories {
 				// get bugs from each product
 				List<HistoryData> allhistories = new ArrayList<HistoryData>();
 				for (String productid : productIds) {
-					List<Bug> bugList = ChangeBugzillaHistories.getBugsByProduct(httpServletRequest, productid, /* page */0, /* limit */ChangeBugzillaHistories.MAXNUMBEROGBUGS, dayAfter);
+					List<Bug> bugList = ChangeBugzillaHistories.getBugsByProduct(httpServletRequest, productid, /* page */0, /* limit */ChangeBugzillaHistories.MAXNUMBEROFBUGS, dayAfter);
 					for (Bug bug : bugList) {
 						Collections.addAll(allhistories, BugzillaManager.getBugHistoryById(httpServletRequest, bug, productid, Integer.toString(bug.getID()), dayAfter));
 					}
