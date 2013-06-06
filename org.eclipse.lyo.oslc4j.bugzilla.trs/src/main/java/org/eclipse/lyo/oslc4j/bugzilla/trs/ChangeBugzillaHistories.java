@@ -53,6 +53,9 @@ import com.j2bugzilla.rpc.GetProduct;
  */
 public class ChangeBugzillaHistories {
 	private static final int MAXNUMBEROFBUGS = 100;
+	private static final int MAXNUMBEROFBUGS_LANDFILL = 3; // Support for Bugzilla hosted on Landfill
+	private static final int MAXNUMBEROFPRODUCTS = 5;
+	private static final int MAXNUMBEROFPRODUCTS_LANDFILL = 1;
 	private static final SimpleDateFormat XSD_DATETIME_FORMAT;
 	static {
 		XSD_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");//$NON-NLS-1$
@@ -73,8 +76,13 @@ public class ChangeBugzillaHistories {
 				GetAccessibleProducts getProductIds = new GetAccessibleProducts();
 				bc.executeMethod(getProductIds);
 				Integer[] ids = getProductIds.getIds();
+				boolean isLandfillHostedBugzilla = (BugzillaManager.getBugzillaUri().indexOf("demo.bugzilla.org") != -1); // Support for Bugzilla hosted on Landfill
+				int maxNumberOfProducts = (!isLandfillHostedBugzilla) ? ChangeBugzillaHistories.MAXNUMBEROFPRODUCTS : ChangeBugzillaHistories.MAXNUMBEROFPRODUCTS_LANDFILL;
+				int numberOfProduct = 0;
 				for (Integer p : ids) {
 					productIds.add(Integer.toString(p));
+					numberOfProduct++;
+					if (numberOfProduct >= maxNumberOfProducts) break; // Support for Bugzilla hosted on Landfill
 				}
 
 				// get basePath
@@ -84,7 +92,9 @@ public class ChangeBugzillaHistories {
 				// get bugs from each product
 				List<HistoryData> allhistories = new ArrayList<HistoryData>();
 				for (String productid : productIds) {
-					List<Bug> bugList = ChangeBugzillaHistories.getBugsByProduct(httpServletRequest, productid, /* page */0, /* limit */ChangeBugzillaHistories.MAXNUMBEROFBUGS, dayAfter);
+					List<Bug> bugList = ChangeBugzillaHistories.getBugsByProduct(httpServletRequest, productid, /* page */0, 
+									/* limit */!isLandfillHostedBugzilla ? ChangeBugzillaHistories.MAXNUMBEROFBUGS : ChangeBugzillaHistories.MAXNUMBEROFBUGS_LANDFILL, // Support for Bugzilla hosted on Landfill
+									dayAfter);
 					for (Bug bug : bugList) {
 						Collections.addAll(allhistories, BugzillaManager.getBugHistoryById(httpServletRequest, bug, productid, Integer.toString(bug.getID()), dayAfter));
 					}
