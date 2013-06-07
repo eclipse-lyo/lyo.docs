@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,66 @@ import com.j2bugzilla.rpc.GetProduct;
  * This class represents the list of History data in Bugzilla
  */
 public class ChangeBugzillaHistories {
-	private static final int MAXNUMBEROFBUGS = 100;
+	private static int MAXNUMBEROFBUGS;
+	private static int MAXNUMBEROFPRODUCTS;
+	static {
+		Properties props = new Properties();
+    try {
+      props.load(BugzillaManager.class.getResourceAsStream("/bugz.properties"));//$NON-NLS-1$
+      String numberOfBugs = props.getProperty("max_number_of_bugs");//$NON-NLS-1$
+      if ((numberOfBugs != null) && (numberOfBugs.length() != 0)) {
+      	MAXNUMBEROFBUGS = Integer.valueOf(numberOfBugs).intValue();
+      }
+      if (MAXNUMBEROFBUGS == 0) {
+      	MAXNUMBEROFBUGS = 100;
+      }
+      String numberOfProducts = props.getProperty("max_number_of_producs");//$NON-NLS-1$
+      if ((numberOfProducts != null) && (numberOfProducts.length() != 0)) {
+      	MAXNUMBEROFPRODUCTS = Integer.valueOf(numberOfProducts).intValue();
+      }
+      if (MAXNUMBEROFPRODUCTS == 0) {
+      	MAXNUMBEROFPRODUCTS = 5;
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+	}
+
+	private static Date STARTCHECKDATE;
+	static {
+		Properties props = new Properties();
+    try {
+      props.load(BugzillaManager.class.getResourceAsStream("/bugz.properties"));//$NON-NLS-1$
+      String year_string = props.getProperty("start_date_year");//$NON-NLS-1$
+      int year=0;
+      if ((year_string != null) && (year_string.length() != 0)) {
+      	year = Integer.valueOf(year_string).intValue();
+      }
+      if (year == 0) {
+      	year = 2013;
+      }
+      String month_string = props.getProperty("start_date_month");//$NON-NLS-1$
+      int month=0;
+      if ((month_string != null) && (month_string.length() != 0)) {
+      	month = Integer.valueOf(month_string).intValue() - 1;
+      }
+      if (month == -1) {
+      	month = 0;
+      }
+      String day_string = props.getProperty("start_date_date");//$NON-NLS-1$
+      int day=0;
+      if ((day_string != null) && (day_string.length() != 0)) {
+      	day = Integer.valueOf(day_string).intValue();
+      }
+      if (day == 0) {
+      	day = 1;
+      }
+      STARTCHECKDATE = (new GregorianCalendar(year, month, day)).getTime();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+	}
+	
 	private static final SimpleDateFormat XSD_DATETIME_FORMAT;
 	static {
 		XSD_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");//$NON-NLS-1$
@@ -73,8 +133,11 @@ public class ChangeBugzillaHistories {
 				GetAccessibleProducts getProductIds = new GetAccessibleProducts();
 				bc.executeMethod(getProductIds);
 				Integer[] ids = getProductIds.getIds();
+				int numberOfProduct = 0;
 				for (Integer p : ids) {
 					productIds.add(Integer.toString(p));
+					numberOfProduct++;
+					if (numberOfProduct >= ChangeBugzillaHistories.MAXNUMBEROFPRODUCTS) break;
 				}
 
 				// get basePath
@@ -83,8 +146,11 @@ public class ChangeBugzillaHistories {
 
 				// get bugs from each product
 				List<HistoryData> allhistories = new ArrayList<HistoryData>();
+				if (dayAfter == null) {
+						dayAfter = ChangeBugzillaHistories.STARTCHECKDATE;
+				}
 				for (String productid : productIds) {
-					List<Bug> bugList = ChangeBugzillaHistories.getBugsByProduct(httpServletRequest, productid, /* page */0, /* limit */ChangeBugzillaHistories.MAXNUMBEROFBUGS, dayAfter);
+					List<Bug> bugList = ChangeBugzillaHistories.getBugsByProduct(httpServletRequest, productid, /* page */0, /* limit */ ChangeBugzillaHistories.MAXNUMBEROFBUGS, dayAfter);
 					for (Bug bug : bugList) {
 						Collections.addAll(allhistories, BugzillaManager.getBugHistoryById(httpServletRequest, bug, productid, Integer.toString(bug.getID()), dayAfter));
 					}
@@ -217,12 +283,11 @@ public class ChangeBugzillaHistories {
 	 */
 	private static void buildBaseResourcesAndChangeLogsInternal(HttpServletRequest httpServletRequest) {
 		Date nowDate = new Date();
-		if ((lastBaseResourceUpdatedDate != null) && 
+		if ((lastBaseResourceUpdatedDate != null) && (UPDATEINTERVAL != -1) &&
 				(nowDate.getTime() - lastBaseResourceUpdatedDate.getTime() > UPDATEINTERVAL)) {
 			mostRecentChangeLogDate = null; // enforce to build all
 		}
 		boolean buildAll = ((mostRecentChangeLogDate == null) || (baseResouces == null));
-		
 		HistoryData[] updatedHistories = null;
 		if (!buildAll) {
 			// Get only updated Histories
@@ -231,6 +296,7 @@ public class ChangeBugzillaHistories {
 				return;
 			}
 		} else {
+			System.out.println("Rebuild Base and ChangeLogs");
 			baseResouces = null;
 			mostRecentChangeLogDate = null;
 			lastBaseResourceUpdatedDate = nowDate;
