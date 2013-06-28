@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_Tk0aAd-LEeKZB9wWVNTsPg" name="OSLC V2">
+  <packageImport xmi:id="_Tk0aAt-LEeKZB9wWVNTsPg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk0aA9-LEeKZB9wWVNTsPg" name="Change Management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk0aBN-LEeKZB9wWVNTsPg" name="oslc_cm:ChangeRequest">
+      <eAnnotations xmi:id="_Tk0aBd-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk0aBt-LEeKZB9wWVNTsPg" name="oslc:shortTitle" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk0aB9-LEeKZB9wWVNTsPg" name="dcterms:description" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk0aCN-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk0aCd-LEeKZB9wWVNTsPg" name="dcterms:identifier" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk0aCt-LEeKZB9wWVNTsPg" name="dcterms:subject" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk0aC9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk0aDN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk0aDd-LEeKZB9wWVNTsPg" name="dcterms:creator" visibility="public" type="_Tk1A09-LEeKZB9wWVNTsPg" association="_Tk1Axt-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk0aDt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk0aD9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk0aEN-LEeKZB9wWVNTsPg" name="dcterms:contributor" visibility="public" type="_Tk1A09-LEeKZB9wWVNTsPg" association="_Tk1AxN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AcN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Acd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Act-LEeKZB9wWVNTsPg" name="dcterms:created" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c7t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Ac9-LEeKZB9wWVNTsPg" name="dc:modified" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c7t-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AdN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Add-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Adt-LEeKZB9wWVNTsPg" name="rdf:type" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Ad9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1AeN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Aed-LEeKZB9wWVNTsPg" name="oslc:discussedBy" visibility="public" type="_Tk1A_d-LEeKZB9wWVNTsPg" association="_Tk1AyN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Aet-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ae9-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1AfN-LEeKZB9wWVNTsPg" name="oslc:instanceShape" visibility="public" type="_Tk1BA9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Afd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Aft-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Af9-LEeKZB9wWVNTsPg" name="oslc:serviceProvider" visibility="public" type="_Tk1A4d-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AgN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Agd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Agt-LEeKZB9wWVNTsPg" name="dcterms:type" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Ag9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1AhN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Ahd-LEeKZB9wWVNTsPg" name="oslc_cm:closeDate" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c7t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Aht-LEeKZB9wWVNTsPg" name="oslc_cm:status" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Ah9-LEeKZB9wWVNTsPg" name="oslc_cm:closed" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c69-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AiN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Aid-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Ait-LEeKZB9wWVNTsPg" name="oslc_cm:inprogress" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c69-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Ai9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1AjN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Ajd-LEeKZB9wWVNTsPg" name="oslc_cm:fixed" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c69-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Ajt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Aj9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1AkN-LEeKZB9wWVNTsPg" name="oslc_cm:approved" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c69-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Akd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Akt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Ak9-LEeKZB9wWVNTsPg" name="oslc_cm:reviewed" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c69-LEeKZB9wWVNTsPg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AlN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ald-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Alt-LEeKZB9wWVNTsPg" name="oslc_cm:relatedChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Al9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1AmN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Amd-LEeKZB9wWVNTsPg" name="oslc_cm:affectsPlanItem" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Amt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Am9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1AnN-LEeKZB9wWVNTsPg" name="oslc_cm:affectedByDefect" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1And-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ant-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1An9-LEeKZB9wWVNTsPg" name="oslc_cm:tracksRequirement" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AoN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Aod-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Aot-LEeKZB9wWVNTsPg" name="oslc_cm:implementsRequirement" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Ao9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1ApN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Apd-LEeKZB9wWVNTsPg" name="oslc_cm:affectsRequirement" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Apt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ap9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1AqN-LEeKZB9wWVNTsPg" name="oslc_cm:testedByTestCase" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Aqd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Aqt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Aq9-LEeKZB9wWVNTsPg" name="oslc_cm:affectsTestResult" visibility="public" type="_Tk217d-LEeKZB9wWVNTsPg">
+        <eAnnotations xmi:id="_Tk1ArN-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_Tk1Ard-LEeKZB9wWVNTsPg" key="mightBe"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Art-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ar9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1AsN-LEeKZB9wWVNTsPg" name="oslc_cm:blocksTestExecutionRecord" visibility="public" type="_Tk213t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Asd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ast-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1As9-LEeKZB9wWVNTsPg" name="oslc_cm:relatedTestExecutionRecord" visibility="public" type="_Tk213t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AtN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Atd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Att-LEeKZB9wWVNTsPg" name="oslc_cm:relatedTestCase" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1At9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1AuN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Aud-LEeKZB9wWVNTsPg" name="oslc_cm:relatedTestPlan" visibility="public" type="_Tk21ut-LEeKZB9wWVNTsPg">
+        <eAnnotations xmi:id="_Tk1Aut-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_Tk1Au9-LEeKZB9wWVNTsPg" key="may"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1AvN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Avd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Avt-LEeKZB9wWVNTsPg" name="oslc_cm:relatedTestScript" visibility="public" type="_Tk2109-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Av9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1AwN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1Awd-LEeKZB9wWVNTsPg" name="oslc_cm:tracksChangeSet" visibility="public" type="_Tk21oN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Awt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Aw9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1AxN-LEeKZB9wWVNTsPg" name="" memberEnd="_Tk0aEN-LEeKZB9wWVNTsPg _Tk1Axd-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1Axd-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk0aBN-LEeKZB9wWVNTsPg" association="_Tk1AxN-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1Axt-LEeKZB9wWVNTsPg" name="" memberEnd="_Tk0aDd-LEeKZB9wWVNTsPg _Tk1Ax9-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1Ax9-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk0aBN-LEeKZB9wWVNTsPg" association="_Tk1Axt-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1AyN-LEeKZB9wWVNTsPg" name="" memberEnd="_Tk1Aed-LEeKZB9wWVNTsPg _Tk1Ayd-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1Ayd-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk0aBN-LEeKZB9wWVNTsPg" association="_Tk1AyN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1Ayt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1Ay9-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk1AzN-LEeKZB9wWVNTsPg" name="Architecture Management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1Azd-LEeKZB9wWVNTsPg" name="oslc_am:Resource"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1Azt-LEeKZB9wWVNTsPg" name="oslc_am:LinkTypeResource"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk1Az9-LEeKZB9wWVNTsPg" name="Core">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Tk1A0N-LEeKZB9wWVNTsPg" name="Dublin Core"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_Tk1A0d-LEeKZB9wWVNTsPg" name="RDF Types"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_Tk1A0t-LEeKZB9wWVNTsPg" name="foaf">
+      <packagedElement xmi:type="uml:Class" xmi:id="_Tk1A09-LEeKZB9wWVNTsPg" name="foaf:Person">
+        <eAnnotations xmi:id="_Tk1A1N-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1A1d-LEeKZB9wWVNTsPg" name="Resource" isAbstract="true">
+      <eAnnotations xmi:id="_Tk1A1t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1A19-LEeKZB9wWVNTsPg" name="rdf:about" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <eAnnotations xmi:id="_Tk1A2N-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_Tk1A2d-LEeKZB9wWVNTsPg" key="id"/>
+        </eAnnotations>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A2t-LEeKZB9wWVNTsPg" name="oslc:instanceShape" visibility="public" type="_Tk1BA9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A29-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A3N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A3d-LEeKZB9wWVNTsPg" name="oslc:serviceProvider" visibility="public" type="_Tk1A4d-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1A3t-LEeKZB9wWVNTsPg" name="instanceShape" visibility="private" type="_Tk1BA9-LEeKZB9wWVNTsPg" association="_Tk1BDt-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A39-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A4N-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1A4d-LEeKZB9wWVNTsPg" name="oslc:ServiceProvider">
+      <eAnnotations xmi:id="_Tk1A4t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1A49-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A5N-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A5d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A5t-LEeKZB9wWVNTsPg" name="dcterms:description" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A59-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A6N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A6d-LEeKZB9wWVNTsPg" name="oslc:oauthConfiguration" visibility="public" type="_Tk1nm9-LEeKZB9wWVNTsPg" association="_Tk1nx9-LEeKZB9wWVNTsPg">
+        <eAnnotations xmi:id="_Tk1A6t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_Tk1A69-LEeKZB9wWVNTsPg" key="BN"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A7N-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A7d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A7t-LEeKZB9wWVNTsPg" name="oslc:service" visibility="public" type="_Tk1nit-LEeKZB9wWVNTsPg">
+        <eAnnotations xmi:id="_Tk1A79-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A8N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A8d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A8t-LEeKZB9wWVNTsPg" name="oslc:details" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A89-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A9N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A9d-LEeKZB9wWVNTsPg" name="oslc:publisher" visibility="public" type="_Tk1nvd-LEeKZB9wWVNTsPg" association="_Tk1ny9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A9t-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A99-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1A-N-LEeKZB9wWVNTsPg" name="oslc:prefixDefinition" visibility="public" type="_Tk1noN-LEeKZB9wWVNTsPg" association="_Tk1nzd-LEeKZB9wWVNTsPg">
+        <eAnnotations xmi:id="_Tk1A-d-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_Tk1A-t-LEeKZB9wWVNTsPg" key="BN"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1A-9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1A_N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1A_d-LEeKZB9wWVNTsPg" name="oslc:Discussion">
+      <eAnnotations xmi:id="_Tk1A_t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1A_9-LEeKZB9wWVNTsPg" name="oslc:discussionAbout" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1BAN-LEeKZB9wWVNTsPg" name="oslc:comment" visibility="public" type="_Tk1npN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BAd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1BAt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1BA9-LEeKZB9wWVNTsPg" name="oslc:ResourceShape">
+      <eAnnotations xmi:id="_Tk1BBN-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1BBd-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BBt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1BB9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1BCN-LEeKZB9wWVNTsPg" name="oslc:describes" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BCd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1BCt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1BC9-LEeKZB9wWVNTsPg" name="oslc:property" visibility="public" type="_Tk1oI9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BDN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1BDd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1BDt-LEeKZB9wWVNTsPg" name="instanceShape" memberEnd="_Tk1A3t-LEeKZB9wWVNTsPg _Tk1BD9-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1BD9-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1A1d-LEeKZB9wWVNTsPg" association="_Tk1BDt-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1BEN-LEeKZB9wWVNTsPg" name="oslc:ServiceProviderCatalog">
+      <eAnnotations xmi:id="_Tk1BEd-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1BEt-LEeKZB9wWVNTsPg" name="oslc:serviceProvider" visibility="public" type="_Tk1A4d-LEeKZB9wWVNTsPg" association="_Tk1nsd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BE9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1BFN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1BFd-LEeKZB9wWVNTsPg" name="dcterms:description" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BFt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1BF9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1BGN-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1BGd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1ngN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1ngd-LEeKZB9wWVNTsPg" name="oslc:domain" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1ngt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1ng9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nhN-LEeKZB9wWVNTsPg" name="oslc:serviceProviderCatalog" visibility="public" type="_Tk1BEN-LEeKZB9wWVNTsPg" association="_Tk1ntd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nhd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nht-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nh9-LEeKZB9wWVNTsPg" name="oslc:oauthConfiguration" visibility="public" type="_Tk1nm9-LEeKZB9wWVNTsPg" association="_Tk1nud-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1niN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nid-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1nit-LEeKZB9wWVNTsPg" name="oslc:Service">
+      <eAnnotations xmi:id="_Tk1ni9-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1njN-LEeKZB9wWVNTsPg" name="oslc:domain" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1njd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1njt-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nj9-LEeKZB9wWVNTsPg" name="oslc:creationFactory" visibility="public" type="_Tk1n0d-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nkN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nkd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nkt-LEeKZB9wWVNTsPg" name="oslc:queryCapability" visibility="public" type="_Tk1n4d-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nk9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nlN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nld-LEeKZB9wWVNTsPg" name="oslc:selectionDialog" visibility="public" type="_Tk1n8d-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nlt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nl9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nmN-LEeKZB9wWVNTsPg" name="oslc:creationDialog" visibility="public" type="_Tk1n8d-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nmd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nmt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1nm9-LEeKZB9wWVNTsPg" name="oslc:OAuthConfiguration">
+      <eAnnotations xmi:id="_Tk1nnN-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1nnd-LEeKZB9wWVNTsPg" name="oslc:oauthRequestTokenURI" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1nnt-LEeKZB9wWVNTsPg" name="oslc:authorizationURI" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1nn9-LEeKZB9wWVNTsPg" name="oslc:oauthAccessTokenURI" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1noN-LEeKZB9wWVNTsPg" name="oslc:PrefixDefinition">
+      <eAnnotations xmi:id="_Tk1nod-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1not-LEeKZB9wWVNTsPg" name="oslc:prefix" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1no9-LEeKZB9wWVNTsPg" name="oslc:prefixBase" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1npN-LEeKZB9wWVNTsPg" name="oslc:Comment">
+      <eAnnotations xmi:id="_Tk1npd-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1npt-LEeKZB9wWVNTsPg" name="dcterms:identifier" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1np9-LEeKZB9wWVNTsPg" name="dcterms:creator" visibility="public" type="_Tk1A09-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1nqN-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nqd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nqt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nq9-LEeKZB9wWVNTsPg" name="dcterms:created" visibility="public">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk3c7t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nrN-LEeKZB9wWVNTsPg" name="dcterms:description" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nrd-LEeKZB9wWVNTsPg" name="oslc:partOfDiscussion" visibility="public" type="_Tk1A_d-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1nrt-LEeKZB9wWVNTsPg" name="oslc:inReplyTo" visibility="public" type="_Tk1npN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nr9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nsN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1nsd-LEeKZB9wWVNTsPg" memberEnd="_Tk1BEt-LEeKZB9wWVNTsPg _Tk1nst-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1nst-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1BEN-LEeKZB9wWVNTsPg" association="_Tk1nsd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1ns9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1ntN-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1ntd-LEeKZB9wWVNTsPg" memberEnd="_Tk1nhN-LEeKZB9wWVNTsPg _Tk1ntt-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1ntt-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1BEN-LEeKZB9wWVNTsPg" association="_Tk1ntd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nt9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nuN-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1nud-LEeKZB9wWVNTsPg" memberEnd="_Tk1nh9-LEeKZB9wWVNTsPg _Tk1nut-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1nut-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1BEN-LEeKZB9wWVNTsPg" association="_Tk1nud-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nu9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nvN-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1nvd-LEeKZB9wWVNTsPg" name="oslc:Publisher">
+      <eAnnotations xmi:id="_Tk1nvt-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1nv9-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nwN-LEeKZB9wWVNTsPg" name="oslc:label" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nwd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nwt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nw9-LEeKZB9wWVNTsPg" name="dcterms:identifier" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1nxN-LEeKZB9wWVNTsPg" name="oslc:icon" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nxd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nxt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1nx9-LEeKZB9wWVNTsPg" memberEnd="_Tk1A6d-LEeKZB9wWVNTsPg _Tk1nyN-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1nyN-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1A4d-LEeKZB9wWVNTsPg" association="_Tk1nx9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nyd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1nyt-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1ny9-LEeKZB9wWVNTsPg" memberEnd="_Tk1A9d-LEeKZB9wWVNTsPg _Tk1nzN-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1nzN-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1A4d-LEeKZB9wWVNTsPg" association="_Tk1ny9-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk1nzd-LEeKZB9wWVNTsPg" memberEnd="_Tk1A-N-LEeKZB9wWVNTsPg _Tk1nzt-LEeKZB9wWVNTsPg">
+      <ownedEnd xmi:id="_Tk1nzt-LEeKZB9wWVNTsPg" name="" visibility="private" type="_Tk1A4d-LEeKZB9wWVNTsPg" association="_Tk1nzd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1nz9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n0N-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1n0d-LEeKZB9wWVNTsPg" name="oslc:CreationFactory">
+      <eAnnotations xmi:id="_Tk1n0t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1n09-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n1N-LEeKZB9wWVNTsPg" name="oslc:label" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n1d-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n1t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n19-LEeKZB9wWVNTsPg" name="oslc:creation" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1n2N-LEeKZB9wWVNTsPg" name="oslc:resourceShape" visibility="public" type="_Tk1BA9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n2d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n2t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n29-LEeKZB9wWVNTsPg" name="oslc:resourceType" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n3N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n3t-LEeKZB9wWVNTsPg" name="oslc:usage" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n39-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n4N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1n4d-LEeKZB9wWVNTsPg" name="oslc:QueryCapability">
+      <eAnnotations xmi:id="_Tk1n4t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1n49-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n5N-LEeKZB9wWVNTsPg" name="oslc:label" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n5d-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n5t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n59-LEeKZB9wWVNTsPg" name="oslc:queryBase" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1n6N-LEeKZB9wWVNTsPg" name="oslc:resourceShape" visibility="public" type="_Tk1BA9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n6d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n6t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n69-LEeKZB9wWVNTsPg" name="oslc:resourceType" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n7N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n7d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n7t-LEeKZB9wWVNTsPg" name="oslc:usage" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n79-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n8N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1n8d-LEeKZB9wWVNTsPg" name="oslc:Dialog">
+      <eAnnotations xmi:id="_Tk1n8t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1n89-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n9N-LEeKZB9wWVNTsPg" name="oslc:label" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n9d-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n9t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n99-LEeKZB9wWVNTsPg" name="oslc:dialog" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk1n-N-LEeKZB9wWVNTsPg" name="oslc:hintWidth" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n-d-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n-t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n-9-LEeKZB9wWVNTsPg" name="oslc:hintHeight" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n_N-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1n_d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1n_t-LEeKZB9wWVNTsPg" name="oslc:resourceType" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1n_9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oAN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oAd-LEeKZB9wWVNTsPg" name="oslc:usage" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oAt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oA9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1oBN-LEeKZB9wWVNTsPg" name="oslc:Compact">
+      <eAnnotations xmi:id="_Tk1oBd-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1oBt-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oB9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oCN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oCd-LEeKZB9wWVNTsPg" name="oslc:shortTitle" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oCt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oC9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oDN-LEeKZB9wWVNTsPg" name="oslc:icon" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oDd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oDt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oD9-LEeKZB9wWVNTsPg" name="oslc:smallPreview" visibility="public" type="_Tk1oFd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oEN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oEd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oEt-LEeKZB9wWVNTsPg" name="oslc:largePreview" visibility="public" type="_Tk1oFd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oE9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oFN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1oFd-LEeKZB9wWVNTsPg" name="oslc:Preview">
+      <eAnnotations xmi:id="_Tk1oFt-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1oF9-LEeKZB9wWVNTsPg" name="oslc:document" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oGN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oGd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oGt-LEeKZB9wWVNTsPg" name="oslc:hintWidth" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oG9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oHN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oHd-LEeKZB9wWVNTsPg" name="oslc:hintHeight" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oHt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oH9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oIN-LEeKZB9wWVNTsPg" name="oslc:initialHeight" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oId-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oIt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk1oI9-LEeKZB9wWVNTsPg" name="oslc:Property">
+      <eAnnotations xmi:id="_Tk1oJN-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk1oJd-LEeKZB9wWVNTsPg" name="dcterms:description" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oJt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oJ9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oKN-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oKd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oKt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oK9-LEeKZB9wWVNTsPg" name="oslc:allowedValues" visibility="public" type="_Tk2Ord-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oLN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk1oLd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk1oLt-LEeKZB9wWVNTsPg" name="oslc:defaultValue" visibility="public">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk1oL9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2OkN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Okd-LEeKZB9wWVNTsPg" name="oslc:hidden" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Okt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Ok9-LEeKZB9wWVNTsPg"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_Tk2OlN-LEeKZB9wWVNTsPg">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </defaultValue>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Old-LEeKZB9wWVNTsPg" name="oslc:isMemeberProperty" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Olt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Ol9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2OmN-LEeKZB9wWVNTsPg" name="oslc:name" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Omd-LEeKZB9wWVNTsPg" name="oslc:maxSize" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Omt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Om9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2OnN-LEeKZB9wWVNTsPg" name="oslc:occurs" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Ond-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Ont-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2On9-LEeKZB9wWVNTsPg" name="oslc:propertyDefinition" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2OoN-LEeKZB9wWVNTsPg" name="oslc:range" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Ood-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Oot-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Oo9-LEeKZB9wWVNTsPg" name="oslc:readyOnly" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2OpN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Opd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Opt-LEeKZB9wWVNTsPg" name="oslc:representation" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Op9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2OqN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Oqd-LEeKZB9wWVNTsPg" name="oslc:valueType" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2Oqt-LEeKZB9wWVNTsPg" name="oslc:valueShape" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Oq9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2OrN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2Ord-LEeKZB9wWVNTsPg" name="oslc:AllowedValues">
+      <eAnnotations xmi:id="_Tk2Ort-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk2Or9-LEeKZB9wWVNTsPg" name="oslc:allowedValue" visibility="public">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2OsN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Osd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_Tk2Ost-LEeKZB9wWVNTsPg" name="oslc:Occurs"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk2Os9-LEeKZB9wWVNTsPg" name="Requirements Management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2OtN-LEeKZB9wWVNTsPg" name="oslc_rm:RequirementsCollection">
+      <eAnnotations xmi:id="_Tk2Otd-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk2Ott-LEeKZB9wWVNTsPg" name="title" visibility="private" type="_Tk22Ad-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2Ot9-LEeKZB9wWVNTsPg" name="description" visibility="private" type="_Tk22At-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2OuN-LEeKZB9wWVNTsPg" name="shortTitle" visibility="private" type="_Tk22AN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2Oud-LEeKZB9wWVNTsPg" name="identifier" visibility="private" type="_Tk22A9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2Out-LEeKZB9wWVNTsPg" name="created" visibility="private" type="_Tk22B9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2Ou9-LEeKZB9wWVNTsPg" name="modified" visibility="private" type="_Tk22B9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2OvN-LEeKZB9wWVNTsPg" name="closeDate" visibility="private" type="_Tk22B9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2Ovd-LEeKZB9wWVNTsPg" name="oslc_rm:elaboratedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Ovt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Ov9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2OwN-LEeKZB9wWVNTsPg" name="oslc_rm:elaborates" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Owd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Owt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Ow9-LEeKZB9wWVNTsPg" name="oslc_rm:specifiedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2OxN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Oxd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Oxt-LEeKZB9wWVNTsPg" name="oslc_rm:specifies" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Ox9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2OyN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Oyd-LEeKZB9wWVNTsPg" name="oslc_rm:affectedBy" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Oyt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Oy9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2OzN-LEeKZB9wWVNTsPg" name="oslc_rm:trackedBy" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2Ozd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2Ozt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2Oz9-LEeKZB9wWVNTsPg" name="oslc_rm:implementedBy" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O0N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O0d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O0t-LEeKZB9wWVNTsPg" name="oslc_rm:validatedBy" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O09-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O1N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O1d-LEeKZB9wWVNTsPg" name="oslc_rm:satisfiedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O1t-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O19-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O2N-LEeKZB9wWVNTsPg" name="oslc_rm:satisfies" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O2d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O2t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O29-LEeKZB9wWVNTsPg" name="oslc_rm:decomposedBy" visibility="public" type="_Tk2OtN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O3N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O3t-LEeKZB9wWVNTsPg" name="oslc_rm:decomposes" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O39-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O4N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O4d-LEeKZB9wWVNTsPg" name="oslc_rm:constrainedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O4t-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O49-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O5N-LEeKZB9wWVNTsPg" name="oslc_rm:contrains" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O5d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O5t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O59-LEeKZB9wWVNTsPg" name="oslc_rm:uses" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O6N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O6d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2O6t-LEeKZB9wWVNTsPg" name="oslc_rm:Requirement">
+      <eAnnotations xmi:id="_Tk2O69-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk2O7N-LEeKZB9wWVNTsPg" name="dcterms:title" visibility="private">
+        <type xmi:type="uml:Class" href="XSDDataTypes.library.uml#_Tk4D3d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O7d-LEeKZB9wWVNTsPg" name="description" visibility="private" type="_Tk22At-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2O7t-LEeKZB9wWVNTsPg" name="shortTitle" visibility="private" type="_Tk22AN-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2O79-LEeKZB9wWVNTsPg" name="identifier" visibility="private" type="_Tk22A9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2O8N-LEeKZB9wWVNTsPg" name="created" visibility="private" type="_Tk22B9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2O8d-LEeKZB9wWVNTsPg" name="modified" visibility="private" type="_Tk22B9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2O8t-LEeKZB9wWVNTsPg" name="closeDate" visibility="private" type="_Tk22B9-LEeKZB9wWVNTsPg"/>
+      <ownedAttribute xmi:id="_Tk2O89-LEeKZB9wWVNTsPg" name="oslc_rm:elaboratedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O9N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O9d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O9t-LEeKZB9wWVNTsPg" name="oslc_rm:elaborates" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O99-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O-N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O-d-LEeKZB9wWVNTsPg" name="oslc_rm:specifiedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O-t-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O-9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O_N-LEeKZB9wWVNTsPg" name="oslc_rm:specifies" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2O_d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2O_t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2O_9-LEeKZB9wWVNTsPg" name="oslc_rm:affectedBy" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PAN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PAd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PAt-LEeKZB9wWVNTsPg" name="oslc_rm:trackedBy" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PA9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PBN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PBd-LEeKZB9wWVNTsPg" name="oslc_rm:implementedBy" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PBt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PB9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PCN-LEeKZB9wWVNTsPg" name="oslc_rm:validatedBy" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PCd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PCt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PC9-LEeKZB9wWVNTsPg" name="oslc_rm:satisfiedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PDN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PDd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PDt-LEeKZB9wWVNTsPg" name="oslc_rm:satisfies" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PD9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PEN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PEd-LEeKZB9wWVNTsPg" name="oslc_rm:decomposedBy" visibility="public" type="_Tk2OtN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PEt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PE9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PFN-LEeKZB9wWVNTsPg" name="oslc_rm:decomposes" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PFd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PFt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PF9-LEeKZB9wWVNTsPg" name="oslc_rm:constrainedBy" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PGN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PGd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PGt-LEeKZB9wWVNTsPg" name="oslc_rm:contrains" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PG9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PHN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk2PHd-LEeKZB9wWVNTsPg" name="Source Code Management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2PHt-LEeKZB9wWVNTsPg" name="Baseline">
+      <ownedAttribute xmi:id="_Tk2PH9-LEeKZB9wWVNTsPg" name="configuration" visibility="private" type="_Tk2PIt-LEeKZB9wWVNTsPg" association="_Tk21q9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PIN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PId-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2PIt-LEeKZB9wWVNTsPg" name="Configuration">
+      <ownedAttribute xmi:id="_Tk2PI9-LEeKZB9wWVNTsPg" name="baseline" visibility="private" type="_Tk2PHt-LEeKZB9wWVNTsPg" association="_Tk21q9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PJN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PJd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PJt-LEeKZB9wWVNTsPg" name="component" visibility="private" type="_Tk21sd-LEeKZB9wWVNTsPg" association="_Tk21uN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PJ9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PKN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PKd-LEeKZB9wWVNTsPg" name="changeSet" visibility="private" type="_Tk21oN-LEeKZB9wWVNTsPg" association="_Tk21rt-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PKt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PK9-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2PLN-LEeKZB9wWVNTsPg" name="Directory">
+      <ownedAttribute xmi:id="_Tk2PLd-LEeKZB9wWVNTsPg" name="configuration" visibility="private" type="_Tk21sd-LEeKZB9wWVNTsPg" association="_Tk21rN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PLt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PL9-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PMN-LEeKZB9wWVNTsPg" name="file" visibility="private" type="_Tk2PNt-LEeKZB9wWVNTsPg" association="_Tk21rd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PMd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PMt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2PM9-LEeKZB9wWVNTsPg" name="changeSet" visibility="private" type="_Tk21oN-LEeKZB9wWVNTsPg" association="_Tk21r9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PNN-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PNd-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2PNt-LEeKZB9wWVNTsPg" name="File">
+      <ownedAttribute xmi:id="_Tk2PN9-LEeKZB9wWVNTsPg" name="directory" visibility="private" type="_Tk2PLN-LEeKZB9wWVNTsPg" association="_Tk21rd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PON-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2POd-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2POt-LEeKZB9wWVNTsPg" name="changeSet" visibility="private" type="_Tk21oN-LEeKZB9wWVNTsPg" association="_Tk21sN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2PO9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2PPN-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk21oN-LEeKZB9wWVNTsPg" name="oslc_scm:ChangeSet">
+      <eAnnotations xmi:id="_Tk21od-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk21ot-LEeKZB9wWVNTsPg" name="baseline" visibility="private" type="_Tk2PIt-LEeKZB9wWVNTsPg" association="_Tk21rt-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21o9-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21pN-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21pd-LEeKZB9wWVNTsPg" name="directory" visibility="private" type="_Tk2PLN-LEeKZB9wWVNTsPg" association="_Tk21r9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21pt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21p9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21qN-LEeKZB9wWVNTsPg" name="file" visibility="private" type="_Tk2PNt-LEeKZB9wWVNTsPg" association="_Tk21sN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21qd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21qt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21q9-LEeKZB9wWVNTsPg" name="baseline configuration" memberEnd="_Tk2PH9-LEeKZB9wWVNTsPg _Tk2PI9-LEeKZB9wWVNTsPg"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21rN-LEeKZB9wWVNTsPg" name="directories" memberEnd="_Tk21st-LEeKZB9wWVNTsPg _Tk2PLd-LEeKZB9wWVNTsPg"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21rd-LEeKZB9wWVNTsPg" name="files" memberEnd="_Tk2PMN-LEeKZB9wWVNTsPg _Tk2PN9-LEeKZB9wWVNTsPg"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21rt-LEeKZB9wWVNTsPg" name="changeSets" memberEnd="_Tk2PKd-LEeKZB9wWVNTsPg _Tk21ot-LEeKZB9wWVNTsPg"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21r9-LEeKZB9wWVNTsPg" name="changedDirectories" memberEnd="_Tk21pd-LEeKZB9wWVNTsPg _Tk2PM9-LEeKZB9wWVNTsPg"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21sN-LEeKZB9wWVNTsPg" name="changedFiles" memberEnd="_Tk21qN-LEeKZB9wWVNTsPg _Tk2POt-LEeKZB9wWVNTsPg"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk21sd-LEeKZB9wWVNTsPg" name="Component">
+      <ownedAttribute xmi:id="_Tk21st-LEeKZB9wWVNTsPg" name="directory" visibility="private" type="_Tk2PLN-LEeKZB9wWVNTsPg" association="_Tk21rN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21s9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21tN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21td-LEeKZB9wWVNTsPg" name="configuration" visibility="private" type="_Tk2PIt-LEeKZB9wWVNTsPg" association="_Tk21uN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21tt-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21t9-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Tk21uN-LEeKZB9wWVNTsPg" name="components" memberEnd="_Tk2PJt-LEeKZB9wWVNTsPg _Tk21td-LEeKZB9wWVNTsPg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk21ud-LEeKZB9wWVNTsPg" name="Quality Management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk21ut-LEeKZB9wWVNTsPg" name="oslc_qm:TestPlan">
+      <eAnnotations xmi:id="_Tk21u9-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk21vN-LEeKZB9wWVNTsPg" name="oslc_qm:relatedChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21vd-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21vt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21v9-LEeKZB9wWVNTsPg" name="oslc_qm:usesTestCase" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21wN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21wd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21wt-LEeKZB9wWVNTsPg" name="oslc_qm:validatesRequirementsCollection" visibility="public" type="_Tk2OtN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21w9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21xN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk21xd-LEeKZB9wWVNTsPg" name="oslc_qm:TestCase">
+      <eAnnotations xmi:id="_Tk21xt-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk21x9-LEeKZB9wWVNTsPg" name="oslc_qm:relatedChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21yN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21yd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21yt-LEeKZB9wWVNTsPg" name="oslc_qm:testsChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21y9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21zN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21zd-LEeKZB9wWVNTsPg" name="oslc_qm:usesTestScript" visibility="public" type="_Tk2109-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21zt-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21z9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk210N-LEeKZB9wWVNTsPg" name="oslc_qm:validatesRequirement" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk210d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk210t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk2109-LEeKZB9wWVNTsPg" name="oslc_qm:TestScript">
+      <eAnnotations xmi:id="_Tk211N-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk211d-LEeKZB9wWVNTsPg" name="oslc_qm:exectionInstructions" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk211t-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2119-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk212N-LEeKZB9wWVNTsPg" name="oslc_qm:relatedChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk212d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk212t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2129-LEeKZB9wWVNTsPg" name="oslc_qm:validatesRequest" visibility="public" type="_Tk2O6t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk213N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk213d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk213t-LEeKZB9wWVNTsPg" name="oslc_qm:TestExecutionRecord">
+      <eAnnotations xmi:id="_Tk2139-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk214N-LEeKZB9wWVNTsPg" name="oslc_qm:blockedByChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk214d-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk214t-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk2149-LEeKZB9wWVNTsPg" name="oslc_qm:runsOnTestEnvironment" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk215N-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk215d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk215t-LEeKZB9wWVNTsPg" name="oslc_qm:reportsOnTestPlan" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2159-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk216N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk216d-LEeKZB9wWVNTsPg" name="oslc_qm:relatedChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk216t-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2169-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk217N-LEeKZB9wWVNTsPg" name="oslc_qm:runsTestCase" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk217d-LEeKZB9wWVNTsPg" name="oslc_qm:TestResult">
+      <eAnnotations xmi:id="_Tk217t-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <ownedAttribute xmi:id="_Tk2179-LEeKZB9wWVNTsPg" name="oslc_qm:affectedByChangeRequest" visibility="public" type="_Tk0aBN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk218N-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk218d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk218t-LEeKZB9wWVNTsPg" name="oslc_qm:executesTestScript" visibility="public" type="_Tk2109-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk2189-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk219N-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk219d-LEeKZB9wWVNTsPg" name="oslc_qm:producedByTestExecutionRecord" visibility="public" type="_Tk213t-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk219t-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk2199-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21-N-LEeKZB9wWVNTsPg" name="oslc_qm:reportsOnTestCase" visibility="public" type="_Tk21xd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21-d-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21-t-LEeKZB9wWVNTsPg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk21-9-LEeKZB9wWVNTsPg" name="oslc_qm:reportsOnTestPlan" visibility="public" type="_Tk21ut-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk21_N-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk21_d-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk21_t-LEeKZB9wWVNTsPg" name="Estimation and Metrics"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk21_9-LEeKZB9wWVNTsPg" name="PrimitiveTypes">
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22AN-LEeKZB9wWVNTsPg" name="oslc_shortTitle"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22Ad-LEeKZB9wWVNTsPg" name="oslc_title"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22At-LEeKZB9wWVNTsPg" name="oslc_description"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22A9-LEeKZB9wWVNTsPg" name="oslc_identifier"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22BN-LEeKZB9wWVNTsPg" name="dcterms_subject"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22Bd-LEeKZB9wWVNTsPg" name="dcterms_creator"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22Bt-LEeKZB9wWVNTsPg" name="dcterms_contributor"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22B9-LEeKZB9wWVNTsPg" name="date"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Tk22CN-LEeKZB9wWVNTsPg" name="URI"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk22Cd-LEeKZB9wWVNTsPg" name="Asset Management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22Ct-LEeKZB9wWVNTsPg" name="oslc_asset:Asset">
+      <ownedAttribute xmi:id="_Tk22C9-LEeKZB9wWVNTsPg" name="oslc_asset:artifacts" visibility="public" type="_Tk22Ed-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22DN-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22Dd-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk22Dt-LEeKZB9wWVNTsPg" name="dcterms:relation" visibility="public" type="_Tk22Ct-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22D9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22EN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22Ed-LEeKZB9wWVNTsPg" name="oslc_asset:Artifact">
+      <ownedAttribute xmi:id="_Tk22Et-LEeKZB9wWVNTsPg" name="oslc_asset:mediaResource" visibility="public" type="_Tk22E9-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22E9-LEeKZB9wWVNTsPg" name="oslc_asset:ArtifactMedia"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk22FN-LEeKZB9wWVNTsPg" name="Automation">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22Fd-LEeKZB9wWVNTsPg" name="oslc_auto:AutomationPlan">
+      <ownedAttribute xmi:id="_Tk22Ft-LEeKZB9wWVNTsPg" name="oslc_auto:parameterDefinition" visibility="public" type="_Tk1oI9-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22F9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22GN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22Gd-LEeKZB9wWVNTsPg" name="oslc_auto:AutomationRequest">
+      <ownedAttribute xmi:id="_Tk22Gt-LEeKZB9wWVNTsPg" name="oslc_auto:state" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22G9-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22HN-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk22Hd-LEeKZB9wWVNTsPg" name="oslc_auto:desiredState" visibility="public" type="_Tk22CN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22Ht-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22H9-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk22IN-LEeKZB9wWVNTsPg" name="oslc_auto:inputParameter" visibility="public" type="_Tk22KN-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22Id-LEeKZB9wWVNTsPg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22It-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22I9-LEeKZB9wWVNTsPg" name="oslc_auto:AutomationResult">
+      <ownedAttribute xmi:id="_Tk22JN-LEeKZB9wWVNTsPg" name="oslc_auto:producedByAutomationRequest" visibility="public" type="_Tk22Gd-LEeKZB9wWVNTsPg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tk22Jd-LEeKZB9wWVNTsPg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tk22Jt-LEeKZB9wWVNTsPg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Tk22J9-LEeKZB9wWVNTsPg" name="oslc_auto:reportsOnAutomationPlan" visibility="public" type="_Tk22Fd-LEeKZB9wWVNTsPg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tk22KN-LEeKZB9wWVNTsPg" name="oslc_auto:ParamterInstance"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk22Kd-LEeKZB9wWVNTsPg" name="PLM"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk22Kt-LEeKZB9wWVNTsPg" name="Performance Monitoring"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_Tk22K9-LEeKZB9wWVNTsPg" name="Reconciliation"/>
+  <profileApplication xmi:id="_Tk22LN-LEeKZB9wWVNTsPg">
+    <eAnnotations xmi:id="_Tk22Ld-LEeKZB9wWVNTsPg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+    </eAnnotations>
+    <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+  </profileApplication>
+</uml:Package>
