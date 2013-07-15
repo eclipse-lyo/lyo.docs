@@ -14,40 +14,27 @@
    
         IBM Corporation - initial API and implementation
  -->
-
-
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>OSLC4JBugzillaAdapter</display-name>
   <context-param>
-  	<description>Scheme used for URI when registering ServiceProvider.  Can be overridden by System property of the same name.</description>
-  	<param-name>org.eclipse.lyo.oslc4j.bugzilla.scheme</param-name>
-  	<param-value>http</param-value>
+    <description>Scheme used for URI when registering ServiceProvider.  Can be overridden by System property of the same name.</description>
+    <param-name>org.eclipse.lyo.oslc4j.bugzilla.scheme</param-name>
+    <param-value>http</param-value>
   </context-param>
   <context-param>
-  	<description>Port used for URI when registering ServiceProvider.  Can be overridden by System property of the same name.</description>
-  	<param-name>org.eclipse.lyo.oslc4j.bugzilla.port</param-name>
-  	<param-value>8080</param-value>
+    <description>Port used for URI when registering ServiceProvider.  Can be overridden by System property of the same name.</description>
+    <param-name>org.eclipse.lyo.oslc4j.bugzilla.port</param-name>
+    <param-value>8080</param-value>
   </context-param>
   <listener>
-	<listener-class>org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager</listener-class>
+    <listener-class>org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager</listener-class>
   </listener>
-  <!--  
   <servlet>
     <servlet-name>JAX-RS Servlet</servlet-name>
-    <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>   
-    <init-param>   
-      <param-name>applicationConfigLocation</param-name>
-      <param-value>/WEB-INF/classes/org/eclipse/lyo/oslc4j/bugzilla/services/providers;/WEB-INF/classes/org/eclipse/lyo/oslc4j/bugzilla/services/resources;</param-value>        
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  -->
-  <servlet>
-    <servlet-name>JAX-RS Servlet</servlet-name>
-    <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>   
+    <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>
     <init-param>
-    	<param-name>javax.ws.rs.Application</param-name>
-    	<param-value>org.eclipse.lyo.oslc4j.bugzilla.services.BugzillaApplication</param-value>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>org.eclipse.lyo.oslc4j.bugzilla.services.BugzillaApplication</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -63,13 +50,13 @@
     <servlet-name>restSdkAdmin</servlet-name>
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>RootServicesService</servlet-name>
     <servlet-class>org.eclipse.lyo.oslc4j.bugzilla.services.RootServicesService</servlet-class>
   </servlet>
   <servlet-mapping>
-	<servlet-name>RootServicesService</servlet-name>
-	<url-pattern>/rootservices</url-pattern>
+    <servlet-name>RootServicesService</servlet-name>
+    <url-pattern>/rootservices</url-pattern>
   </servlet-mapping>
   <filter>
     <display-name>CredentialsFilter</display-name>

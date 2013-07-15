@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><launchConfiguration type="org.eclipse.m2e.Maven2LaunchConfigurationType">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2e.Maven2LaunchConfigurationType">
 <booleanAttribute key="M2_DEBUG_OUTPUT" value="false"/>
 <stringAttribute key="M2_GOALS" value="jetty:run"/>
 <booleanAttribute key="M2_NON_RECURSIVE" value="false"/>
@@ -7,6 +8,7 @@
 <listAttribute key="M2_PROPERTIES"/>
 <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
 <booleanAttribute key="M2_SKIP_TESTS" value="false"/>
+<intAttribute key="M2_THREADS" value="1"/>
 <booleanAttribute key="M2_UPDATE_SNAPSHOTS" value="false"/>
 <booleanAttribute key="M2_WORKSPACE_RESOLUTION" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.m2e.launching.MavenSourceLocator"/>
