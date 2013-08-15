@@ -17,6 +17,7 @@ package org.eclipse.lyo.oslc4j.bugzilla.trs;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +40,7 @@ import org.eclipse.lyo.core.trs.ChangeEvent;
 import org.eclipse.lyo.core.trs.ChangeLog;
 import org.eclipse.lyo.core.trs.Creation;
 import org.eclipse.lyo.core.trs.Modification;
+import org.eclipse.lyo.core.trs.Page;
 import org.eclipse.lyo.core.trs.TRSConstants;
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.jbugzx.rpc.GetAccessibleProducts;
@@ -279,9 +281,31 @@ public class ChangeBugzillaHistories {
 	}
 
 	/**
-	 * Build Bugzilla Base resources and ChangeLogs
+	 * Create a brand new Base/Page Resource
+	 * @throws URISyntaxException 
 	 */
-	private static void buildBaseResourcesAndChangeLogsInternal(HttpServletRequest httpServletRequest) {
+	private static Page createNewPage(Base base, int basePagenum) throws URISyntaxException {
+		Page ldp = new Page();
+		ldp.setAbout(URI.create(BugzillaManager.getBugzServiceBase()
+				+ "/trs/" + TRSConstants.TRS_TERM_BASE + String.valueOf(basePagenum)));//$NON-NLS-1$);
+		ldp.setNextPage(new URI(TRSConstants.RDF_NIL));
+		ldp.setPageOf(base);
+		return ldp;
+	}
+
+	private static Base createNewBase(int basePagenum) throws URISyntaxException {
+		Base base = new Base();
+		base.setAbout(URI.create(BugzillaManager.getBugzServiceBase()
+				+ "/trs/" + TRSConstants.TRS_TERM_BASE));//$NON-NLS-1$
+//		base.setCutoffEvent(new URI(TRSConstants.RDF_NIL));
+		base.setNextPage(ChangeBugzillaHistories.createNewPage(base, basePagenum));
+		return base;
+	}
+	/**
+	 * Build Bugzilla Base resources and ChangeLogs
+	 * @throws URISyntaxException 
+	 */
+	private static void buildBaseResourcesAndChangeLogsInternal(HttpServletRequest httpServletRequest) throws URISyntaxException {
 		Date nowDate = new Date();
 		if ((lastBaseResourceUpdatedDate != null) && (UPDATEINTERVAL != -1) &&
 				(nowDate.getTime() - lastBaseResourceUpdatedDate.getTime() > UPDATEINTERVAL)) {
@@ -313,10 +337,7 @@ public class ChangeBugzillaHistories {
 		Base base = null;
 		Base prevBase = null;
 		if (buildAll) {
-			base = new Base();
-			base.setAbout(URI.create(BugzillaManager.getBugzServiceBase()
-					+ "/trs/" + TRSConstants.TRS_TERM_BASE));//$NON-NLS-1$
-			base.setNextPage(nilURI);
+			base = ChangeBugzillaHistories.createNewBase(basePagenum);
 			baseResouces = new HashMap<String, Base>();
 			baseResouces.put(String.valueOf(basePagenum), base);
 		}
@@ -398,23 +419,20 @@ public class ChangeBugzillaHistories {
 				changeLogs.put(String.valueOf(changeLogPageNum), changeLog);
 			}
 
-			changeLog.getChanges().add(ce);
+			changeLog.getChange().add(ce);
 			currentNumberOfChangeLog++;
 
 			if (buildAll && !allmembers.contains(uri)) {
 				// Base Page
 				if (base == null) {
-					URI nextPage = URI.create(BugzillaManager.getBugzServiceBase()
-									+ "/trs/" + TRSConstants.TRS_TERM_BASE + "/" + String.valueOf(basePagenum + 1));//$NON-NLS-1$ //$NON-NLS-2$
 					if (prevBase != null) {
-						prevBase.setNextPage(nextPage);
+						URI nextPage = URI.create(BugzillaManager.getBugzServiceBase()
+								+ "/trs/" + TRSConstants.TRS_TERM_BASE + "/" + String.valueOf(basePagenum + 1));//$NON-NLS-1$ //$NON-NLS-2$
+						prevBase.getNextPage().setNextPage(nextPage);
 						prevBase = null;
 					}
 					basePagenum++;
-					base = new Base();
-					base.setAbout(URI.create(BugzillaManager.getBugzServiceBase()
-							+ "/trs/" + TRSConstants.TRS_TERM_BASE));//$NON-NLS-1$
-					base.setNextPage(nilURI);
+					base = ChangeBugzillaHistories.createNewBase(basePagenum);
 					baseResouces.put(String.valueOf(basePagenum), base);
 				}
 				base.getMembers().add(uri);// rdfs:member is mandatory
@@ -445,7 +463,7 @@ public class ChangeBugzillaHistories {
 	}
 
 	public static void buildBaseResourcesAndChangeLogs(
-			HttpServletRequest httpServletRequest) {
+			HttpServletRequest httpServletRequest) throws URISyntaxException {
 		synchronized (mutex) {
 			ChangeBugzillaHistories.buildBaseResourcesAndChangeLogsInternal(httpServletRequest);
 		}
@@ -457,9 +475,10 @@ public class ChangeBugzillaHistories {
 	 * @param pagenum
 	 * @param httpServletRequest
 	 * @return
+	 * @throws URISyntaxException 
 	 */
 	public static Base getBaseResource(String pagenum,
-			HttpServletRequest httpServletRequest) {
+			HttpServletRequest httpServletRequest) throws URISyntaxException {
 		synchronized (mutex) {
 			ChangeBugzillaHistories.buildBaseResourcesAndChangeLogsInternal(httpServletRequest);
 			return baseResouces != null ? baseResouces.get(pagenum) : null;
@@ -472,9 +491,10 @@ public class ChangeBugzillaHistories {
 	 * @param pagenum
 	 * @param httpServletRequest
 	 * @return
+	 * @throws URISyntaxException 
 	 */
 	public static ChangeLog getChangeLog(String pagenum,
-			HttpServletRequest httpServletRequest) {
+			HttpServletRequest httpServletRequest) throws URISyntaxException {
 		synchronized (mutex) {
 			ChangeBugzillaHistories.buildBaseResourcesAndChangeLogsInternal(httpServletRequest);
 			// changeLogs might be null

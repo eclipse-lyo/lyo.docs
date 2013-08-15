@@ -27,7 +27,7 @@ String oauthDomain = (String) request.getAttribute("oauthDomain");
  -->
 <rdf:Description rdf:about="<%= baseUri + "/rootservices" %>"
 	xmlns:bugz="http://www.bugzilla.org/rdf#"
-	xmlns:trs="http://jazz.net/ns/trs#"
+	xmlns:trs="http://open-services.net/ns/core/trs#"
     xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/"
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:jfs="http://jazz.net/xmlns/prod/jazz/jfs/1.0/" 

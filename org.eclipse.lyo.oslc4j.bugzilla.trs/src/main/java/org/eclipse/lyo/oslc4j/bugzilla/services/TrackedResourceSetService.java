@@ -28,11 +28,13 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.lyo.core.trs.AbstractChangeLog;
 import org.eclipse.lyo.core.trs.Base;
 import org.eclipse.lyo.core.trs.ChangeLog;
 import org.eclipse.lyo.core.trs.EmptyChangeLog;
+import org.eclipse.lyo.core.trs.Page;
 import org.eclipse.lyo.core.trs.TRSConstants;
 import org.eclipse.lyo.core.trs.TrackedResourceSet;
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
@@ -65,8 +67,8 @@ public class TrackedResourceSetService {
 	 * Added in Lab 1.3
 	 */
 	@GET
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-	public TrackedResourceSet getTrackedResourceSet() {
+    @Produces({OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+	public TrackedResourceSet getTrackedResourceSet() throws URISyntaxException {
 		
 		TrackedResourceSet result = new TrackedResourceSet();
 		result.setAbout(URI.create(BugzillaManager.getBugzServiceBase() + "/trs"));//$NON-NLS-1$
@@ -86,8 +88,8 @@ public class TrackedResourceSetService {
 	 */
 	@Path(TRSConstants.TRS_TERM_BASE)
 	@GET
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-	public Base getBase() {
+    @Produces({OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+	public Page getBase() {
         URI requestURI = uriInfo.getRequestUri();
         boolean endsWithSlash = requestURI.getPath().endsWith("/");
         String redirectLocation = requestURI.toString() + (endsWithSlash ? "1" : "/1");
@@ -103,10 +105,25 @@ public class TrackedResourceSetService {
 	 */
 	@GET
 	@Path(TRSConstants.TRS_TERM_BASE+"/{page}")
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-	public Base getBasePage(
+    @Produces({OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+	public Page getBasePage(
 		@PathParam("page") String pagenum ) {
-		return ChangeBugzillaHistories.getBaseResource(pagenum, httpServletRequest);
+		Base base;
+		try {
+			base = ChangeBugzillaHistories.getBaseResource(pagenum, httpServletRequest);
+		} catch (URISyntaxException e) {
+			throw new IllegalStateException(e);
+		}
+		if (base == null) {
+			throw new WebApplicationException(Status.NOT_FOUND);
+		}
+		Page nextPage = base.getNextPage();
+		if (nextPage == null) {
+			throw new WebApplicationException(Status.NOT_FOUND);
+		}
+		// Due to OSLC4J limitation, not Base but NextPage will be returned.
+		// See org.eclipse.lyo.rio.trs.resources.BaseResource.getBasePage(Long)
+		return nextPage;
 	}
 
 	/*
@@ -114,7 +131,7 @@ public class TrackedResourceSetService {
 	 */
 	@Path(TRSConstants.TRS_TERM_CHANGE_LOG)
 	@GET
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+    @Produces({OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
 	public ChangeLog getChangeLog() {
         URI requestURI = uriInfo.getRequestUri();
         boolean endsWithSlash = requestURI.getPath().endsWith("/");
@@ -131,9 +148,13 @@ public class TrackedResourceSetService {
 	 */
 	@GET
 	@Path(TRSConstants.TRS_TERM_CHANGE_LOG+"/{page}")
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
+    @Produces({OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
 	public ChangeLog getChangeLogPage(
 		@PathParam("page") String pagenum ) {
-		return ChangeBugzillaHistories.getChangeLog(pagenum, httpServletRequest);
+		try {
+			return ChangeBugzillaHistories.getChangeLog(pagenum, httpServletRequest);
+		} catch (URISyntaxException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 }

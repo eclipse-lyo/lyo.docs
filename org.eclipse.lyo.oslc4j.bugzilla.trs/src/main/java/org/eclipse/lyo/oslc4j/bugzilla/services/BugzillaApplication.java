@@ -70,7 +70,7 @@ public class BugzillaApplication extends OslcWinkApplication {
             RESOURCE_CLASSES.add(ServiceProviderService.class);
             
             //TRS resource
-            // Added in Lab 1.1
+            //Added in Lab 1.2
             RESOURCE_CLASSES.add(TrackedResourceSetService.class);
 
             RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_ALLOWED_VALUES,           AllowedValues.class);

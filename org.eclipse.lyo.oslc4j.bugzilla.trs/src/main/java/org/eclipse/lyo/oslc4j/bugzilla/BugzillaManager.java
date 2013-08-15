@@ -338,6 +338,13 @@ public class BugzillaManager implements ServletContextListener  {
 				InputStream response = client.httpGet(buffer.toString());
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		        factory.setNamespaceAware(true);
+
+		        // Loading the external DTD causes problems for some Bugzilla instances. We don't need validation anyway, so disable it.
+		        factory.setValidating(false);
+		        factory.setFeature("http://xml.org/sax/features/validation", false);
+		        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+		        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
 				DocumentBuilder builder = factory.newDocumentBuilder();
 				Document document = builder.parse(response);		        
 		        Element root = document.getDocumentElement();
