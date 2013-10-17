@@ -376,7 +376,7 @@ public class BugzillaChangeRequestService
     @GET
     @Path("{changeRequestId}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-    public BugzillaChangeRequest getChangeRequest(@PathParam("productId")        final String productId,
+    public Response getChangeRequest(@PathParam("productId")        final String productId,
                                                   @PathParam("changeRequestId")  final String changeRequestId,
                                                   @QueryParam("oslc.properties") final String propertiesString,
                                                   @QueryParam("oslc.prefix")     final String prefix) throws IOException, ServletException, URISyntaxException
@@ -417,7 +417,7 @@ public class BugzillaChangeRequestService
             httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
                                             QueryUtils.invertSelectedProperties(properties));
             
-            return changeRequest;
+            return Response.ok(changeRequest).header(Constants.HDR_OSLC_VERSION, Constants.OSLC_VERSION_V2).build();
         }
 
         throw new WebApplicationException(Status.NOT_FOUND);
@@ -668,7 +668,7 @@ public class BugzillaChangeRequestService
     	newChangeRequest.setAbout(about);
         setETagHeader(getETagFromChangeRequest(newChangeRequest), httpServletResponse);
 
-        return Response.created(about).entity(changeRequest).build();
+        return Response.created(about).entity(changeRequest).header(Constants.HDR_OSLC_VERSION, Constants.OSLC_VERSION_V2).build();
     }
     
     /**
