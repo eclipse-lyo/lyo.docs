@@ -1,5 +1,5 @@
 <%--
- Copyright (c) 2011, 2012 IBM Corporation.
+ Copyright (c) 2011, 2014 IBM Corporation.
 
  All rights reserved. This program and the accompanying materials
  are made available under the terms of the Eclipse Public License v1.0
@@ -210,8 +210,14 @@ function showPreview(elem) { // (1)
 function parsePreview(xml) { // (1)  
    var ret = {};
    var compact = firstChild(firstChild(xml));
-   var preview = firstChild(
-      firstChildNamed(compact,'oslc:smallPreview')); // (2) 
+   var smallPrev = firstChildNamed(compact,'oslc:smallPreview');
+   var largePrev = firstChildNamed(compact, 'oslc:largePreview');
+   var preview;
+   if(smallPrev != null){
+	   preview = firstChild(smallPrev);
+   } else{
+	   preview = firstChild(largePrev);
+   }
    if (preview) {
       var document = firstChildNamed(preview, 'oslc:document');
       if (document) ret.uri = document.getAttribute('rdf:resource');
@@ -244,9 +250,9 @@ function firstChildNamed(e, nodeName) { // (4)
 Code for OSLC Delegated UI 
 */
 
-var createDialogURL = "http://" + hostname + ":8080/OSLC4JBugzilla/services/1/changeRequests/creator";
-var selectDialogURL = "http:////" + hostname + ":8080/OSLC4JBugzilla/services/1/changeRequests/selector";
-var returnURL       = "http:////" + hostname + ":8181/ninacrm/blank.html";
+var createDialogURL = "http://" + hostname + ":8080/OSLC4JQualityManagement/services/testCases/creator";
+var selectDialogURL = "http://" + hostname + ":8080/OSLC4JQualityManagement/services/testCases/selector";
+var returnURL       = "http://" + hostname + ":8181/ninacrm/blank.html";
 
 function selectDefect() {
 	postMessageProtocol(selectDialogURL);
