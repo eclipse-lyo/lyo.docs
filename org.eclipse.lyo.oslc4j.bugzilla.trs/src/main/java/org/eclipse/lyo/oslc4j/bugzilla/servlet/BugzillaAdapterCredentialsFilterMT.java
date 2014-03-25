@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Credentials;
-import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
+import org.eclipse.lyo.server.oauth.core.utils.UnauthorizedException;
 
 import com.j2bugzilla.base.BugzillaConnector;
 import com.j2bugzilla.base.BugzillaException;

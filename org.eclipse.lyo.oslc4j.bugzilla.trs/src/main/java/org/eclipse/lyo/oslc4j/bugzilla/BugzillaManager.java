@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 IBM Corporation.
+ * Copyright (c) 2011, 2014 IBM Corporation.
  *
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
@@ -163,7 +163,7 @@ public class BugzillaManager implements ServletContextListener  {
 	public static BugzillaConnector getBugzillaConnector(HttpServletRequest request) 
 	{	
 		//connector should never be null if CredentialsFilter is doing its job
-		BugzillaConnector connector = CredentialsFilter.getConnector(request);	
+		BugzillaConnector connector = (BugzillaConnector) request.getSession().getAttribute(CredentialsFilter.CONNECTOR_ATTRIBUTE);	
 		return connector;
 	}
 	
@@ -331,7 +331,7 @@ public class BugzillaManager implements ServletContextListener  {
 				    buffer.append("&order=bug_id");
 				}
 				
-				Credentials credentials = CredentialsFilter.getCredentials(httpServletRequest);
+				Credentials credentials = (Credentials)httpServletRequest.getSession().getAttribute(CredentialsFilter.CREDENTIALS_ATTRIBUTE);
 				
 				BugzillaHttpClient client = new BugzillaHttpClient(getBugzillaUri(), credentials);
 				

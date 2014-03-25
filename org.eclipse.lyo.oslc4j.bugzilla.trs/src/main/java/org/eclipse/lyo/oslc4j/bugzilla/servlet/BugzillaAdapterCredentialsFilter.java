@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 IBM Corporation.
+ * Copyright (c) 2012, 2014 IBM Corporation.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,6 +30,7 @@ import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.HttpUtils;
 import org.eclipse.lyo.server.oauth.consumerstore.FileSystemConsumerStore;
 import org.eclipse.lyo.server.oauth.core.consumer.ConsumerStore;
+import org.eclipse.lyo.server.oauth.core.utils.AbstractAdapterCredentialsFilter;
 
 import com.j2bugzilla.base.BugzillaConnector;
 import com.j2bugzilla.base.BugzillaException;
@@ -67,17 +68,21 @@ public class BugzillaAdapterCredentialsFilter
 	}
 	
 	@Override
-	protected Credentials getCredentialsFromRequest(HttpServletRequest request) throws UnauthorizedException {
-		Credentials credentials = HttpUtils.getCredentials(request);
-		if (credentials == null) {
-			throw new UnauthorizedException();
+	protected Credentials getCredentialsFromRequest(HttpServletRequest request) throws org.eclipse.lyo.server.oauth.core.utils.UnauthorizedException {
+		try {
+			Credentials credentials = HttpUtils.getCredentials(request);
+			if (credentials == null) {
+				throw new org.eclipse.lyo.server.oauth.core.utils.UnauthorizedException();
+			}
+			return credentials;
+		} catch (org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException e) {
+			throw new org.eclipse.lyo.server.oauth.core.utils.UnauthorizedException(e);
 		}
-		return credentials;
 	}
 	
 	@Override
 	protected BugzillaConnector login(Credentials creds, HttpServletRequest request) 
-			throws UnauthorizedException, ServletException 
+			throws org.eclipse.lyo.server.oauth.core.utils.UnauthorizedException, ServletException 
 	{
 		BugzillaConnector bc = new BugzillaConnector();
 		try {
@@ -91,7 +96,7 @@ public class BugzillaAdapterCredentialsFilter
 			bc.executeMethod(login);
 		} catch (BugzillaException e) {
 			e.printStackTrace();
-			throw new UnauthorizedException(e.getCause().getMessage());
+			throw new org.eclipse.lyo.server.oauth.core.utils.UnauthorizedException(e.getCause().getMessage());
 		}
 		return bc;
 	}
