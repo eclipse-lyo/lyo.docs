@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 IBM Corporation.
+ * Copyright (c) 2012, 2014 IBM Corporation.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -101,7 +101,7 @@ public class ChangeBugzillaHistories {
       if (month == -1) {
       	month = 0;
       }
-      String day_string = props.getProperty("start_date_date");//$NON-NLS-1$
+      String day_string = props.getProperty("start_date_day");//$NON-NLS-1$
       int day=0;
       if ((day_string != null) && (day_string.length() != 0)) {
       	day = Integer.valueOf(day_string).intValue();

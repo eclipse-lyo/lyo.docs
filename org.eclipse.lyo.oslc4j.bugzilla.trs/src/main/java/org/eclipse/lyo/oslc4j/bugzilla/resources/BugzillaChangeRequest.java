@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 IBM Corporation.
+ * Copyright (c) 2012, 2014 IBM Corporation.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -24,6 +24,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +59,19 @@ import com.j2bugzilla.base.ConnectionException;
 public final class BugzillaChangeRequest
        extends ChangeRequest
 {
+	private static boolean enable_url_as_cr = false;
+    //Bugzilla adapter properties from bugz.properties 
+    static {
+        Properties props = new Properties();
+        try {
+            props.load(BugzillaManager.class.getResourceAsStream("/bugz.properties"));
+            enable_url_as_cr = Boolean.parseBoolean(props.getProperty("enable_url_as_cr", "true"));
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 	public BugzillaChangeRequest() throws URISyntaxException {
 		super();
 
@@ -228,6 +242,16 @@ public final class BugzillaChangeRequest
 						URI oslcUri = new URI(BugzillaManager.getBugzServiceBase() + "/" + productId + "/changeRequests/" + bugId);
 						changeRequest.addRelatedChangeRequest(new Link(oslcUri));
 					}
+				}
+			}
+		}
+		// "URL" Experimental support
+		if (enable_url_as_cr) {
+			String url = (String) bug.getParameterMap().get("url"); //$NON-NLS-1$
+			if (url!= null) {
+				String trimmed_url = url.trim();
+				if (trimmed_url.length() > 0) {
+					changeRequest.addRelatedChangeRequest(new Link(new URI(trimmed_url)));
 				}
 			}
 		}

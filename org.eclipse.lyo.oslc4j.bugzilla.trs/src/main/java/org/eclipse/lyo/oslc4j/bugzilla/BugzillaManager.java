@@ -66,6 +66,7 @@ import org.eclipse.lyo.oslc4j.bugzilla.servlet.ServiceProviderCatalogSingleton;
 import org.eclipse.lyo.oslc4j.bugzilla.trs.GetComments;
 import org.eclipse.lyo.oslc4j.bugzilla.trs.GetHistory;
 import org.eclipse.lyo.oslc4j.bugzilla.trs.HistoryData;
+import org.eclipse.lyo.oslc4j.bugzilla.trs.UpdateURL;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.BugzillaHttpClient;
 import org.eclipse.lyo.oslc4j.client.ServiceProviderRegistryURIs;
 import org.eclipse.lyo.oslc4j.core.SingletonWildcardProperties;
@@ -94,6 +95,7 @@ public class BugzillaManager implements ServletContextListener  {
 	private static String admin = null;
 	private static String admin_password = null;	// Added in Lab 1.2
 	private static String adapter_host = null;		// Added in Lab 1.2
+	private static boolean enable_url_as_cr = false;
 	
 	private static String servletBase = null;
 	private static String bugzServiceBase = null;
@@ -129,6 +131,7 @@ public class BugzillaManager implements ServletContextListener  {
             adapter_host = props.getProperty("adapter_host");			// Added in Lab 1.2
             System.out.println("bugzilla_uri: " + bugzillaUri);
             System.out.println("admin: " + admin);
+            enable_url_as_cr = Boolean.parseBoolean(props.getProperty("enable_url_as_cr", "true"));
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -981,6 +984,23 @@ public class BugzillaManager implements ServletContextListener  {
 			if (comment.length() != 0) {
 				CommentBug bugzillaMethod = new CommentBug(Integer.parseInt(cr.getIdentifier()), comment);
 				bc.executeMethod(bugzillaMethod);
+			}
+			// "URL" Experimental support 
+			if (enable_url_as_cr) {
+				// Support RelatedChangeRequests
+				Link[] links = cr.getRelatedChangeRequests();
+				String url = "";
+				for (Link link : links) {
+					url = link.getValue().toString();
+					if ((url == null) || (url.startsWith(BugzillaManager.getBugzServiceBase()))) {// If so, this link comes from "see_also" field
+						url = "";
+						continue;
+					}
+					break;
+				}
+				UpdateURL updateMethod = new UpdateURL(Integer.parseInt(cr.getIdentifier()), url);
+				bc.executeMethod(updateMethod);
+				// 
 			}
 		} catch (Exception e)
 		{
