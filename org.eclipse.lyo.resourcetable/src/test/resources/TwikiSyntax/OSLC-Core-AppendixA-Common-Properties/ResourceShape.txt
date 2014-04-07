@@ -1,0 +1,12 @@
+---+++ Resource: Resource Shape
+
+A Resource Shape resource can have a title and a set of types.
+
+   * *Resource*: =oslc:ResourceShape=
+   * *Namespace URI*: =http://open-services.net/ns/core#=
+   * *Suggested Namespace Prefix*: =oslc=
+
+| *Prefixed Name* | *Occurs* | *Read-only* | *Value-type* | *Represen-tation* | *Range* | *Description* |
+| =dcterms:title= | zero-or-one | True | XMLLiteral | n/a | n/a | Title of the resource shape. *SHOULD* include only content that is valid and suitable inside an XHTML &lt;span&gt; element.  |
+| =oslc:describes= | zero-or-many | True | Resource | Reference | n/a | This shape describes resources that are of any of these types. Formally, a shape S applies to a resource R if there is a triple =R rdf:type T= and there is a triple =S oslc:describes T=. |
+| =oslc:property= | zero-or-many | True | Resource | Inline | =oslc:Property= | The properties that are allowed or required by this shape. |
