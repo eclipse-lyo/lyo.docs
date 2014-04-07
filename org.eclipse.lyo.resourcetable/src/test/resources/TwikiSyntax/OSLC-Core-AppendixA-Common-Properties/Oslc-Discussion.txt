@@ -1,0 +1,11 @@
+---+ oslc:Discussion Resource
+
+A Discussion resource is intended to represent a sequence of comments or notes regarding the associated resource.
+
+   * *Resource*: =oslc:Discussion=
+   * *Namespace URI*: =http://open-services.net/ns/core#=
+   * *Suggested Namespace Prefix*: =oslc=
+
+| *Prefixed Name* | *Occurs* | *Read-only* | *Value-type* | *Represen-tation* | *Range* | *Description* |
+| =oslc:discussionAbout= | exactly-one | False | Resource | Reference | Any | Reference to associated resource |
+| =oslc:comment= | zero-or-many | False | Resource or Local Resource | Reference or Inline | =oslc:Comment= | Comment about resource |
