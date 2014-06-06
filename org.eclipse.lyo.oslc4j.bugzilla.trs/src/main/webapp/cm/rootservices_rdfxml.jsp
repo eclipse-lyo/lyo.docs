@@ -20,12 +20,13 @@
 String baseUri = (String) request.getAttribute("baseUri");
 String catalogUri = (String) request.getAttribute("catalogUri");
 String oauthDomain = (String) request.getAttribute("oauthDomain");
+String about = (String) request.getAttribute("about");
 %>
 <!-- Jazz Root Services, see:
 	https://jazz.net/wiki/bin/view/Main/RootServicesSpec
 	https://jazz.net/wiki/bin/view/Main/RootServicesSpecAddendum2
  -->
-<rdf:Description rdf:about="<%= baseUri + "/rootservices" %>"
+<rdf:Description rdf:about="<%= about %>"
 	xmlns:bugz="http://www.bugzilla.org/rdf#"
 	xmlns:trs="http://open-services.net/ns/core/trs#"
     xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/"

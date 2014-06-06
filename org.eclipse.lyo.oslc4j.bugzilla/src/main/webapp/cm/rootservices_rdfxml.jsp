@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <%--
- Copyright (c) 2011, 2012 IBM Corporation.
+ Copyright (c) 2011, 2014 IBM Corporation.
 
  All rights reserved. This program and the accompanying materials
  are made available under the terms of the Eclipse Public License v1.0
@@ -14,18 +14,20 @@
  
     Sam Padgett		 - initial API and implementation
     Michael Fiedler	 - adapted for OSLC4J
+    Sam Padgett		 - fix rootservices about URI
 --%>
 <%@ page contentType="application/rdf+xml" language="java" pageEncoding="UTF-8" %>
 <%
 String baseUri = (String) request.getAttribute("baseUri");
 String catalogUri = (String) request.getAttribute("catalogUri");
 String oauthDomain = (String) request.getAttribute("oauthDomain");
+String about = (String) request.getAttribute("about");
 %>
 <!-- Jazz Root Services, see:
 	https://jazz.net/wiki/bin/view/Main/RootServicesSpec
 	https://jazz.net/wiki/bin/view/Main/RootServicesSpecAddendum2
  -->
-<rdf:Description rdf:about="<%= baseUri + "/rootservices" %>"
+<rdf:Description rdf:about="<%= about %>"
     xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/"
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:jfs="http://jazz.net/xmlns/prod/jazz/jfs/1.0/" 

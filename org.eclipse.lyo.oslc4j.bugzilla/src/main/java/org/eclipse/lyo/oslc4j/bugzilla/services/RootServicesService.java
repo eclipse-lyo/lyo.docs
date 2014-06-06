@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 IBM Corporation.
+ * Copyright (c) 2011, 2014 IBM Corporation.
  *
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
@@ -12,6 +12,7 @@
  *  Contributors:
  *  
  *     IBM Corporation - initial API and implementation
+ *     Samuel Padgett  - fix rootservices about URI
  *******************************************************************************/
 package org.eclipse.lyo.oslc4j.bugzilla.services;
 
@@ -46,6 +47,7 @@ public class RootServicesService extends HttpServlet {
         request.setAttribute("baseUri", BugzillaManager.getBugzServiceBase());
         request.setAttribute("catalogUri", ServiceProviderCatalogSingleton.getUri().toString());
         request.setAttribute("oauthDomain", BugzillaManager.getServletBase());
+        request.setAttribute("about", BugzillaManager.getServletBase() + request.getServletPath());
 		final RequestDispatcher rd = request.getRequestDispatcher("/cm/rootservices_rdfxml.jsp"); 
 		rd.forward(request, response);
 		response.flushBuffer();
