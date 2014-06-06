@@ -668,7 +668,7 @@ public class BugzillaChangeRequestService
     	newChangeRequest.setAbout(about);
         setETagHeader(getETagFromChangeRequest(newChangeRequest), httpServletResponse);
 
-        return Response.created(about).entity(changeRequest).header(Constants.HDR_OSLC_VERSION, Constants.OSLC_VERSION_V2).build();
+        return Response.created(about).entity(newChangeRequest).header(Constants.HDR_OSLC_VERSION, Constants.OSLC_VERSION_V2).build();
     }
     
     /**
