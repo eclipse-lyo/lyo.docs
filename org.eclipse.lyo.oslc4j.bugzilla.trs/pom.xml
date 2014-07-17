@@ -1,16 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.eclipse.lyo.oslc4j.rio</groupId>
-  <artifactId>trs4j-bugzilla-sample</artifactId>
-  <packaging>war</packaging>
-  <version>2.0.0-SNAPSHOT</version>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.lyo.oslc4j.rio</groupId>
+	<artifactId>trs4j-bugzilla-sample</artifactId>
+	<packaging>war</packaging>
+	<version>2.0.0-SNAPSHOT</version>
 	<repositories>
 		<repository>
-			<id>lyo-releases</id> 
+			<id>lyo-releases</id>
 			<url>https://repo.eclipse.org/content/repositories/lyo-releases/</url>
 		</repository>
 	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -25,9 +30,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-		  <groupId>org.eclipse.lyo</groupId>
-		  <artifactId>oslc-trs</artifactId>
-		  <version>2.0.0</version>
+			<groupId>org.eclipse.lyo</groupId>
+			<artifactId>oslc-trs</artifactId>
+			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
@@ -79,58 +84,58 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.2.1</version>
 		</dependency>
-        <dependency>
-            <groupId>org.eclipse.lyo.core.query</groupId>
-            <artifactId>oslc-query</artifactId>
-            <version>[1.1,)</version>
-        </dependency>
+		<dependency>
+			<groupId>org.eclipse.lyo.core.query</groupId>
+			<artifactId>oslc-query</artifactId>
+			<version>[1.1,)</version>
+		</dependency>
 	</dependencies>
-  
-  <build>
-    <finalName>trs4j-bugzilla-sample</finalName>
-      	<plugins>
 
-		<!-- Jetty 7 plugin See also: http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
-		<plugin>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-maven-plugin</artifactId>
-			<!--  <version>7.3.0.v20110203</version> -->
+	<build>
+		<finalName>trs4j-bugzilla-sample</finalName>
+		<plugins>
 
-			<configuration>
-			    <webAppConfig>
-			      <contextPath>/OSLC4JBugzilla</contextPath>
-			    </webAppConfig>
+			<!-- Jetty 7 plugin See also: http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<!-- <version>7.3.0.v20110203</version> -->
 
-				<!-- Jetty config adds logging -->
-				<jettyConfig>${project.build.directory}/classes/jetty.xml</jettyConfig>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/OSLC4JBugzilla</contextPath>
+					</webAppConfig>
 
-				<!-- enable hot deploy -->
-				<reload>automatic</reload>
-				<scanIntervalSeconds>5</scanIntervalSeconds>
-				<scanTargets>
-					<scanTarget>WebContent</scanTarget>
-				</scanTargets>
-					
-    			<systemProperties>
+					<!-- Jetty config adds logging -->
+					<jettyConfig>${project.build.directory}/classes/jetty.xml</jettyConfig>
 
-					<systemProperty>
-						<name>config.dir</name>
-						<value>${basedir}/src/test/resources</value>
-					</systemProperty>
+					<!-- enable hot deploy -->
+					<reload>automatic</reload>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<scanTargets>
+						<scanTarget>WebContent</scanTarget>
+					</scanTargets>
 
-					<systemProperty>
-						<name>jetty.logs</name>
-						<value>${basedir}/target</value>
-					</systemProperty>
-					<systemProperty>
-						<name>jetty.port</name>
-						<value>8085</value>
-					</systemProperty>
-				</systemProperties>
-					
-			</configuration>
+					<systemProperties>
 
-		</plugin>
-  	</plugins>
-  </build>
+						<systemProperty>
+							<name>config.dir</name>
+							<value>${basedir}/src/test/resources</value>
+						</systemProperty>
+
+						<systemProperty>
+							<name>jetty.logs</name>
+							<value>${basedir}/target</value>
+						</systemProperty>
+						<systemProperty>
+							<name>jetty.port</name>
+							<value>8085</value>
+						</systemProperty>
+					</systemProperties>
+
+				</configuration>
+
+			</plugin>
+		</plugins>
+	</build>
 </project>
