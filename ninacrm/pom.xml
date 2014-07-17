@@ -10,6 +10,10 @@
 	<name>nina-crm-example</name>
 	<url>http://maven.apache.org</url>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
@@ -27,18 +31,18 @@
 			<scope>compile</scope>
 		</dependency>
 
-        <dependency>
-            <groupId>com.hp.hpl.jena</groupId>
-            <artifactId>jena</artifactId>
-            <version>2.5.7</version>
-        </dependency>
-        <dependency>
-      		<groupId>javax.servlet</groupId>
-      		<artifactId>javax.servlet-api</artifactId>
-      		<version>3.0.1</version>
-      		<scope>provided</scope>
-   		 </dependency>
-        
+		<dependency>
+			<groupId>com.hp.hpl.jena</groupId>
+			<artifactId>jena</artifactId>
+			<version>2.5.7</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -54,11 +58,11 @@
 					<webAppConfig>
 						<contextPath>/ninacrm</contextPath>
 					</webAppConfig>
-					
+
 					<!-- Jetty config adds logging -->
 					<jettyConfig>${project.build.directory}/test-classes/jetty.xml</jettyConfig>
 
-    				<systemProperties>
+					<systemProperties>
 
 						<systemProperty>
 							<name>config.dir</name>
@@ -76,7 +80,7 @@
 						</systemProperty>
 
 					</systemProperties>
-					
+
 				</configuration>
 			</plugin>
 
