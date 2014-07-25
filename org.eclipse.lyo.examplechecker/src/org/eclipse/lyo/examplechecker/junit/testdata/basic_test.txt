@@ -1,0 +1,53 @@
+Suspicious namespace URI: http://jazz.net/ns/ism/provisioning/rm#
+Suspicious namespace URI: http://open-services.net/ns/om#
+om:description	Suggestion:	dcterms:description;	Warning: untyped literal;
+oslcAuto:unavailableeeee	Error: the term "oslcAuto:unavailableeeee" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+oslcAuto:test	Error: the term "oslcAuto:test" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+sco:parent	Suggestion:	dcterms:source;
+sco:name	Suggestion:	http://open-services.net/ns/crtv#name;	Suggestion:	oslc:name;	Warning: untyped literal;
+sco:Container	Suggestion:	rdfs:Container;
+om:maxvalue	Warning: untyped literal;
+sco:TestPredicate	Warning: untyped literal;
+oslc:totalCount	 Suggestion:	add rdf:datatype="http://www.w3.org/2001/XMLSchema#integer";
+sco:Agent	Suggestion:	dcterms:Agent;
+dcterms:type	Suggestion:	rdf:type; 	 Warning: untyped literal;
+oslc:partOfDiscussion	 Error: object should be a resource of type "http://open-services.net/ns/core#Resource", NOT a literal - "test_must_be_reference_predicate";
+oslc:value	Error: the term "oslc:value" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/core#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.core.CORE"; 	 Warning: untyped literal;
+sco:flavorId	Suggestion:	dcterms:identifier; oslc:shortId; 	 Warning: untyped literal;
+sco:alias	Warning: untyped literal;
+sco:newPredicate	Warning: untyped literal;
+dcterms:modified	Error:Invaliddatetimestring:2013-03-07T14:15:38;	Error:Invaliddatetimestring:2013-03-07T14:15:38.45+9:00;	Error:Invaliddatetimestring:2013-03-07T14:15:38z;	Suggestion:	addrdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime";
+dcterms:identifier	Warning: string value should not contain URI: "http://open-services.net/ns/auto#automationresult";
+oslc:Inline	Error: the term "oslc:Inline" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/core#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.core.CORE";	Warning: untyped literal;
+oslc:ResponseInfo	Error: it's only used for OSLC paging, and ordinarily only has properties in the OSLC Core namespace, the following properties are not in OSLC Core name space: [http://www.w3.org/2000/01/rdf-schema#member]
+rdfs:member	Error: Subject's type should be one of the following: "http://www.w3.org/2000/01/rdf-schema#Container", "http://www.w3.org/ns/ldp#Container"
+oslcAuto:test	Warning: test is used as a predicate, but does not exist in the cached copy of any vocabulary.
+oslc:Inline	Error: Inline is used as a predicate, but it identifies a Resource.
+sco:TestPredicate	Warning: TestPredicate is used as a predicate, but "TestPredicate" begins with an uppercase letter which is contrary to Linked Data best practices.
+sco:ipGroup, sco:ipPool:	Suggestion:	 the common entity "ip" should be defined as a resource with the following properties: Group; Pool.
+om:description	Warning: suspicious String values ["Approved by Fulfillment Manager", "Approved by Line Manager", "Closed"]. Suggestion:use enumeration instead.
+sco:flavorId	Warning: suspicious String values [1, 2, 3, 4, 5, 6, 7, 8]. Suggestion:use enumeration instead.
+sco:alias	Warning: suspicious String values [RegionOne_private_10.22.1.0/25, RegionOne_public_172.16.106.0/24, RegionOne_public_203.0.113.0/22, RegionTwo_public_172.16.107.0/24]. Suggestion:use enumeration instead.
+sco:name	Warning: suspicious String values [RegionOne_private_10.22.1.0/25, RegionOne_public_172.16.106.0/24, RegionOne_public_203.0.113.0/22, RegionTwo_public_172.16.107.0/24, kvm.med, m1.large, m1.medium, m1.small, m1.tiny, m1.xlarge, ova-sized, vmw-min]. Suggestion:use enumeration instead.
+om:maxvalue	Warning: suspicious String values ["APPFM", "APPLM", "CLOSED"]. Suggestion:use enumeration instead.
+Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+Warning:	"http://172.16.114.5:16310/14082013/containers/1" is not accessible
+Warning:	"http://172.16.114.5:16310/14082013/containers/2" is not accessible
+Warning:	"http://172.16.114.5:16310/14082013/containers/3" is not accessible
+Warning:	"http://172.16.114.5:16310/14082013/containers/4" is not accessible
+Warning:	"http://198.51.100.5:16310/pears/containers/1" is not accessible
+Error:		"http://jazz.net/ns/ism/provisioning/sco#Agent" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Error:		"http://jazz.net/ns/ism/provisioning/sco#Container" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Error:		"http://jazz.net/ns/ism/provisioning/sco#Flavor" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Error:		"http://jazz.net/ns/ism/provisioning/sco#IpGroup" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Warning:	"http://localhost:7001/maximo/oslc/os/oslcsynonymdomain/_U1JTVEFUVVMvQ0xPU0VEL35OVUxMfi9_TlVMTH4vfk5VTEx_L0NMT1NFRA--" is not accessible
+Warning:	"http://localhost:7001/maximo/oslc/os/oslcsynonymdomain/_U1JTVEFUVVMvQVBQRk0vfk5VTEx_L35OVUxMfi9_TlVMTH4vQVBQRk0-" is not accessible
+Warning:	"http://localhost:7001/maximo/oslc/os/oslcsynonymdomain/_U1JTVEFUVVMvQVBQTE0vfk5VTEx_L35OVUxMfi9_TlVMTH4vQVBQTE0-" is not accessible
+Error:		"http://open-services.net/ns/IBM/DataProtection#RecoveryPoint" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Error:		"http://open-services.net/ns/auto#unavailableeeee" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Warning:	"https://172.16.106.4/resources/ipGroups/1" is not accessible
+Warning:	"https://172.16.106.4/resources/ipGroups/2" is not accessible
+Warning:	"https://172.16.106.4/resources/ipGroups/5" is not accessible
+Warning:	"https://198.51.100.194/resources/clouds/1" is not accessible
+Warning:	"https://198.51.100.194/resources/ipGroups/1" is not accessible
