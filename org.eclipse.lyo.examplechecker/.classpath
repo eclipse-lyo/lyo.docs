@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Java70"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/jena-core-2.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/jena-iri-0.9.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/xercesImpl-2.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/IBM_ADMIN/git/examplechecker/lyoexamplechecker/target/dependency/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

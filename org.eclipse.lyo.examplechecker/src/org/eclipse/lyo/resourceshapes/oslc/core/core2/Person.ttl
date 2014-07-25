@@ -1,0 +1,65 @@
+@prefix oslc:      <http://open-services.net/ns/core#> .
+@prefix authoring: <http://open-services.net/ns/authoring#> .
+@prefix xs:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix foaf:      <http://xmlns.com/foaf/0.1/> .
+@prefix oslc_cm:   <http://open-services.net/ns/cm#> .
+@prefix oslc_qm:   <http://open-services.net/ns/qm#> .
+@prefix oslc_rm:   <http://open-services.net/ns/rm#> .
+
+@base <http://open-services.net/wiki#> .
+
+<>
+          a                              oslc:ResourceShape ;
+          oslc:describes                 foaf:Person ;
+          dcterms:title                  "Person is a common resource because a Person resource is required as the value for a dcterms:creator or dcterms:contributor property." ;
+          oslc:property                  <+name> ;
+          oslc:property                  <+givenName> ;
+          oslc:property                  <+familyName> ;
+.
+
+<+name>
+          a                              oslc:Property ;
+          oslc:name                      "name" ;
+          oslc:propertyDefinition        foaf:name ;
+          dcterms:title                  "foaf:name" ;
+          oslc:occurs                    oslc:Exactly-one ;
+          oslc:valueType                 xs:string ;
+          dcterms:description            "The full name of a person expressed as simple text string." ;
+.
+
+<+givenName>
+          a                              oslc:Property ;
+          oslc:name                      "givenName" ;
+          oslc:propertyDefinition        foaf:givenName ;
+          dcterms:title                  "foaf:givenName" ;
+          oslc:occurs                    oslc:Exactly-one ;
+          oslc:valueType                 xs:string ;
+          dcterms:description            "Given name of person expressed as simple text string." ;
+.
+
+<+familyName>
+          a                              oslc:Property ;
+          oslc:name                      "familyName" ;
+          oslc:propertyDefinition        foaf:familyName ;
+          dcterms:title                  "foaf:familyName" ;
+          oslc:occurs                    oslc:Exactly-one ;
+          oslc:valueType                 xs:string ;
+          dcterms:description            "Family name of person expressed as simple text string." ;
+.
+
+<#_sections_>
+          a                              rdfs:Seq ;
+          rdf:_1                         <#_section_1> ;
+.
+
+<#_section_1>
+          a                              rdfs:Seq ;
+          dcterms:title                  "Properties" ;
+          rdf:_1                         <+name> ;
+          rdf:_2                         <+givenName> ;
+          rdf:_3                         <+familyName> ;
+.
+

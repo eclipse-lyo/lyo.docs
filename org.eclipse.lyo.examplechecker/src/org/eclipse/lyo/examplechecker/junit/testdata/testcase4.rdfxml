@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:j.0="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:oslc_auto="http://open-services.net/ns/auto#"
+    xmlns:oslc="http://open-services.net/ns/core#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dashboard="http:/open-service.net/ns/dashboard#"
+    xmlns:oslc_data="http://open-services.net/ns/servicemanagement/1.0/" >
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:subject rdf:nodeID="A1"/>
+    <rdf:predicate rdf:resource="http://open-services.net/ns/auto#reportsOnAutomationPlan"/>
+    <rdf:object rdf:resource="http://HOST:PORT/itmautomationprovider/services/plans/1"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+    <dcterms:title>http://HOST:PORT/itmautomationprovider/services/plans/1</dcterms:title>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A2">
+    <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:value>0</rdf:value>
+    <oslc:name>Return code</oslc:name>
+    <dcterms:description rdf:parseType="Literal">Command execution return code</dcterms:description>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+    <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:value>L29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUy&#xD;
+Ni91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFn&#xD;
+ZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9J&#xD;
+VE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9i&#xD;
+aW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2Fp&#xD;
+eDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAy&#xD;
+LWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29w&#xD;
+dC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91&#xD;
+eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50&#xD;
+L2FpeDUyNi91eC9iaW4KL29wdC9JVE02MzAyLWFnZW50L2FpeDUyNi91eC9iaW4K&#xD;
+</rdf:value>
+    <oslc:name>Content</oslc:name>
+    <dcterms:description rdf:parseType="Literal">Standard output from command execution</dcterms:description>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <oslc_auto:outputParameter rdf:nodeID="A3"/>
+    <oslc_auto:outputParameter rdf:nodeID="A2"/>
+    <oslc_auto:reportsOnAutomationPlan rdf:resource="http://9.128.106.126:15210/itmautomationprovider/services/plans/1"/>
+    <oslc_auto:verdict rdf:resource="http://open-services.net/ns/auto#passed"/>
+    <oslc_auto:state rdf:resource="http://open-services.net/ns/auto#complete"/>
+    <dcterms:title rdf:parseType="Literal">Execute result</dcterms:title>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-03-06T13:32:40.547Z</dcterms:modified>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-03-06T13:32:40.547Z</dcterms:created>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#AutomationResult"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A2">
+  	<dashboard:lineWidth>10</dashboard:lineWidth>
+  	<dashboard:lineColor>red</dashboard:lineColor>
+  	<dashboard:lineStyle>Arial</dashboard:lineStyle>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+  	<dashboard:smallImageHeight>10</dashboard:smallImageHeight>
+  	<dashboard:smallImageWidth>red</dashboard:smallImageWidth>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A4">
+  	<dashboard:testHeight>10</dashboard:testHeight>  	
+  </rdf:Description>
+</rdf:RDF>

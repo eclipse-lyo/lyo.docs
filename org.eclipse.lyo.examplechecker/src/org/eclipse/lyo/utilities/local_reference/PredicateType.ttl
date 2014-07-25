@@ -1,0 +1,296 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix dc: <http://purl.org/dc/terms/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix oslc: <http://open-services.net/ns/core#>.
+@prefix crtv: <http://open-services.net/ns/crtv#>.
+@prefix auto: <http://open-services.net/ns/auto#>.
+@prefix tools: <http://open-services.net/ns/authoring/tools#>.     
+
+<http://example.com/predicate-type/>  
+	a foaf:Document;
+	dc:description "Collection of known types for known predicates";
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		dc:description	;
+		tools:dataType		rdf:XMLLiteral	;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		dc:identifier	;
+		tools:dataType		xsd:string		;	# Anywhere xsd:string is used, an untyped literal is also valid.
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		dc:created		;
+		tools:dataType		xsd:dateTime	;	
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		dc:modified		;
+		tools:dataType		xsd:dateTime	;	
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		dc:subject		;
+		tools:dataType		xsd:string		;	
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		dc:title		;
+		tools:dataType		rdf:XMLLiteral	;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		rdf:value	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:allowedValue	;
+		tools:dataType		xsd:string	;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:shortTitle	;
+		tools:dataType		rdf:XMLLiteral	;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:shortId	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		foaf:name	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		foaf:givenName	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		foaf:familyName	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:hidden		;
+		tools:dataType		xsd:boolean		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:isMemberProperty		;
+		tools:dataType		xsd:boolean		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:name		;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:maxSize	;
+		tools:dataType		xsd:integer		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA?sortcol=table;up=#Dublin_Core_Properties
+		tools:predicate		oslc:readOnly 	;
+		tools:dataType		xsd:boolean		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:extendedError;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:hintHeight;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:hintWidth;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:initialHeight;
+		tools:dataType		xsd:string		;
+	];		
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:label;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:message;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:defaultValue;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:prefix;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:rel;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:statusCode;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/bin/view/Main/OSLCCoreSpecAppendixA#oslc_Comment_Resource
+		tools:predicate		oslc:totalCount;
+		tools:dataType		xsd:integer		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:manufacturer 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:model 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:serialNumber 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:systemBoardUUID 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:vmid 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:hostid 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:shortHostName 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:fqdn 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:name 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:address 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:fileName 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:instancePath 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:portNumber 	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:assetTag	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:processId	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:version	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:ipAddress	;
+		tools:dataType		xsd:string		;
+	];
+	tools:mustBe [
+		a	tools:TypeAndPredicate ;
+		# from http://open-services.net/wiki/reconciliation/OSLC-Reconciliation-Specification-Version-2.0/
+		tools:predicate		crtv:observationTime	;
+		tools:dataType		xsd:dateTime		;
+	];
+	.
+

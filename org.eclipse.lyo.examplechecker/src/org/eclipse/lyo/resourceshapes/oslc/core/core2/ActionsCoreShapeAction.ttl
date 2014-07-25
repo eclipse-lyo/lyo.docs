@@ -1,0 +1,81 @@
+@prefix oslc:      <http://open-services.net/ns/core#> .
+@prefix authoring: <http://open-services.net/ns/authoring#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix crtv:      <http://open-services.net/ns/crtv#> .
+@prefix cm:        <http://open-services.net/ns/cm#> .
+@prefix qm:        <http://open-services.net/ns/qm#> .
+@prefix http:      <http://www.w3.org/2011/http#> .
+
+
+@base   <http://open-services.net/ns/authoring/core#ActionShape> .
+
+<>
+           a                  oslc:ResourceShape ;
+           oslc:describes     oslc:Action ;
+           oslc:property <+request> , <+description> , <+title> , <+type> 
+.
+
+<#_sections_>
+           a                              rdfs:Seq ;
+		   rdf:_1                         <#_section_1_common> ;
+		   rdf:_2                         <#_section_2_other> ;
+.
+<#_section_1_common>
+           a                              rdfs:Seq ;
+           dcterms:description            "*OSLC Core:* Common Properties" ;
+		   rdf:_1                         <+title> ;
+		   rdf:_2                         <+description> ;
+		   rdf:_3                         <+type> ;
+.
+<#_section_2_other>
+           a                              rdfs:Seq ;
+           dcterms:description            "*OSLC Core Actions:* Start of additional properties" ;
+		   rdf:_1                         <+request> ;
+.
+
+<+title>
+      a       oslc:Property ;
+      oslc:name "title" ;
+      oslc:occurs oslc:Exactly-one ;
+      oslc:propertyDefinition
+              dcterms:title ;
+      oslc:valueType rdf:XMLLiteral ;
+      dcterms:description "Title (reference: Dublin Core) of the resource, represented as rich text using XHTML content. **SHOULD** include only content that is valid and suitable inside an XHTML &lt;div&gt; element." ;
+      dcterms:title "dcterms:title" .
+
+<+description>
+      a       oslc:Property ;
+      oslc:name "description" ;
+      oslc:occurs oslc:Zero-or-one ;
+      oslc:propertyDefinition
+              dcterms:description ;
+      oslc:valueType rdf:XMLLiteral ;
+      dcterms:description "Descriptive text (reference: Dublin Core) about the resource, represented as rich text using XHTML content. **SHOULD** include only content that is valid and suitable inside an XHTML &lt;div&gt; element." ;
+      dcterms:title "dcterms:description" .
+
+<+type>
+      a       oslc:Property ;
+      oslc:name "type" ;
+      oslc:occurs oslc:One-or-many ;
+      oslc:propertyDefinition
+              rdf:type ;
+      oslc:representation oslc:Reference ;
+      oslc:valueType oslc:Resource ;
+      dcterms:description "The resource type URIs.  At least one type **MUST** be `oslc:Action`." ;
+      dcterms:title "rdf:type" .
+
+<+request>
+      a       oslc:Property ;
+      oslc:name "request" ;
+      oslc:occurs oslc:One-or-many ;
+      oslc:propertyDefinition
+              oslc:request ;
+      oslc:range oslc:Any ;
+      oslc:representation oslc:Either ;
+      oslc:valueType oslc:Resource ;
+      dcterms:description "Instructions for executing the action. It is likely that the target resource will be an `http:Request` but that is not necessarily the case.  Multiple occurrences of this property **MUST** be different ways of achieving the same operation; they are semantically the same, but achieved through different data or technologies." ;
+      dcterms:title "oslc:request" .
+

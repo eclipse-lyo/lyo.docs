@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:oslc="http://open-services.net/ns/core#"
+    xmlns:oslc_data="http://open-services.net/ns/servicemanagement/1.0/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:oslc_auto="http://open-services.net/ns/auto#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <oslc:ResponseInfo rdf:about="http://HOST:PORT/itmautomationprovider/services/plans">
+    <rdfs:member>
+      <oslc_auto:AutomationPlan rdf:about="http://HOST:PORT/itmautomationprovider/services/plans/1">
+        <dcterms:identifier>2</dcterms:identifier>
+        <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">DATETIME</dcterms:created>
+        <oslc_auto:parameterDefinition>
+          <oslc:Property>
+            <oslc:valueType rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <oslc:propertyDefinition rdf:resource="http://open-services.net/ns/auto#ParameterDefinition"/>
+            <oslc:occurs rdf:resource="http://open-services.net/ns/core#Zero-or-one"/>
+            <oslc:name>Work Directory</oslc:name>
+            <dcterms:description rdf:parseType="Literal">Working directory for command execution [optional]</dcterms:description>
+          </oslc:Property>
+        </oslc_auto:parameterDefinition>
+        <oslc_auto:parameterDefinition>
+          <oslc:Property>
+            <oslc:valueType rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <oslc:propertyDefinition rdf:resource="http://open-services.net/ns/auto#ParameterDefinition"/>
+            <oslc:occurs rdf:resource="http://open-services.net/ns/core#Zero-or-one"/>
+            <oslc:name>Content</oslc:name>
+            <dcterms:description rdf:parseType="Literal">Base64-encoded content: command to be executed or file to be uploade [optional]</dcterms:description>
+          </oslc:Property>
+        </oslc_auto:parameterDefinition>
+        <oslc_auto:parameterDefinition>
+          <oslc:Property>
+            <oslc:allowedValue>EXECUTE</oslc:allowedValue>
+            <oslc:allowedValue>GET</oslc:allowedValue>
+            <oslc:allowedValue>PUT</oslc:allowedValue>
+            <oslc:valueType rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <oslc:propertyDefinition rdf:resource="http://open-services.net/ns/auto#ParameterDefinition"/>
+            <oslc:occurs rdf:resource="http://open-services.net/ns/core#Exactly-one"/>
+            <oslc:name>Action</oslc:name>
+            <dcterms:description rdf:parseType="Literal">Action to be executed [required]</dcterms:description>
+          </oslc:Property>
+        </oslc_auto:parameterDefinition>
+        <rdf:type rdf:resource="http://open-services.net/ns/auto#ExecuteCompatible"/>
+        <oslc_auto:parameterDefinition>
+          <oslc:Property>
+            <oslc:allowedValue>10.1.1.1</oslc:allowedValue>
+            <oslc:allowedValue>10.1.1.2</oslc:allowedValue>
+            <oslc:allowedValue>10.1.1.9</oslc:allowedValue>
+            <oslc:valueType rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <oslc:propertyDefinition rdf:resource="http://open-services.net/ns/auto#ParameterDefinition"/>
+            <oslc:occurs rdf:resource="http://open-services.net/ns/core#Exactly-one"/>
+            <oslc:name>IP Address</oslc:name>
+            <dcterms:description rdf:parseType="Literal">Target machine IP address [required]</dcterms:description>
+          </oslc:Property>
+        </oslc_auto:parameterDefinition>
+        <oslc_auto:parameterDefinition>
+          <oslc:Property>
+            <oslc:valueType rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <oslc:propertyDefinition rdf:resource="http://open-services.net/ns/auto#ParameterDefinition"/>
+            <oslc:occurs rdf:resource="http://open-services.net/ns/core#Zero-or-one"/>
+            <oslc:name>File name</oslc:name>
+            <dcterms:description rdf:parseType="Literal">Remote file name (either file to be retrieved, or target file name for file upload) [optional]</dcterms:description>
+          </oslc:Property>
+        </oslc_auto:parameterDefinition>
+        <dcterms:title rdf:parseType="Literal">REMOTE_NC123456 1.2.34.56</dcterms:title>
+        <dcterms:description rdf:parseType="Literal">Automation Plan for TEMS: REMOTE_NC123456</dcterms:description>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">DATETIME</dcterms:modified>
+      </oslc_auto:AutomationPlan>
+    </rdfs:member>
+    <oslc:totalCount>1</oslc:totalCount>
+  </oslc:ResponseInfo>
+</rdf:RDF>
