@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:oslc_auto="http://open-services.net/ns/auto#"
+    xmlns:oslc="http://open-services.net/ns/core#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:oslc_data="http://open-services.net/ns/servicemanagement/1.0/" >
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:value>10.1.2.3</rdf:value>
+    <oslc:name>IP Address</oslc:name>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <oslc:name>File name</oslc:name>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A2">
+    <rdf:value>dW5hbWUgLXM=&#xD;</rdf:value>
+    <oslc:name>Content</oslc:name>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+    <rdf:value>EXECUTE</rdf:value>
+    <oslc:name>Action</oslc:name>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A4">
+    <oslc_auto:inputParameter rdf:nodeID="A3"/>
+    <oslc_auto:inputParameter rdf:nodeID="A2"/>
+    <oslc_auto:inputParameter rdf:nodeID="A1"/>
+    <oslc_auto:inputParameter rdf:nodeID="A0"/>
+    <oslc_auto:inputParameter rdf:nodeID="A5"/>
+    <oslc_auto:executesAutomationPlan rdf:resource="http://HOST:PORT/itmautomationprovider/services/plans/1"/>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#AutomationRequest"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A6">
+    <rdf:subject rdf:nodeID="A4"/>
+    <rdf:predicate rdf:resource="http://open-services.net/ns/auto#executesAutomationPlan"/>
+    <rdf:object rdf:resource="http://HOST:PORT/itmautomationprovider/services/plans/1"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+    <dcterms:title>http://HOST:PORT/itmautomationprovider/services/plans/1</dcterms:title>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A5">
+    <oslc:name>Work Directory</oslc:name>
+    <rdf:type rdf:resource="http://open-services.net/ns/auto#ParameterInstance"/>
+  </rdf:Description>
+</rdf:RDF>
