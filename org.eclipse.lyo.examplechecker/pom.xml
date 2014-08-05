@@ -3,15 +3,6 @@
   <groupId>org.eclipse.lyo</groupId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <resources>
-      <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -60,6 +51,7 @@
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
   		<version>4.5</version>
+  		<scope>test</scope>
   	</dependency>
   </dependencies>
   <artifactId>examplechecker</artifactId>
