@@ -1,0 +1,14 @@
+Suspicious namespace URI: http://open-services.net/ns/servicemanagement/1.0/
+Suspicious namespace URI: http:/open-service.net/ns/dashboard#
+dcterms:title	Warning: string value should not contain URI: "http://host:port/itmautomationprovider/services/plans/1";
+oslc_auto:reportsOnAutomationPlan	Error: the term "oslc_auto:reportsOnAutomationPlan" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+dashboard:smallImageHeight	Warning: untyped literal;
+dashboard:lineStyle	Warning: untyped literal;
+dashboard:lineColor	Warning: untyped literal;
+dashboard:lineWidth	Warning: untyped literal;
+dashboard:smallImageWidth	Warning: untyped literal;
+dashboard:testHeight	Warning: untyped literal;
+dashboard:smallImageHeight, dashboard:smallImageWidth:	Suggestion:	 the common entity "smallImage" should be defined as a resource with the following properties: Height; Width.
+dashboard:lineColor, dashboard:lineStyle, dashboard:lineWidth:	Suggestion:	 the common entity "line" should be defined as a resource with the following properties: Color; Style; Width.
+Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
