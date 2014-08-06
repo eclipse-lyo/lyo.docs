@@ -1,3 +1,0 @@
-Suspicious namespace URI: http://open-services.net/ns/servicemanagement/1.0/
-dcterms:title	Warning: string value should not contain URI: "http://host:port/itmautomationprovider/services/plans/1";
-Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
