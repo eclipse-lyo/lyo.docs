@@ -21,18 +21,18 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.eclipse.lyo.utilities.CheckForCommonMistakes;
-import org.eclipse.lyo.utilities.CheckRequiredArgs;
-import org.eclipse.lyo.utilities.ClassifiedErrorMessage;
-import org.eclipse.lyo.utilities.FileSuffixToJenaLanguage;
-import org.eclipse.lyo.utilities.FilenameParser;
-import org.eclipse.lyo.utilities.InvalidPredicateCheck;
-import org.eclipse.lyo.utilities.InvalidURILinkCheck;
-import org.eclipse.lyo.utilities.OSLCToolLogger;
-import org.eclipse.lyo.utilities.PotentialEnumCheck;
-import org.eclipse.lyo.utilities.ReadFileIntoNewModel;
-import org.eclipse.lyo.utilities.StatementCheck;
-import org.eclipse.lyo.utilities.UnusualPredicateandObjectCheck;
+import org.eclipse.lyo.tools.common.util.CheckForCommonMistakes;
+import org.eclipse.lyo.tools.common.util.CheckRequiredArgs;
+import org.eclipse.lyo.tools.common.util.ClassifiedErrorMessage;
+import org.eclipse.lyo.tools.common.util.FileSuffixToJenaLanguage;
+import org.eclipse.lyo.tools.common.util.FilenameParser;
+import org.eclipse.lyo.tools.common.util.InvalidPredicateCheck;
+import org.eclipse.lyo.tools.common.util.InvalidURILinkCheck;
+import org.eclipse.lyo.tools.common.util.OSLCToolLogger;
+import org.eclipse.lyo.tools.common.util.PotentialEnumCheck;
+import org.eclipse.lyo.tools.common.util.ReadFileIntoNewModel;
+import org.eclipse.lyo.tools.common.util.StatementCheck;
+import org.eclipse.lyo.tools.common.util.UnusualPredicateandObjectCheck;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

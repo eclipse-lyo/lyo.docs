@@ -19,7 +19,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.eclipse.lyo.utilities.OSLCToolLogger;
+import org.eclipse.lyo.tools.common.util.OSLCToolLogger;
 
 
 public class Loader {

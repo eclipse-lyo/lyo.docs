@@ -1,6 +1,6 @@
 Suspicious namespace URI: http://open-services.net/ns/servicemanagement/1.0/
-oslc_auto:ExecuteCompatible	Error: the term "oslc_auto:ExecuteCompatible" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
-oslc_auto:ParameterDefinition	Error: the term "oslc_auto:ParameterDefinition" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+oslc_auto:ExecuteCompatible	Error: the term "oslc_auto:ExecuteCompatible" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.tools.common.vocabulary.oslc.auto.AUTO";
+oslc_auto:ParameterDefinition	Error: the term "oslc_auto:ParameterDefinition" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.tools.common.vocabulary.oslc.auto.AUTO";
 oslc_auto:parameterDefinition for "IP Address"	Warning: resource ordinarily should have zero oslc:propertyDefinition predicates.
 oslc_auto:parameterDefinition for "Content"	Warning: resource ordinarily should have zero oslc:propertyDefinition predicates.
 oslc_auto:parameterDefinition for "Work Directory"	Warning: resource ordinarily should have zero oslc:propertyDefinition predicates.
