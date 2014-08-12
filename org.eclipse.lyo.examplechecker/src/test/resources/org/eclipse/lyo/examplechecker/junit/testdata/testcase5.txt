@@ -1,5 +1,5 @@
 Suspicious namespace URI: http://open-services.net/ns/servicemanagement/1.0/
-oslc_auto:ParameterDefinition	Error: the term "oslc_auto:ParameterDefinition" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+oslc_auto:ParameterDefinition	Error: the term "oslc_auto:ParameterDefinition" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "vocabularies.oslc.auto.AUTO";
 oslc:totalCount	Suggestion:	add rdf:datatype="http://www.w3.org/2001/XMLSchema#integer";
 oslc:ResponseInfo	Error: it's only used for OSLC paging, and ordinarily only has properties in the OSLC Core namespace, the following properties are not in OSLC Core name space: [http://www.w3.org/2000/01/rdf-schema#member]
 rdfs:member	Error: Subject's type should be one of the following: "http://www.w3.org/2000/01/rdf-schema#Container", "http://www.w3.org/ns/ldp#Container"
@@ -7,3 +7,12 @@ oslc_auto:parameterDefinition for "Work Directory"	Error: doesn't have a type of
 oslc_auto:parameterDefinition for "Work Directory"	Warning: resource ordinarily should have zero oslc:propertyDefinition predicates.
 oslc_auto:parameterDefinition for "Content"	Warning: resource ordinarily should have zero oslc:propertyDefinition predicates.
 Error:		"http://open-services.net/ns/auto#ParameterDefinition" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+Warning:	Suspicious usage of: <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+sco:nativeReference		Warning: predicate "sco:nativeReference" is unneeded, its object "http://HOST:PORT/Tasks/2" is already the subject of the triples.
+sco:nativeReference		Suggestion:	dcterms:identifier
+sco:nativeReference		Suggestion: this predicate "sco:nativeReference" with object "http://127.0.0.1:8001/itmautomationprovider/services/plans" needs discussion.
+sco:nativeDefinition	Suggestion:	inappropriate property name containing "native";	Warning: untyped literal;
+sco:nativeDefinition, sco:nativeIdentity, sco:nativeReference	:	Suggestion:	the common entity "native" should be removed if not clearly needed, and (if needed) defined as a resource with the following properties: Definition; Identity; Reference.
+sco:nativeReference		Suggestion:	inappropriate property name containing "native";	Warning: untyped literal;
+sco:nativeIdentity		Suggestion:	dcterms:identifier;	Suggestion:	inappropriate property name containing "native";	Warning: untyped literal;

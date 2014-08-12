@@ -1,8 +1,8 @@
 Suspicious namespace URI: http://jazz.net/ns/ism/provisioning/rm#
 Suspicious namespace URI: http://open-services.net/ns/om#
 om:description	Suggestion:	dcterms:description;	Warning: untyped literal;
-oslcAuto:unavailableeeee	Error: the term "oslcAuto:unavailableeeee" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
-oslcAuto:test	Error: the term "oslcAuto:test" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+oslcAuto:unavailableeeee	Error: the term "oslcAuto:unavailableeeee" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "vocabularies.oslc.auto.AUTO";
+oslcAuto:test	Error: the term "oslcAuto:test" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "vocabularies.oslc.auto.AUTO";
 sco:parent	Suggestion:	dcterms:source;
 sco:name	Suggestion:	http://open-services.net/ns/crtv#name;	Suggestion:	oslc:name;	Warning: untyped literal;
 sco:Container	Suggestion:	rdfs:Container;
@@ -12,13 +12,13 @@ oslc:totalCount	 Suggestion:	add rdf:datatype="http://www.w3.org/2001/XMLSchema#
 sco:Agent	Suggestion:	dcterms:Agent;
 dcterms:type	Suggestion:	rdf:type; 	 Warning: untyped literal;
 oslc:partOfDiscussion	 Error: object should be a resource of type "http://open-services.net/ns/core#Resource", NOT a literal - "test_must_be_reference_predicate";
-oslc:value	Error: the term "oslc:value" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/core#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.core.CORE"; 	 Warning: untyped literal;
+oslc:value	Error: the term "oslc:value" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/core#". If it does exist in the URI, please notify us to update the API "vocabularies.oslc.core.CORE"; 	 Warning: untyped literal;
 sco:flavorId	Suggestion:	dcterms:identifier; oslc:shortId; 	 Warning: untyped literal;
 sco:alias	Warning: untyped literal;
 sco:newPredicate	Warning: untyped literal;
 dcterms:modified	Error:Invaliddatetimestring:2013-03-07T14:15:38;	Error:Invaliddatetimestring:2013-03-07T14:15:38.45+9:00;	Error:Invaliddatetimestring:2013-03-07T14:15:38z;	Suggestion:	addrdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime";
 dcterms:identifier	Warning: string value should not contain URI: "http://open-services.net/ns/auto#automationresult";
-oslc:Inline	Error: the term "oslc:Inline" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/core#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.core.CORE";	Warning: untyped literal;
+oslc:Inline	Error: the term "oslc:Inline" as a Property does not exist in the cached copy of the URI "http://open-services.net/ns/core#". If it does exist in the URI, please notify us to update the API "vocabularies.oslc.core.CORE";	Warning: untyped literal;
 oslc:ResponseInfo	Error: it's only used for OSLC paging, and ordinarily only has properties in the OSLC Core namespace, the following properties are not in OSLC Core name space: [http://www.w3.org/2000/01/rdf-schema#member]
 rdfs:member	Error: Subject's type should be one of the following: "http://www.w3.org/2000/01/rdf-schema#Container", "http://www.w3.org/ns/ldp#Container"
 oslcAuto:test	Warning: test is used as a predicate, but does not exist in the cached copy of any vocabulary.
