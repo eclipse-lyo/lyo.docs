@@ -25,22 +25,22 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 
-import org.eclipse.lyo.utilities.CheckForCommonMistakes;
-import org.eclipse.lyo.utilities.FileSuffixToJenaLanguage;
-import org.eclipse.lyo.utilities.FilenameParser;
-import org.eclipse.lyo.utilities.ReadFileIntoNewModel;
-import org.eclipse.lyo.vocabularies.oslc.changemgmt.CM;
-import org.eclipse.lyo.vocabularies.oslc.core.Core;
-import org.eclipse.lyo.vocabularies.oslc.qualitymgmt.QM;
-import org.eclipse.lyo.vocabularies.oslc.reconciliation.CRTV;
-import org.eclipse.lyo.vocabularies.oslc.rqmgmt.RM;
+import org.eclipse.lyo.tools.common.util.CheckForCommonMistakes;
+import org.eclipse.lyo.tools.common.util.FileSuffixToJenaLanguage;
+import org.eclipse.lyo.tools.common.util.FilenameParser;
+import org.eclipse.lyo.tools.common.util.ReadFileIntoNewModel;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.changemgmt.CM;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.core.OSLC;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.qm.QM;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.reconciliation.CRTV;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.rm.RM;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -72,11 +72,11 @@ public class ResourceShape2WikiText {
 
 	final static String NS_ = "";
 	final static String NS_EXAMPLE_ORG = "http://example.org#";
-	final static String nsCoreX = NS_OSLC_AUTHORING;
-	final static Property oslcDescribesP = Core.describes;
+	final static String nsCOREX = NS_OSLC_AUTHORING;
+	final static Property oslcDescribesP = OSLC.describes;
 	final static Property rdfsLabelP = RDFS.label;
-	final Property corexOrder = ResourceFactory.createProperty(nsCoreX+"order");
-	final Property corexRangeSuggestion = ResourceFactory.createProperty(nsCoreX+"rangeSuggestion");
+	final Property corexOrder = ResourceFactory.createProperty(nsCOREX+"order");
+	final Property corexRangeSuggestion = ResourceFactory.createProperty(nsCOREX+"rangeSuggestion");
 	private static PrintWriter pw;
 	private static boolean strict = false;
 	
@@ -105,8 +105,8 @@ public class ResourceShape2WikiText {
 	{
 		BufferedReader reader = null;
 		fixedRangeProps = new HashSet<String>();
-		fixedRangeProps.add(org.eclipse.lyo.vocabularies.oslc.core.Core.instanceShape.getURI());
-		fixedRangeProps.add(org.eclipse.lyo.vocabularies.oslc.core.Core.serviceProvider.getURI());
+		fixedRangeProps.add(org.eclipse.lyo.tools.common.vocabulary.oslc.core.OSLC.instanceShape.getURI());
+		fixedRangeProps.add(org.eclipse.lyo.tools.common.vocabulary.oslc.core.OSLC.serviceProvider.getURI());
 
 		try
 		{
@@ -137,7 +137,7 @@ public class ResourceShape2WikiText {
 	 */
 	private static void prepareNsPrefixMap()
 	{
-		nsPrefixMap.put(Core.NS,"oslc");
+		nsPrefixMap.put(OSLC.NS,"oslc");
 		nsPrefixMap.put(NS_OSLC_AUTHORING,NSPREFIX_AUTHORING);
 		nsPrefixMap.put(XSD.getURI(), NSPREFIX_XSD);
 		nsPrefixMap.put(XSD.getURI(), NSPREFIX_XSD2);
@@ -175,14 +175,14 @@ public class ResourceShape2WikiText {
 			oslcCommonProps.add(com.hp.hpl.jena.vocabulary.DCTerms.modified.getURI());
 			oslcCommonProps.add(com.hp.hpl.jena.vocabulary.DCTerms.relation.getURI());
 
-			oslcCommonProps.add(Core.discussedBy.getURI());
-			oslcCommonProps.add(Core.instanceShape.getURI());
-			oslcCommonProps.add(Core.serviceProvider.getURI());
-			oslcCommonProps.add(Core.shortId.getURI());
-			oslcCommonProps.add(Core.shortTitle.getURI());
-			oslcCommonProps.add(Core.modifiedBy.getURI());
-			oslcCommonProps.add(Core.partOfDiscussion.getURI());
-			oslcCommonProps.add(Core.inReplyTo.getURI());
+			oslcCommonProps.add(OSLC.discussedBy.getURI());
+			oslcCommonProps.add(OSLC.instanceShape.getURI());
+			oslcCommonProps.add(OSLC.serviceProvider.getURI());
+			oslcCommonProps.add(OSLC.shortId.getURI());
+			oslcCommonProps.add(OSLC.shortTitle.getURI());
+			oslcCommonProps.add(OSLC.modifiedBy.getURI());
+			oslcCommonProps.add(OSLC.partOfDiscussion.getURI());
+			oslcCommonProps.add(OSLC.inReplyTo.getURI());
 
 			oslcCommonProps.add(oslcDescribesP.getURI());
 			String commonpropFile = "/wiki/commonprops.txt";
@@ -351,7 +351,7 @@ public class ResourceShape2WikiText {
 			System.exit(1);
 		}
 		String resLocalName = this.setResourceTableHeader(shape);
-		Property p = org.eclipse.lyo.vocabularies.oslc.core.ResourceShape.property ;
+		Property p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.ResourceShape.property ;
 		Seq seq = getPropertyOrderSeq(shapes);
 		if(seq != null)//basically has embedded sections under http://open-services.net/wiki#_sections_
 		{
@@ -404,7 +404,7 @@ public class ResourceShape2WikiText {
 			
 			if(commonPropertyResourceList.size()>0)
 			{
-				rtHandler.addResourceTableSection(new ResourceTableHandler.ResourceTableSection("OSLC Core: Common Properties"));
+				rtHandler.addResourceTableSection(new ResourceTableHandler.ResourceTableSection("OSLC OSLC: Common Properties"));
 				for(Resource propResource : commonPropertyResourceList)		{
 					wikiTextForResourceShapeProperty(propResource);
 				}
@@ -424,7 +424,7 @@ public class ResourceShape2WikiText {
 	
 	private boolean isCommonProperty(Resource propertyResource)
 	{
-		Statement propertyDefnStmt = propertyResource.getProperty(org.eclipse.lyo.vocabularies.oslc.core.Property.propertyDefinition);
+		Statement propertyDefnStmt = propertyResource.getProperty(org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.propertyDefinition);
 		if ( propertyDefnStmt != null ) {
 			RDFNode value = propertyDefnStmt.getObject();
 			if ( value.isURIResource() )
@@ -472,7 +472,7 @@ public class ResourceShape2WikiText {
 		//	Ultimately should drive based on an input resource shape.  This is written for spec authoring purposes.
 		ResourceTableHandler.ResourceTableRow rtRow = new ResourceTableHandler.ResourceTableRow(shapes);
 		rtHandler.addResourceTableRow(rtRow);
-		p = org.eclipse.lyo.vocabularies.oslc.core.Property.propertyDefinition;
+		p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.propertyDefinition;
 		Statement propertyDefnStmt = propertyResource.getProperty(p);
 		if ( propertyDefnStmt != null ) {
 			RDFNode value = propertyDefnStmt.getObject();
@@ -486,7 +486,7 @@ public class ResourceShape2WikiText {
 		} else
 			rtRow.setInvalidResourceURIMsg("missing:propertyDefinition");
 
-		p = org.eclipse.lyo.vocabularies.oslc.core.Property.occurs;
+		p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.occurs;
 		Statement propertyOccursStmt = propertyResource.getProperty(p);
 		if ( propertyOccursStmt != null ) 
 		{
@@ -499,26 +499,26 @@ public class ResourceShape2WikiText {
 			{
 				Resource r = occursValue.asResource();
 				String uri = r.getURI();
-				if ( !org.eclipse.lyo.vocabularies.oslc.core.Property.validOccurs.contains(occursValue)) 
+				if ( !org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validOccurs.contains(occursValue)) 
 				{
 					if(!strict)
 					{
 						String localPart = this.getLocalPart(uri).toLowerCase();
 						if(localPart.contains("zero") && localPart.contains("one"))
 						{
-							r = org.eclipse.lyo.vocabularies.oslc.core.Property.validOccursValues[1];
+							r = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validOccursValues[1];
 						}
 						else if(localPart.contains("zero") && localPart.contains("many"))
 						{
-							r = org.eclipse.lyo.vocabularies.oslc.core.Property.validOccursValues[2];
+							r = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validOccursValues[2];
 						}
 						else if(localPart.contains("one") && localPart.contains("many"))
 						{
-							r = org.eclipse.lyo.vocabularies.oslc.core.Property.validOccursValues[3];
+							r = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validOccursValues[3];
 						}
 						else if(localPart.contains("exactly") && localPart.contains("one"))
 						{
-							r = org.eclipse.lyo.vocabularies.oslc.core.Property.validOccursValues[0];
+							r = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validOccursValues[0];
 						}
 						propertyOccursStmt.changeObject(r);
 						rtRow.setOccurs(r);
@@ -526,7 +526,7 @@ public class ResourceShape2WikiText {
 					}
 					else
 					{
-						rtRow.setInvalidOccursURIMsg("***Object is a URI but is not one of the Core URIs***");
+						rtRow.setInvalidOccursURIMsg("***Object is a URI but is not one of the OSLC URIs***");
 					}
 				} 
 				else 
@@ -540,7 +540,7 @@ public class ResourceShape2WikiText {
 			rtRow.setInvalidOccursURIMsg("***missing: occurs***");
 		}
 
-		p = org.eclipse.lyo.vocabularies.oslc.core.Property.readOnly;
+		p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.readOnly;
 		s = propertyResource.listProperties(p).toList();
 		if ( s.size() == 1 ) {
 			RDFNode roValue = s.get(0).getObject();
@@ -562,10 +562,10 @@ public class ResourceShape2WikiText {
 		}
 		wiki += "| " + propertyReadOnly + " ";
 
-		//	Core allows 0:*
+		//	OSLC allows 0:*
 		//	(Virtually?) every spec uses 1:1 - if you want spec automation, use ==1
 		//	Other predicates' values (representation, range) depend on its value too
-		p = org.eclipse.lyo.vocabularies.oslc.core.Property.valueType;
+		p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.valueType;
 		s = propertyResource.listProperties(p).toList();
 		if ( s.size() != 1 ) rtRow.setInvalidValueTypeMsg("***Wrong number of value types, run validation to list messages***");
 		else {
@@ -581,7 +581,7 @@ public class ResourceShape2WikiText {
 				String uri = r.toString();
 				String ncName = uri.substring(uri.indexOf('#')+1);
 
-				if ( !org.eclipse.lyo.vocabularies.oslc.core.Property.validValueType.contains(vtValue)) 
+				if ( !org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validValueType.contains(vtValue)) 
 				{
 					
 					if(!strict)
@@ -630,27 +630,27 @@ public class ResourceShape2WikiText {
 						}
 						else if(ncName.equalsIgnoreCase("resource"))
 						{
-							r = ResourceFactory.createResource(Core.NS+"Resource") ;
+							r = ResourceFactory.createResource(OSLC.NS+"Resource") ;
 							s.get(0).changeObject(r);
 						}
 						else if(ncName.toLowerCase().contains("local"))
 						{
-							r = ResourceFactory.createResource(Core.NS+"LocalResource") ;
+							r = ResourceFactory.createResource(OSLC.NS+"LocalResource") ;
 							s.get(0).changeObject(r);
 						}
 						else if(ncName.toLowerCase().contains("either") || ncName.toLowerCase().contains("any"))
 						{
-							r = ResourceFactory.createResource(Core.NS+"AnyResource") ;
+							r = ResourceFactory.createResource(OSLC.NS+"AnyResource") ;
 							s.get(0).changeObject(r);
 						}
 						rtRow.setValueType(r);
 						
 						// Update defaults for other columns based on value type
-						if ( org.eclipse.lyo.vocabularies.oslc.core.Property.validValueTypeLiteral.contains(r) ) {//Anamitra - fix shape here by deleteing those statements from shape
+						if ( org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validValueTypeLiteral.contains(r) ) {//Anamitra - fix shape here by deleteing those statements from shape
 							propertyRep = "N/A";
-							propertyResource.removeAll(org.eclipse.lyo.vocabularies.oslc.core.Property.representation);
+							propertyResource.removeAll(org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.representation);
 							propertyRange = "N/A";
-							propertyResource.removeAll(org.eclipse.lyo.vocabularies.oslc.core.Property.range);
+							propertyResource.removeAll(org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.range);
 						}
 						
 						if(isLocalResource(r))
@@ -658,8 +658,8 @@ public class ResourceShape2WikiText {
 							localResource = true;
 						}
 
-						if ( org.eclipse.lyo.vocabularies.oslc.core.Property.validValueTypeResource.contains(r) ) {//Anamitra - if anything other than Any - then fix shape and move that to suggested range predicate
-							Resource rRange = org.eclipse.lyo.vocabularies.oslc.core.Property.defaultRange;
+						if ( org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validValueTypeResource.contains(r) ) {//Anamitra - if anything other than Any - then fix shape and move that to suggested range predicate
+							Resource rRange = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.defaultRange;
 							rtRow.setRange(rRange);
 						}
 					}
@@ -671,11 +671,11 @@ public class ResourceShape2WikiText {
 				else 
 				{
 					// Update defaults for other columns based on value type
-					if ( org.eclipse.lyo.vocabularies.oslc.core.Property.validValueTypeLiteral.contains(vtValue) ) {//Anamitra - fix shape here by deleteing those statements from shape
+					if ( org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validValueTypeLiteral.contains(vtValue) ) {//Anamitra - fix shape here by deleteing those statements from shape
 						propertyRep = "N/A";
-						propertyResource.removeAll(org.eclipse.lyo.vocabularies.oslc.core.Property.representation);
+						propertyResource.removeAll(org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.representation);
 						propertyRange = "N/A";
-						propertyResource.removeAll(org.eclipse.lyo.vocabularies.oslc.core.Property.range);
+						propertyResource.removeAll(org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.range);
 					}
 					
 					if(isLocalResource(r))
@@ -683,8 +683,8 @@ public class ResourceShape2WikiText {
 						localResource = true;
 					}
 
-					if ( org.eclipse.lyo.vocabularies.oslc.core.Property.validValueTypeResource.contains(vtValue) ) {//Anamitra - if anything other than Any - then fix shape and move that to suggested range predicate
-						Resource rRange = org.eclipse.lyo.vocabularies.oslc.core.Property.defaultRange;
+					if ( org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validValueTypeResource.contains(vtValue) ) {//Anamitra - if anything other than Any - then fix shape and move that to suggested range predicate
+						Resource rRange = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.defaultRange;
 						rtRow.setRange(rRange);
 						//propertyRange = uriMode?"[Any]("+r.getURI()+")":"Any";
 					}
@@ -695,7 +695,7 @@ public class ResourceShape2WikiText {
 		//wiki += "| " + propertyValueType + " ";
 		
 
-		p = org.eclipse.lyo.vocabularies.oslc.core.Property.representation;
+		p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.representation;
 		s = propertyResource.listProperties(p).toList();
 		if (s.size() == 1) {
 			RDFNode representationValue = s.get(0).getObject();
@@ -709,31 +709,31 @@ public class ResourceShape2WikiText {
 				String uri = r.toString();
 				String ncName = uri.substring(uri.indexOf('#')+1);
 
-				if (!org.eclipse.lyo.vocabularies.oslc.core.Property.validRepresentation
+				if (!org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.validRepresentation
 					.contains(representationValue.asResource())) 
 				{
 					if(!strict)
 					{
 						if(ncName.equalsIgnoreCase("Reference"))
 						{
-							r = ResourceFactory.createResource(Core.NS+"Reference");
+							r = ResourceFactory.createResource(OSLC.NS+"Reference");
 							s.get(0).changeObject(r);
 						}
 						else if(ncName.equalsIgnoreCase("Inline"))
 						{
-							r = ResourceFactory.createResource(Core.NS+"Inline");
+							r = ResourceFactory.createResource(OSLC.NS+"Inline");
 							s.get(0).changeObject(r);
 						}
 						else
 						{
-							r = ResourceFactory.createResource(Core.NS+"Either");
+							r = ResourceFactory.createResource(OSLC.NS+"Either");
 							s.get(0).changeObject(r);
 						}
 						rtRow.setRepresentation(r);
-						if(localResource && !r.equals(ResourceFactory.createResource(Core.NS+"Inline")))
+						if(localResource && !r.equals(ResourceFactory.createResource(OSLC.NS+"Inline")))
 						{
 							propertyResource.removeAll(p);
-							propertyResource.addProperty(p, ResourceFactory.createResource(Core.NS+"Inline"));
+							propertyResource.addProperty(p, ResourceFactory.createResource(OSLC.NS+"Inline"));
 						}
 					}
 					else
@@ -743,10 +743,10 @@ public class ResourceShape2WikiText {
 				} 
 				else 
 				{
-					if(localResource && !r.equals(ResourceFactory.createResource(Core.NS+"Inline")))
+					if(localResource && !r.equals(ResourceFactory.createResource(OSLC.NS+"Inline")))
 					{
 						propertyResource.removeAll(p);
-						propertyResource.addProperty(p, ResourceFactory.createResource(Core.NS+"Inline"));
+						propertyResource.addProperty(p, ResourceFactory.createResource(OSLC.NS+"Inline"));
 					}
 				}
 			}
@@ -758,7 +758,7 @@ public class ResourceShape2WikiText {
 		} else if ( s.size() > 1 )
 			rtRow.setInvalidRepresentationURIMsg("***Too many values***");
 
-		p = org.eclipse.lyo.vocabularies.oslc.core.Property.range;
+		p = org.eclipse.lyo.tools.common.vocabulary.oslc.core.Property.range;
 		s = propertyResource.listProperties(p).toList();
 		String suggestedRangeNcName = null;
 		String suggestedRangeURI = null;//fully qualified name of the range resource
@@ -777,16 +777,16 @@ public class ResourceShape2WikiText {
 				}
 				else
 				{
-					ncName = shapes.shortForm(Core.NS+"Any");
-					rtRow.setRange(ResourceFactory.createResource(Core.NS+"Any"));
-					if(!uri.equals(Core.NS+"Any"))
+					ncName = shapes.shortForm(OSLC.NS+"Any");
+					rtRow.setRange(ResourceFactory.createResource(OSLC.NS+"Any"));
+					if(!uri.equals(OSLC.NS+"Any"))
 					{
 						suggestedRangeURI = uri;
 						String nsURI = (new PropertyImpl(uri)).getNameSpace();
 						String localPart = (new PropertyImpl(uri)).getLocalName();
 						suggestedRangeNcName = this.getNcName(shapes, localPart, nsURI);
 					}
-					uri = Core.NS+"Any";
+					uri = OSLC.NS+"Any";
 				}
 				
 			}
@@ -898,7 +898,7 @@ public class ResourceShape2WikiText {
 	
 	private boolean isLocalResource(Resource r)
 	{
-		return (r.equals(ResourceFactory.createResource(Core.NS+"LocalResource")));
+		return (r.equals(ResourceFactory.createResource(OSLC.NS+"LocalResource")));
 	}
 	
 	

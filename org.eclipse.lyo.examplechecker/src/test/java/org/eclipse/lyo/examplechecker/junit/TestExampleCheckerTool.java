@@ -25,9 +25,9 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.eclipse.lyo.examplechecker.CheckExample;
-import org.eclipse.lyo.utilities.ClassifiedErrorMessage;
-import org.eclipse.lyo.utilities.OSLCToolLogger;
-import org.eclipse.lyo.utilities.ReadFileIntoNewModel;
+import org.eclipse.lyo.tools.common.util.ClassifiedErrorMessage;
+import org.eclipse.lyo.tools.common.util.OSLCToolLogger;
+import org.eclipse.lyo.tools.common.util.ReadFileIntoNewModel;
 import org.junit.Before;
 import org.junit.Test;
 

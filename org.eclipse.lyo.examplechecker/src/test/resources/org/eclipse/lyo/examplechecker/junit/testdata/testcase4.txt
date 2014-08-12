@@ -1,7 +1,7 @@
 Suspicious namespace URI: http://open-services.net/ns/servicemanagement/1.0/
 Suspicious namespace URI: http:/open-service.net/ns/dashboard#
 dcterms:title	Warning: string value should not contain URI: "http://host:port/itmautomationprovider/services/plans/1";
-oslc_auto:reportsOnAutomationPlan	Error: the term "oslc_auto:reportsOnAutomationPlan" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.vocabularies.oslc.auto.AUTO";
+oslc_auto:reportsOnAutomationPlan	Error: the term "oslc_auto:reportsOnAutomationPlan" as a Resource does not exist in the cached copy of the URI "http://open-services.net/ns/auto#". If it does exist in the URI, please notify us to update the API "org.eclipse.lyo.tools.common.vocabulary.oslc.auto.AUTO";
 dashboard:smallImageHeight	Warning: untyped literal;
 dashboard:lineStyle	Warning: untyped literal;
 dashboard:lineColor	Warning: untyped literal;
