@@ -54,6 +54,8 @@ public class CommonPropertyCheck {
 		commonPropNameMap.put("parent", "dcterms:source");
 		commonPropNameMap.put("count", "oslc:totalCount");
 		commonPropNameMap.put("number", "oslc:totalCount");
+		commonPropNameMap.put("identity", "dcterms:identifier");
+		commonPropNameMap.put("native", "inappropriate property name containing \"native\"");
 
 		commonPropObjMap = new HashMap<Object, String>();
 		DCTerms dctermsObj = new DCTerms();
@@ -104,15 +106,8 @@ public class CommonPropertyCheck {
 		else if (resType == rdfsClassR) {
 			commonResType = "Resource";
 		}
-
 		//Check for invalid property/resource under common name spaces
-		Collection<String> nameSpaceList = commonPropObjMap.values();
-		for (String i : nameSpaceList) {
-			if (i.toLowerCase().equals(lowerNameSpace)) {
-				inCommonNs = true;
-				break;
-			}
-		}
+		inCommonNs = isInCommmonNameSpace(lowerNameSpace);
 
 		for (Object obj : commonPropObjMap.keySet()) {
 			HashMap<String, String> simpleFields = null;
@@ -226,5 +221,17 @@ public class CommonPropertyCheck {
 			nsList.add(propNameMap.getValue());
 		}
 		return nsList;
+	}
+	
+	public static boolean isInCommmonNameSpace(String nameSpace) {
+		boolean inCommonNs = false;
+		Collection<String> nameSpaceList = commonPropObjMap.values();
+		for (String i : nameSpaceList) {
+			if (i.toLowerCase().equals(nameSpace.toLowerCase())) {
+				inCommonNs = true;
+				break;
+			}
+		}
+		return inCommonNs;
 	}
 }

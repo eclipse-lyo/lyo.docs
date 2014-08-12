@@ -3,6 +3,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:oslc="http://open-services.net/ns/core#"
     xmlns:oslc_data="http://open-services.net/ns/servicemanagement/1.0/"
+    xmlns:sco="http://jazz.net/ns/ism/provisioning/sco#"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:oslc_auto="http://open-services.net/ns/auto#"
@@ -29,7 +30,7 @@
             <oslc:name>Content</oslc:name>
             <dcterms:description rdf:parseType="Literal">Base64-encoded content: command to be executed or file to be uploade [optional]</dcterms:description>
           </oslc:Property>
-        </oslc_auto:parameterDefinition>
+        </oslc_auto:parameterDefinition>       
         <rdf:type rdf:resource="http://ibm.com/ns/auto#ExecuteCompatible"/>
         <oslc_auto:parameterDefinition>
           <oslc:Property>
@@ -41,7 +42,7 @@
             <oslc:name>IP Address</oslc:name>
             <dcterms:description rdf:parseType="Literal">Target machine IP address [required]</dcterms:description>
           </oslc:Property>
-        </oslc_auto:parameterDefinition>
+        </oslc_auto:parameterDefinition>        
         <dcterms:title rdf:parseType="Literal">REMOTE_NC123456 1.2.34.56</dcterms:title>
         <dcterms:description rdf:parseType="Literal">Automation Plan for TEMS: REMOTE_NC123456</dcterms:description>
         <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-03-06T13:32:40.547Z</dcterms:modified>
@@ -49,4 +50,19 @@
     </rdfs:member>
     <oslc:totalCount>1</oslc:totalCount>
   </oslc:ResponseInfo>
+  <rdf:Description rdf:about="http://HOST:PORT/Tasks/1">
+	    <dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</dcterms:identifier>
+	    <dcterms:title>Backup</dcterms:title>	    
+	    <sco:nativeReference>nativeReference</sco:nativeReference>
+	    <sco:nativeReference rdf:resource="http://127.0.0.1:8001/itmautomationprovider/services/plans"/>
+	    <sco:nativeIdentity>nativeIdentity</sco:nativeIdentity>
+	    <sco:nativeDefinition>nativeDefinition</sco:nativeDefinition>
+	    <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+   <rdf:Description rdf:about="http://HOST:PORT/Tasks/2">
+	    <dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</dcterms:identifier>
+	    <dcterms:title>Backup</dcterms:title>	    
+	    <sco:nativeReference rdf:resource="http://HOST:PORT/Tasks/2"/>
+	    <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
 </rdf:RDF>
