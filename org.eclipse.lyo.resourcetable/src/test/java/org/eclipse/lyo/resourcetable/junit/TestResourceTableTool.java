@@ -16,13 +16,12 @@
 
 package org.eclipse.lyo.resourcetable.junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
 
+import org.eclipse.lyo.tools.common.util.ReadFileIntoNewModel;
 import org.junit.Test;
-
-import org.eclipse.lyo.utilities.ReadFileIntoNewModel;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;

@@ -16,7 +16,13 @@
 
 package org.eclipse.lyo.resourcetable;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,19 +36,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.BasicConfigurator;
-
-import org.eclipse.lyo.utilities.ReadFileIntoNewModel;
-import org.eclipse.lyo.vocabularies.oslc.changemgmt.CM;
-import org.eclipse.lyo.vocabularies.oslc.core.Core;
-import org.eclipse.lyo.vocabularies.oslc.qualitymgmt.QM;
-import org.eclipse.lyo.vocabularies.oslc.rqmgmt.RM;
+import org.eclipse.lyo.tools.common.util.ReadFileIntoNewModel;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.changemgmt.CM;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.core.OSLC;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.qm.QM;
+import org.eclipse.lyo.tools.common.vocabulary.oslc.rm.RM;
 
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
 import com.hp.hpl.jena.vocabulary.DCTerms;
-import com.hp.hpl.jena.vocabulary.XSD;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 /**
  * Utility to generate an OSLC shape document from a tWiki or mediawiki format resource table.
@@ -68,7 +73,7 @@ public class WikiText2ResourceShape
 	
 	private static final String space;
 	
-	final Property oslcDescribesP = Core.describes;
+	final Property oslcDescribesP = OSLC.describes;
 	final Property rdfsLabelP = RDFS.label;
 	final Property rdftypeP = RDF.type;
 	
@@ -106,8 +111,8 @@ public class WikiText2ResourceShape
 	private static void prepareFixedRangePropList()
 	{
 		fixedRangeProps = new HashSet<String>();
-		fixedRangeProps.add(Core.instanceShape.getURI());
-		fixedRangeProps.add(Core.serviceProvider.getURI());
+		fixedRangeProps.add(OSLC.instanceShape.getURI());
+		fixedRangeProps.add(OSLC.serviceProvider.getURI());
 	}
 	
 	/**
@@ -118,7 +123,7 @@ public class WikiText2ResourceShape
 	private static Map<String,String> prepareNsPrefixMap()
 	{
 		Map<String,String> nsPrefixMap = new LinkedHashMap<String,String>();//use linked map to always maintain the order
-		nsPrefixMap.put(Core.NS,"oslc");
+		nsPrefixMap.put(OSLC.NS,"oslc");
 		nsPrefixMap.put(NS_OSLC_AUTHORING,NSPREFIX_AUTHORING);
 		nsPrefixMap.put(XSD.getURI(), NSPREFIX_XSD);
 		nsPrefixMap.put(XSD.getURI(), NSPREFIX_XSD2);
@@ -584,7 +589,7 @@ public class WikiText2ResourceShape
 	
 	private void handleOccurs(PropertyInfo prop, String occurs, String uri, Map<String,String> prefixNsMap, Map<String,String> nsPrefixMap)
 	{
-		String oslcPrefix = nsPrefixMap.get(Core.NS);
+		String oslcPrefix = nsPrefixMap.get(OSLC.NS);
 
 		if(this.isExactlyOne(occurs))
 		{
@@ -742,7 +747,7 @@ public class WikiText2ResourceShape
 	
 	private void handleRepresentation(PropertyInfo prop, String representation, String uri, Map<String,String> prefixNsMap, Map<String,String> nsPrefixMap)
 	{
-		String oslcPrefix = nsPrefixMap.get(Core.NS);
+		String oslcPrefix = nsPrefixMap.get(OSLC.NS);
 		if(representation.toLowerCase().indexOf("reference") >=0)
 		{
 			prop.representation = oslcPrefix+":Reference";
@@ -764,7 +769,7 @@ public class WikiText2ResourceShape
 	private void handleValueType(PropertyInfo prop, String valueType, String uri, Map<String,String> prefixNsMap, Map<String,String> nsPrefixMap)
 	{
 		String xsdPrefix = nsPrefixMap.get(XSD.getURI());
-		String oslcPrefix = nsPrefixMap.get(Core.NS);
+		String oslcPrefix = nsPrefixMap.get(OSLC.NS);
 		if(valueType.toLowerCase().indexOf("string") >=0)
 		{
 			prop.valueType = xsdPrefix+":string";
