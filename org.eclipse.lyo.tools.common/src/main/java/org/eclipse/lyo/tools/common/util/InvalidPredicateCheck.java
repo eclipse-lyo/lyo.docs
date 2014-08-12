@@ -16,6 +16,7 @@
 package org.eclipse.lyo.tools.common.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,17 +38,18 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
-public class InvalidPredicateCheck {
-	private final static int CHECK_THRESHOLD = 1;
-
+public class InvalidPredicateCheck {	
+	private final static int CHECK_THRESHOLD = 1;	
+	
 	public static ArrayList<ClassifiedErrorMessage> CheckInvalidPredicate(Model example, Map<String, String> nspm) {
 		ArrayList<ClassifiedErrorMessage> errorMsgList = new ArrayList<ClassifiedErrorMessage>();
 		ClassifiedErrorMessage errMsg = null;
-		String errorMsg = "";
-		errorMsg = check_OSLCResponseInfo(example, nspm);
+		String errorMsg = "";		
+		errorMsg = check_OSLCResponseInfo(example, nspm);	
 		if (errorMsg.length() > 0 ) {
 			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR, "", errorMsg);
 			errorMsgList.add(errMsg);
@@ -60,54 +62,58 @@ public class InvalidPredicateCheck {
 			OSLCToolLogger.error(errMsg.toString());
 		}
 		errorMsgList.addAll(check_InvalidPredicateName(example,nspm));
-
+		
 		errorMsgList.addAll(check_PredicatewithCommonSuffix(example, nspm));
-
+		
 		errorMsgList.addAll(check_OSLCauto_parameterDefinition(example, nspm));
+		
+		errorMsgList.addAll(check_Predicate_Reference(example, nspm));
+		
 		return errorMsgList;
 	}
-
+	
 	// Look for mis-use of oslc:ResponseInfo
 	private static String check_OSLCResponseInfo(Model example, Map<String, String> nspm) {
 		ResIterator subjects = example.listSubjects();
 		boolean found = false;
-		Set<String> errorMsg =	new HashSet<String>();
+		Set<String> errorMsg =  new HashSet<String>();
 		String responseInfoProp = OSLC.ResponseInfo.toString();
 		String nsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm,OSLC.ResponseInfo.getNameSpace());
-
+		
 		while ( subjects.hasNext() ) {
 			Resource tmpRes = subjects.next();
 			found = false;
-			StmtIterator tmpStmts = tmpRes.listProperties();
-			while ( tmpStmts.hasNext()) {
-				Statement tmpStmt = tmpStmts.next();
-				if (tmpStmt.getPredicate().toString().equals(RDF.type.toString()) &&
-						tmpStmt.getObject().toString().equals(responseInfoProp)) {
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				tmpStmts = tmpRes.listProperties();
-				while ( tmpStmts.hasNext()) {
-					Statement tmpStmt = tmpStmts.next();
-					Property pred = tmpStmt.getPredicate();
-					if (!tmpStmt.getPredicate().toString().equals(RDF.type.toString()) &&
-							!CoreCommon.ResponseInfoPredicateWhiteList.contains(pred.toString())) {
-						errorMsg.add(pred.toString());
-					}
-				}
-			}
-
-		}
+            StmtIterator tmpStmts = tmpRes.listProperties();
+            while ( tmpStmts.hasNext()) {
+            	Statement tmpStmt = tmpStmts.next();
+            	if (tmpStmt.getPredicate().toString().equals(RDF.type.toString()) && 
+            			tmpStmt.getObject().toString().equals(responseInfoProp)) {
+        	    	found = true;
+        	    	break;    
+            	}
+            }
+            if (found) {
+	            tmpStmts = tmpRes.listProperties();
+	            while ( tmpStmts.hasNext()) {
+	            	Statement tmpStmt = tmpStmts.next();
+	            	Property pred = tmpStmt.getPredicate();
+	            	if (!tmpStmt.getPredicate().toString().equals(RDF.type.toString()) && 
+	            			!CoreCommon.ResponseInfoPredicateWhiteList.contains(pred.toString())) {
+	            		errorMsg.add(pred.toString());
+	            	}
+	            }
+            }
+            
+		}	
 		if (!errorMsg.isEmpty()) {
 			return nsPrefix + OSLC.ResponseInfo.getLocalName() + "\tError: it's only used for OSLC paging, and ordinarily only has properties in the OSLC Core namespace, the following properties are not in OSLC Core name space: " + errorMsg.toString();
 		}
 		else {
 			return "";
 		}
+		
 	}
-
+	
 	// Look for mis-use of oslc:ResponseInfo
 	private static String check_RDFSMember(Model example, Map<String, String> nspm) {
 		ResIterator subjects = example.listSubjects();
@@ -119,34 +125,34 @@ public class InvalidPredicateCheck {
 		String ldpContainerProp = Container.toString();
 		String rdfsMemeberProp = RDFS.member.toString();
 		String nsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm,RDFS.member.getNameSpace());
-
+		
 		while ( subjects.hasNext() ) {
 			Resource tmpRes = subjects.next();
 			found = false;
 			underCorrectContainer = false;
-			StmtIterator tmpStmts = tmpRes.listProperties();
-			while ( tmpStmts.hasNext()) {
-				Statement tmpStmt = tmpStmts.next();
-				if (tmpStmt.getPredicate().toString().equals(rdfsMemeberProp)) {
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				tmpStmts = tmpRes.listProperties();
-				while ( tmpStmts.hasNext()) {
-					Statement tmpStmt = tmpStmts.next();
-					Property pred = tmpStmt.getPredicate();
-					if (tmpStmt.getPredicate().toString().equals(RDF.type.toString())
-							&& (tmpStmt.getObject().toString().equals(rdfsContainerProp)
-							|| tmpStmt.getObject().toString().equals(ldpContainerProp))) {
-						underCorrectContainer = true;
-					}
-				}
-			}
-			if ( found && !underCorrectContainer) {
-				errorMsg = "\tError: Subject's type should be one of the following: \"" + rdfsContainerProp + "\", \"" + ldpContainerProp + "\"";
-			}
+            StmtIterator tmpStmts = tmpRes.listProperties();
+            while ( tmpStmts.hasNext()) {
+            	Statement tmpStmt = tmpStmts.next();
+            	if (tmpStmt.getPredicate().toString().equals(rdfsMemeberProp)) {
+             		found = true;
+            		break;
+            	}
+            }
+            if (found) {
+            	tmpStmts = tmpRes.listProperties();
+	            while ( tmpStmts.hasNext()) {
+	            	Statement tmpStmt = tmpStmts.next();
+	            	Property pred = tmpStmt.getPredicate();
+	            	if (tmpStmt.getPredicate().toString().equals(RDF.type.toString()) 
+	            			&& (tmpStmt.getObject().toString().equals(rdfsContainerProp) 
+	            			|| tmpStmt.getObject().toString().equals(ldpContainerProp))) {
+	            		underCorrectContainer = true;
+	            	}
+	            }
+            }
+            if ( found && !underCorrectContainer) {
+    			errorMsg = "\tError: Subject's type should be one of the following: \"" + rdfsContainerProp + "\", \"" + ldpContainerProp + "\"";
+    		}
 		}
 		if (!errorMsg.isEmpty()) {
 			return nsPrefix + RDFS.member.getLocalName() + errorMsg;
@@ -155,7 +161,7 @@ public class InvalidPredicateCheck {
 			return "";
 		}
 	}
-
+	
 	// Check for invalid predicates
 	private static ArrayList<ClassifiedErrorMessage> check_InvalidPredicateName(Model example, Map<String, String> nspm) {
 		ArrayList<ClassifiedErrorMessage> errorMsgList = new ArrayList<ClassifiedErrorMessage>();
@@ -164,35 +170,35 @@ public class InvalidPredicateCheck {
 		Map<String, Set<String>> errorMsgs = new HashMap<String, Set<String>>();
 		Set<String> badURIs = new HashSet<String>();
 		Set<String> goodURIs = new HashSet<String>();
-
+				
 		while ( subjects.hasNext() ) {
 			Resource tmpRes = subjects.next();
-			StmtIterator tmpStmts = tmpRes.listProperties();
-
-			while ( tmpStmts.hasNext()) {
-				boolean errorFound = false;
-				Statement tmpStmt = tmpStmts.next();
-				Property pred = tmpStmt.getPredicate();
-				String nsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm, pred.getNameSpace());
-				String tmpMsg = "";
-				Set<String> tmpErrors = CommonPropertyCheck.checkCommonProperty(pred.getNameSpace(),
-						pred.getLocalName(), nspm, RDF.Property, true);
-				if (!tmpErrors.isEmpty()) {
-					for (String s : tmpErrors) {
-						tmpMsg = s;
-					}
-					if (tmpMsg.equals("\tWarning: unknown predicate,")) {
-						// If the name space is not accessible, we assume it's a new instance document
-						// without any vocabulary defined. For this case, we don't raise any
-						// "unknown predicate" error.
-						String nameSpace = pred.getNameSpace();
-						if (goodURIs.contains(nameSpace)) {
-							errorFound = true;
-							Set<String> tmp = new HashSet<String>();
-							tmp.add("\tWarning: " + pred.getLocalName() + " is used as a predicate, but does not exist in the cached copy of any vocabulary.");
-							OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
-						}
-						else if (!badURIs.contains(nameSpace)){
+            StmtIterator tmpStmts = tmpRes.listProperties();
+            
+            while ( tmpStmts.hasNext()) {
+            	boolean errorFound = false;
+            	Statement tmpStmt = tmpStmts.next();
+            	Property pred = tmpStmt.getPredicate();
+            	String nsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm, pred.getNameSpace());
+            	String tmpMsg = "";
+        		Set<String> tmpErrors = CommonPropertyCheck.checkCommonProperty(pred.getNameSpace(), 
+        				pred.getLocalName(), nspm, RDF.Property, true);
+        		if (!tmpErrors.isEmpty()) {
+        			for (String s : tmpErrors) {
+        				tmpMsg = s;
+        			}
+        			if (tmpMsg.equals("\tWarning: unknown predicate,")) {
+        				// If the name space is not accessible, we assume it's a new instance document
+    					// without any vocabulary defined. For this case, we don't raise any 
+    					// "unknown predicate" error.
+        				String nameSpace = pred.getNameSpace();
+        				if (goodURIs.contains(nameSpace)) {
+        					errorFound = true;
+        					Set<String> tmp = new HashSet<String>();
+        					tmp.add("\tWarning: " + pred.getLocalName() + " is used as a predicate, but does not exist in the cached copy of any vocabulary.");
+        					OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
+        				}
+        				else if (!badURIs.contains(nameSpace)){
 							int ret = InvalidURILinkCheck.checkURIexists(nameSpace, badURIs);
 							if (ret != 0 ) {
 								badURIs.add(nameSpace);
@@ -201,99 +207,100 @@ public class InvalidPredicateCheck {
 								goodURIs.add(nameSpace);
 								errorFound = true;
 								Set<String> tmp = new HashSet<String>();
-								tmp.add("\tWarning: " + pred.getLocalName() + " is used as a predicate, but does not exist in the cached copy of any vocabulary.");
+	        					tmp.add("\tWarning: " + pred.getLocalName() + " is used as a predicate, but does not exist in the cached copy of any vocabulary.");
 								OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
 							}
-						}
-					}
-					else {
-						errorFound = true;
-						Set<String> tmp = new HashSet<String>();
-						tmp.add("\tError: " + pred.getLocalName() + " is used as a predicate, but it identifies a Resource.");
-						OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
-					}
-
-				}
-				// any predicate name that starts with an Upper case local name is
-				// *probably invalid* (either it's invalid, or it's breaking
-				// Linked Data naming conventions)
-				if (!errorFound) {
-					if (Character.isUpperCase(pred.getLocalName().charAt(0))) {
-						Set<String> tmp = new HashSet<String>();
-						tmp.add("\tWarning: " + pred.getLocalName() + " is used as a predicate, but \"" + pred.getLocalName() + "\" begins with an uppercase letter which is contrary to Linked Data best practices.");
-						OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
-
-					}
-				}
-			}
-		}
+        				}
+        			} 
+        			else {
+        				errorFound = true;
+        				Set<String> tmp = new HashSet<String>();
+    					tmp.add("\tError: " + pred.getLocalName() + " is used as a predicate, but it identifies a Resource.");
+        				OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
+        			}
+        		
+        		}   
+        		// any predicate name that starts with an Upper case local name is 
+        		// *probably invalid* (either it's invalid, or it's breaking 
+        		// Linked Data naming conventions)
+        		if (!errorFound) {
+        			if (Character.isUpperCase(pred.getLocalName().charAt(0))) {       
+        				Set<String> tmp = new HashSet<String>();
+    					tmp.add("\tWarning: " + pred.getLocalName() + " is used as a predicate, but \"" + pred.getLocalName() + "\" begins with an uppercase letter which is contrary to Linked Data best practices.");  
+    					OSLCToolLogger.addNewErrorMsg(errorMsgs, nsPrefix + pred.getLocalName(), tmp);
+            				          		           		
+        			}
+        		}
+	        }
+	    }
 		for (Iterator<Entry<String, Set<String>>> nspi = errorMsgs.entrySet().iterator();
 				nspi.hasNext();) {
 			Entry<String, Set<String>> nsp = (Entry<String, Set<String>>) nspi.next();
 			List<String> tmplist = new ArrayList<String>(nsp.getValue());
-			Collections.sort(tmplist);
-			String msg = "";
-			for(String i: tmplist){
-				msg += i;
-			}
-			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR,
-					nsp.getKey(), msg );
-			errorMsgList.add(errMsg);
-			OSLCToolLogger.error(errMsg.toString());
-		}
+		    Collections.sort(tmplist);
+		    String msg = "";
+		    for(String i: tmplist){
+		    	msg += i;
+		    }
+		    errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR, 
+		    		nsp.getKey(), msg );
+		    errorMsgList.add(errMsg);
+		    OSLCToolLogger.error(errMsg.toString());
+		}	
 		return errorMsgList;
-	}
-
+	}  
+	
 	// Check sets of predicates with common suffixes
 	private static ArrayList<ClassifiedErrorMessage>  check_PredicatewithCommonSuffix(Model example, Map<String, String> nspm) {
 		ArrayList<ClassifiedErrorMessage> errorMsgList = new ArrayList<ClassifiedErrorMessage>();
+		Set<String> special_common_strs = new HashSet<String>(Arrays.asList( new String[]{"native"} ) );
 		ClassifiedErrorMessage errMsg = null;
 		ResIterator subjects = example.listSubjects();
 		ArrayList<String> nsList = CommonPropertyCheck.getPublicNameSpaces();
 		HashMap<String, Set<String>> commonSuffixes = new HashMap<String, Set<String>>();
-
+				
 		while ( subjects.hasNext() ) {
 			Resource tmpRes = subjects.next();
-			StmtIterator tmpStmts = tmpRes.listProperties();
-
-			while ( tmpStmts.hasNext()) {
-				Statement tmpStmt = tmpStmts.next();
-				Property pred = tmpStmt.getPredicate();
-				String predName = pred.getLocalName();
-				String prefix = NameSpacePrefix.findNameSpacePrefix(nspm, pred.getNameSpace());
-				if (!nsList.contains(pred.getNameSpace())) {
-					boolean upperFound = false;
-					int index = 0;
-					int len = predName.length();
-					String reversePredName = new StringBuffer(predName).reverse().toString();
-					for (char c : reversePredName.toCharArray()) {
-						if (Character.isUpperCase(c)) {
-							upperFound = true;
-							break;
-						}
-						index++;
-					}
-					if (upperFound) {
-						String commonPart = predName.substring(0, len - index - 1);
-						if (commonSuffixes.get(commonPart) != null ) {
-							Set<String> predList = commonSuffixes.get(commonPart);
-							predList.add(prefix + predName);
-							commonSuffixes.put(commonPart, predList);
-						}
-						else {
-							Set<String> predList = new HashSet<String>();
-							predList.add(prefix + predName);
-							commonSuffixes.put(commonPart, predList);
-						}
-					}
-				}
-
-			}
-		}
+            StmtIterator tmpStmts = tmpRes.listProperties();
+            
+            while ( tmpStmts.hasNext()) {
+            	Statement tmpStmt = tmpStmts.next();
+            	Property pred = tmpStmt.getPredicate();
+            	String predName = pred.getLocalName();
+            	String prefix = NameSpacePrefix.findNameSpacePrefix(nspm, pred.getNameSpace());
+            	if (!nsList.contains(pred.getNameSpace())) {
+            		boolean upperFound = false;
+            		int index = 0;
+            		int len = predName.length();
+            		String reversePredName = new StringBuffer(predName).reverse().toString();
+            		for (char c : reversePredName.toCharArray()) {
+            		    if (Character.isUpperCase(c)) {
+            		        upperFound = true;
+            		        break;
+            		    }
+            		    index++;
+            		}
+            		if (upperFound) {
+            			String commonPart = predName.substring(0, len - index - 1);
+            			if (commonSuffixes.get(commonPart) != null ) {
+            				Set<String> predList = commonSuffixes.get(commonPart);
+            				predList.add(prefix + predName);
+            				commonSuffixes.put(commonPart, predList);
+            			}
+            			else {
+            				Set<String> predList = new HashSet<String>();
+            				predList.add(prefix + predName);
+            				commonSuffixes.put(commonPart, predList);
+            			}
+            		}            		
+            	}
+            	        		
+	        }
+	    }
 		for (Iterator<Entry<String,Set<String>>> predsp = commonSuffixes.entrySet().iterator();
 				predsp.hasNext();) {
 			Entry<String, Set<String>> pred = (Entry<String, Set<String>>) predsp.next();
-			// If we have > CHECK_THRESHOLD number of instances of common suffix, we raise a suggestion.
+			// If we have > CHECK_THRESHOLD number of instances of common suffix, we raise a suggestion. 
 			Set<String> predList = pred.getValue();
 			String commonString = pred.getKey();
 			if (predList.size() > CHECK_THRESHOLD) {
@@ -317,17 +324,25 @@ public class InvalidPredicateCheck {
 						suggestion += "; " + i.replace(commonString, "").replace(nameSpace, "");
 					}
 				}
-				errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR,
-						subject, ":\tSuggestion:\tthe common entity \"" + commonString + "\" should be " +
-								"defined as a resource with the following properties: " + suggestion + "." );
-				errorMsgList.add(errMsg);
-				OSLCToolLogger.error(errMsg.toString());
+				// Special error message for common entity "native"
+				if (special_common_strs.contains(commonString)) {
+					errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR, 
+						subject, ":\tSuggestion:\tthe common entity \"" + commonString + "\" should be removed if not clearly needed," +
+								"and (if needed) defined as a resource with the following properties: " + suggestion + "." );
+				}
+				else {
+					errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR, 
+							subject, ":\tSuggestion:\tthe common entity \"" + commonString + "\" should be defined " +
+									"as a resource with the following properties: " + suggestion + "." );
+				}
+			    errorMsgList.add(errMsg);
+			    OSLCToolLogger.error(errMsg.toString());
 			}
-
-		}
+			
+		}	
 		return errorMsgList;
-	}
-
+	}  
+		
 	// In the context of an auto:parameterDefinition object, that object resource should
 	// 1: have type (rdf:type) of oslc:Property
 	// 2: ordinarily should have zero propertyDefinition predicates (if it has one, call that "unusual" rather than a warning)
@@ -338,59 +353,113 @@ public class InvalidPredicateCheck {
 		String errorMsg = "";
 		String autoPrefix = NameSpacePrefix.findNameSpacePrefix(nspm, AUTO.NS);
 		String oslcPrefix = NameSpacePrefix.findNameSpacePrefix(nspm, OSLC.NS);
-		Property paramDef = AUTO.parameterDefinition;
+		Property paramDef = AUTO.parameterDefinition;		
 		Resource OSLCProperty = OSLC.Property;
 		Property OSLCpropertyDefinition = OSLC.propertyDefinition;
 		Property OSLCname = OSLC.name;
 		Property RDFtype = RDF.type;
 		boolean foundOSLCProperty = false;
-		Integer numOfOSLCpropertyDefinition = 0;
-
+		Integer numOfOSLCpropertyDefinition = 0;		
+		
 		while (subjects.hasNext() ) {
 			Resource tmpRes = subjects.next();
-			StmtIterator tmpStmts = tmpRes.listProperties();
-			Property pred = null;
-			while (tmpStmts.hasNext()) {
-				Statement tmpStmt = tmpStmts.next();
-				if (tmpStmt.getPredicate().toString().equals(paramDef.toString())) {
-					pred = tmpStmt.getPredicate();
-					RDFNode tmp = tmpStmt.getObject();
-					if (tmp.isResource() ){
-						Resource objRes = tmp.asResource();
-						StmtIterator objStmts = objRes.listProperties();
-						foundOSLCProperty = false;
-						numOfOSLCpropertyDefinition = 0;
-						String paramName = "";
-						while (objStmts.hasNext()){
-							Statement objStmt = objStmts.next();
-							if (objStmt.getPredicate().toString().equals(RDFtype.toString())
-									&& objStmt.getObject().toString().equals(OSLCProperty.toString())) {
-								foundOSLCProperty = true;
-							}
-							if (objStmt.getPredicate().toString().equals(OSLCpropertyDefinition.toString())) {
-								numOfOSLCpropertyDefinition++;
-							}
-							if (objStmt.getPredicate().toString().equals(OSLCname.toString())) {
-								paramName = objStmt.getObject().toString();
-							}
-						}
-						if (!foundOSLCProperty ) {
-							errorMsg = "\tError: doesn't have a type of " + oslcPrefix + OSLCProperty.getLocalName();
-							errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR,
-							autoPrefix + paramDef.getLocalName() + " for \"" + paramName + "\"" , errorMsg);
-							errorMsgList.add(errMsg);
-							OSLCToolLogger.error(errMsg.toString());
-						}
-						if (numOfOSLCpropertyDefinition > 0) {
-							errorMsg = "\tWarning: resource ordinarily should have zero " + oslcPrefix + OSLCpropertyDefinition.getLocalName() + " predicates.";
-							errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_WARNING,
-									autoPrefix + paramDef.getLocalName() + " for \"" + paramName + "\"" ,errorMsg);
-							errorMsgList.add(errMsg);
-							OSLCToolLogger.error(errMsg.toString());
-						}
-					}
-				}
-			}
+            StmtIterator tmpStmts = tmpRes.listProperties();
+            Property pred = null;
+            while (tmpStmts.hasNext()) {
+            	Statement tmpStmt = tmpStmts.next();
+            	if (tmpStmt.getPredicate().toString().equals(paramDef.toString())) {
+            		pred = tmpStmt.getPredicate();
+            		RDFNode tmp = tmpStmt.getObject(); 
+            		if (tmp.isResource() ){
+	            		Resource objRes = tmp.asResource();
+	            		StmtIterator objStmts = objRes.listProperties();
+	            		foundOSLCProperty = false;
+	            		numOfOSLCpropertyDefinition = 0;
+	            		String paramName = "";
+	            		while (objStmts.hasNext()){	            			
+	            			Statement objStmt = objStmts.next();
+	            			if (objStmt.getPredicate().toString().equals(RDFtype.toString())
+	            					&& objStmt.getObject().toString().equals(OSLCProperty.toString())) {
+	            				foundOSLCProperty = true;
+	            			}
+	            			if (objStmt.getPredicate().toString().equals(OSLCpropertyDefinition.toString())) {
+	            				numOfOSLCpropertyDefinition++;
+	            			}
+	            			if (objStmt.getPredicate().toString().equals(OSLCname.toString())) {
+	            				paramName = objStmt.getObject().toString();
+	            			}
+	            		}
+	            		if (!foundOSLCProperty ) {	            			
+	            			errorMsg = "\tError: doesn't have a type of " + oslcPrefix + OSLCProperty.getLocalName();
+	            			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR, 
+	            			autoPrefix + paramDef.getLocalName() + " for \"" + paramName + "\"" , errorMsg);
+	            			errorMsgList.add(errMsg);
+	            			OSLCToolLogger.error(errMsg.toString());
+		            	}
+	            		if (numOfOSLCpropertyDefinition > 0) {
+	            			errorMsg = "\tWarning: resource ordinarily should have zero " + oslcPrefix + OSLCpropertyDefinition.getLocalName() + " predicates.";
+	            			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_WARNING, 
+	            					autoPrefix + paramDef.getLocalName() + " for \"" + paramName + "\"" ,errorMsg);
+	            			errorMsgList.add(errMsg);
+	            			OSLCToolLogger.error(errMsg.toString());
+	            		}
+            		}            		
+              	}            	
+            } 
+		}
+		return errorMsgList;
+	}
+	
+	// Predicate name xxxReference not under common name space should be checked as follows:
+	// 1: if its object starts with http:// or https://, the predicate probably is unneeded because it's already the subject of the triples.
+	// 2: if its object is not a link, then dcterms:identifier is the likely best fit. 
+	private static ArrayList<ClassifiedErrorMessage> check_Predicate_Reference(Model example, Map<String, String> nspm) {
+		ArrayList<ClassifiedErrorMessage> errorMsgList = new ArrayList<ClassifiedErrorMessage>();
+		ClassifiedErrorMessage errMsg = null;
+		String REF_STR_TO_CHECK = "Reference";
+		ResIterator subjects = example.listSubjects();
+		String errorMsg = "";	
+		String dctermsNsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm, DCTerms.NS);
+		
+		while (subjects.hasNext() ) {
+			Resource tmpRes = subjects.next();
+			String subjectStr = tmpRes.toString();
+            StmtIterator tmpStmts = tmpRes.listProperties();
+            Property pred = null;
+            while (tmpStmts.hasNext()) {
+            	Statement tmpStmt = tmpStmts.next();
+            	Property tmpPred = tmpStmt.getPredicate();
+            	if (tmpPred.toString().contains(REF_STR_TO_CHECK)) {
+            		pred = tmpStmt.getPredicate();
+            		RDFNode tmp = tmpStmt.getObject(); 
+            		if (!CommonPropertyCheck.isInCommmonNameSpace(tmpPred.getNameSpace())) {   
+            			String nsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm, tmpPred.getNameSpace());
+	               		if (tmp.isResource() ){
+	               			if (tmp.toString().equals(subjectStr)) {
+		            			errorMsg = "\tWarning: predicate \"" + nsPrefix + tmpPred.getLocalName() + "\" is unneeded, its object \"" + tmp.toString() + "\" is already the subject of the triples.";
+		            			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_WARNING, 
+		            					nsPrefix + tmpPred.getLocalName(), errorMsg);
+		            			errorMsgList.add(errMsg);
+		            			OSLCToolLogger.error(errMsg.toString());
+	               			}
+	               			else {
+	               				errorMsg = "\tSuggestion: this predicate \"" + nsPrefix + tmpPred.getLocalName() + "\" with object \"" + tmp.toString() + "\" needs discussion.";
+		            			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_WARNING, 
+		            					nsPrefix + tmpPred.getLocalName(), errorMsg);
+		            			errorMsgList.add(errMsg);
+		            			OSLCToolLogger.error(errMsg.toString());
+	               			}
+		            	}    
+	            		else {
+	            			errorMsg = "\tSuggestion:\t" + dctermsNsPrefix + DCTerms.identifier.getLocalName();
+	            			errMsg = new ClassifiedErrorMessage(ClassifiedErrorMessage.PRIORITY_ERROR, 
+	            					nsPrefix + tmpPred.getLocalName(), errorMsg);
+	            			errorMsgList.add(errMsg);
+	            			OSLCToolLogger.error(errMsg.toString());
+	            		}
+            		}
+              	}            	
+            } 
 		}
 		return errorMsgList;
 	}

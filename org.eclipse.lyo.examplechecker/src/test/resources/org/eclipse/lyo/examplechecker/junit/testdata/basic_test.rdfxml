@@ -8,7 +8,7 @@
     xmlns:om="http://open-services.net/ns/om#"
     xmlns:oslcAuto="http://open-services.net/ns/auto#"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-
+	
   <oslc:ResponseInfo rdf:about="http://cilwas1:16310/14082013/containers">
     <rdfs:member>
       <sco:Container rdf:about="http://172.16.114.5:16310/14082013/containers/1">
@@ -287,23 +287,23 @@
 		<rdfs:member>
 		<rdf:Description rdf:about="http://localhost:7001/maximo/oslc/os/oslcsynonymdomain/_U1JTVEFUVVMvQVBQRk0vfk5VTEx_L35OVUxMfi9_TlVMTH4vQVBQRk0-">
 			<om:description>"Approved by Fulfillment Manager"</om:description>
-			<om:maxvalue>"APPFM"</om:maxvalue>
+			<om:maxvalue>"APPFM"</om:maxvalue>    
 		</rdf:Description>
 		</rdfs:member>
 		<rdfs:member>
 		<rdf:Description rdf:about="http://localhost:7001/maximo/oslc/os/oslcsynonymdomain/_U1JTVEFUVVMvQVBQTE0vfk5VTEx_L35OVUxMfi9_TlVMTH4vQVBQTE0-">
 			<om:maxvalue>"APPLM"</om:maxvalue>
-			<om:description>"Approved by Line Manager"</om:description>
-			<dcterms:title>"CorrectTitle1"</dcterms:title>
+			<om:description>"Approved by Line Manager"</om:description> 
+			<dcterms:title>"CorrectTitle1"</dcterms:title>			
 		</rdf:Description>
 		</rdfs:member>
 		<rdfs:member>
 		<rdf:Description rdf:about="http://localhost:7001/maximo/oslc/os/oslcsynonymdomain/_U1JTVEFUVVMvQ0xPU0VEL35OVUxMfi9_TlVMTH4vfk5VTEx_L0NMT1NFRA--">
 			<om:maxvalue>"CLOSED"</om:maxvalue>
-			<om:description>"Closed"</om:description>
+			<om:description>"Closed"</om:description> 
 			<dcterms:title>"CorrectTitle2"</dcterms:title>
-			<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
-		</rdf:Description>
+			<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>			
+		</rdf:Description>    
 		</rdfs:member>
 	</rdf:Description>
 	<rdf:Description rdf:about="http://HOST:PORT/Tasks/1">
@@ -313,8 +313,8 @@
 	    <oslcAuto:state rdf:resource="http://open-services.net/ns/auto#inProgress"/>
 	    <oslcAuto:verdict rdf:resource="http://open-services.net/ns/auto#unavailableeeee"/>
 	    <rdf:type rdf:resource="http://open-services.net/ns/IBM/DataProtection#RecoveryPoint"/>
-	    <oslcAuto:test rdf:resource="http://jazz.net/ns/rm#Attachment"/>
-	    <oslc:Inline>inline</oslc:Inline>
+	    <oslcAuto:test rdf:resource="http://jazz.net/ns/rm#Attachment"/>	
+	    <oslc:Inline>inline</oslc:Inline>    
 	    <sco:TestPredicate>TestPredicate</sco:TestPredicate>
 	    <sco:newPredicate>newPredicate</sco:newPredicate>
 	    <rdf:type rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>

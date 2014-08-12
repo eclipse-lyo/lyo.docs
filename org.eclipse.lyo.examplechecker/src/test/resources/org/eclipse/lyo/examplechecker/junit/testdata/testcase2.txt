@@ -1,1 +1,2 @@
 Error:		"http://open-services.net/ns/servicemanagement/1.0/" is not accessible via GET, or its content does not contain the URI as would be expected in a RDFS vocabulary document.
+Warning:	"http://xmlns.com/foaf/0.1/" doesn't return a rdf/turtle document.
