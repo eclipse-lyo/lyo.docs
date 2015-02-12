@@ -1,17 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 IBM Corporation.
+ * Copyright (c) 2011, 2015 IBM Corporation.
  *
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  and Eclipse Distribution License v. 1.0 which accompanies this distribution.
- *  
+ *
  *  The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  *  and the Eclipse Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
- *  
+ *
  *  Contributors:
- *  
+ *
  *     IBM Corporation - initial API and implementation
+ *     Samuel Padgett  - add Basic WWW-Authentication header before OAuth
  *******************************************************************************/
 package org.eclipse.lyo.oslc4j.bugzilla.utils;
 
@@ -36,7 +37,7 @@ import org.eclipse.lyo.server.oauth.core.OAuthConfiguration;
 
 /**
  * Utilities for working with HTTP requests and responses.
- * 
+ *
  * @author Samuel Padgett <spadgett@us.ibm.com>
  */
 public class HttpUtils {
@@ -49,10 +50,10 @@ public class HttpUtils {
 	private static final String OAUTH_AUTHORIZATION_PREFIX = "OAuth ";
 	private static final String OAUTH_AUTHENTICATION_CHALLENGE = OAUTH_AUTHORIZATION_PREFIX
 			+ "realm=\"" + BugzillaManager.REALM + "\"";
-	
+
 	/**
 	 * Gets the credentials from an HTTP request.
-	 * 
+	 *
 	 * @param request
 	 *            the request
 	 * @return the Bugzilla credentials or <code>null</code> if the request did
@@ -67,13 +68,13 @@ public class HttpUtils {
 		if (authorizationHeader == null || "".equals(authorizationHeader)) {
 			return null;
 		}
-	
+
 		Credentials credentials = new Credentials();
 		if (!authorizationHeader.startsWith(HttpUtils.BASIC_AUTHORIZATION_PREFIX)) {
 			throw new UnauthorizedException(
 					"Only basic access authentication is supported.");
 		}
-		
+
 		String encodedString = authorizationHeader.substring(HttpUtils.BASIC_AUTHORIZATION_PREFIX.length());
 		try {
 			String unencodedString = new String(Base64.decode(encodedString), "UTF-8");
@@ -81,7 +82,7 @@ public class HttpUtils {
 			if (seperator == -1) {
 				throw new UnauthorizedException("Invalid Authorization header value.");
 			}
-			
+
 			credentials.setUsername(unencodedString.substring(0, seperator));
 			credentials.setPassword(unencodedString.substring(seperator + 1));
 		} catch (DecodingException e) {
@@ -89,7 +90,7 @@ public class HttpUtils {
 		} catch (UnsupportedEncodingException e) {
 			throw new UnauthorizedException("Invalid Authorization header value.");
 		}
-		
+
 		return credentials;
 	}
 
@@ -99,14 +100,15 @@ public class HttpUtils {
 			OAuthServlet.handleException(response, e, BugzillaManager.REALM);
 		} else {
 			// Accept basic access or OAuth authentication.
-			response.addHeader(WWW_AUTHENTICATE_HEADER,
-					OAUTH_AUTHENTICATION_CHALLENGE);
+			// Basic must be first. Some runtimes will return a single,
+			// comma-separated WWW-Authenticate response header, and some
+			// browsers won't recognize the Basic challenge if it appears
+			// second.
 			response.addHeader(WWW_AUTHENTICATE_HEADER,
 					BASIC_AUTHENTICATION_CHALLENGE);
+			response.addHeader(WWW_AUTHENTICATE_HEADER,
+					OAUTH_AUTHENTICATION_CHALLENGE);
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 	}
-
-
-	
 }
