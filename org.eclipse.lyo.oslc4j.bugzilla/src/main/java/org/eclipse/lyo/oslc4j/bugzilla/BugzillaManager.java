@@ -123,6 +123,10 @@ public class BugzillaManager implements ServletContextListener	{
 		try {
 			props.load(BugzillaManager.class.getResourceAsStream("/bugz.properties"));
 			bugzillaUri = props.getProperty("bugzilla_uri");
+			// normalize the URI so it never ends with '/'
+			if (bugzillaUri != null && bugzillaUri.endsWith("/")) {
+				bugzillaUri = bugzillaUri.substring(0, bugzillaUri.length() - 1);
+			}
 			admin = props.getProperty("admin");
 			System.out.println("bugzilla_uri: " + bugzillaUri);
 			System.out.println("admin: " + admin);

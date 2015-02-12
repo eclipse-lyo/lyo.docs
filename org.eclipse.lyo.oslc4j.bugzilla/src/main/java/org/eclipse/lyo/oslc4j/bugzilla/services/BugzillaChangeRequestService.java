@@ -12,7 +12,7 @@
  * Contributors:
  *
  *     Michael Fiedler     - initial API and implementation for Bugzilla adapter
- *     
+ *
  *******************************************************************************/
 package org.eclipse.lyo.oslc4j.bugzilla.services;
 
@@ -79,13 +79,13 @@ import com.j2bugzilla.rpc.BugSearch;
 @OslcService(Constants.CHANGE_MANAGEMENT_DOMAIN)
 @Path("{productId}/changeRequests")
 public class BugzillaChangeRequestService
-	
+
 {
 
 	@Context private HttpServletRequest httpServletRequest;
 	@Context private HttpServletResponse httpServletResponse;
 	@Context private UriInfo uriInfo;
-	
+
     public BugzillaChangeRequestService()
     {
         super();
@@ -113,12 +113,12 @@ public class BugzillaChangeRequestService
         resourceTypes = {Constants.TYPE_CHANGE_REQUEST},
         usages = {OslcConstants.OSLC_USAGE_DEFAULT}
     )
-    
+
     /**
      * RDF/XML, XML and JSON representation of a change request collection
-     * 
+     *
      * TODO:  add query support
-     * 
+     *
      * @param productId
      * @param where
      * @param select
@@ -142,38 +142,38 @@ public class BugzillaChangeRequestService
     		                                             @QueryParam("oslc.orderBy")     final String orderBy,
     		                                             @QueryParam("oslc.searchTerms") final String searchTerms,
     		                                             @QueryParam("oslc.paging")      final String paging,
-    		                                             @QueryParam("oslc.pageSize")    final String pageSize) throws IOException, ServletException 
+    		                                             @QueryParam("oslc.pageSize")    final String pageSize) throws IOException, ServletException
     {
         boolean isPaging = false;
-        
+
         if (paging != null) {
             isPaging = Boolean.parseBoolean(paging);
         }
-        
+
     	int page=0;
-    	
+
         if (null != pageString) {
             page = Integer.parseInt(pageString);
         }
-        
+
     	int limit=10;
-    	
+
     	if (isPaging && pageSize != null) {
     	    limit = Integer.parseInt(pageSize);
     	}
-    	
+
     	Map<String, String> prefixMap;
-    	
+
         try {
             prefixMap = QueryUtils.parsePrefixes(prefix);
         } catch (ParseException e) {
            throw new IOException(e);
         }
-        
+
         addDefaultPrefixes(prefixMap);
-        
+
         Properties properties;
-        
+
         if (select == null) {
             properties = QueryUtils.WILDCARD_PROPERTY_LIST;
         } else {
@@ -183,20 +183,20 @@ public class BugzillaChangeRequestService
                 throw new IOException(e);
             }
         }
-        
+
         Map<String, Object> propMap =
             QueryUtils.invertSelectedProperties(properties);
-        
+
         final List<BugzillaChangeRequest> results =
             BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
                                              where, prefixMap,
                                              propMap, orderBy, searchTerms);
-        
+
         Object nextPageAttr = httpServletRequest.getAttribute(Constants.NEXT_PAGE);
-        
+
         if (! isPaging && nextPageAttr != null) {
-            
-            String location = 
+
+            String location =
                 uriInfo.getBaseUri().toString() + uriInfo.getPath() + '?' +
                 (where != null ? ("oslc.where=" + URLEncoder.encode(where, "UTF-8") + '&') : "") +
                 (select != null ? ("oslc.select=" + URLEncoder.encode(select, "UTF-8") + '&') : "") +
@@ -204,7 +204,7 @@ public class BugzillaChangeRequestService
                 (orderBy != null ? ("oslc.orderBy=" + URLEncoder.encode(orderBy, "UTF-8") + '&') : "") +
                 (searchTerms != null ? ("oslc.searchTerms=" + URLEncoder.encode(searchTerms, "UTF-8") + '&') : "") +
                 "oslc.paging=true&oslc.pageSize=" + limit;
-                
+
             try {
                 throw new WebApplicationException(Response.temporaryRedirect(new URI(location)).build());
             } catch (URISyntaxException e) {
@@ -212,13 +212,13 @@ public class BugzillaChangeRequestService
                 throw new IllegalStateException(e);
             }
         }
-        
+
         httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
                                         propMap);
-        
+
         if (nextPageAttr != null) {
-            
-            String location = 
+
+            String location =
                 uriInfo.getBaseUri().toString() + uriInfo.getPath() + '?' +
                 (where != null ? ("oslc.where=" + URLEncoder.encode(where, "UTF-8") + '&') : "") +
                 (select != null ? ("oslc.select=" + URLEncoder.encode(select, "UTF-8") + '&') : "") +
@@ -226,7 +226,7 @@ public class BugzillaChangeRequestService
                 (orderBy != null ? ("oslc.orderBy=" + URLEncoder.encode(orderBy, "UTF-8") + '&') : "") +
                 (searchTerms != null ? ("oslc.searchTerms=" + URLEncoder.encode(searchTerms, "UTF-8") + '&') : "") +
                 "oslc.paging=true&oslc.pageSize=" + limit + "&page=" + nextPageAttr;
-                
+
             httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_NEXT_PAGE,
                                             location);
 
@@ -234,11 +234,11 @@ public class BugzillaChangeRequestService
 
         return results;
     }
-    
+
     private static void addDefaultPrefixes(final Map<String, String> prefixMap)
     {
         recursivelyCollectNamespaceMappings(prefixMap, BugzillaChangeRequest.class);
-    }    
+    }
 
     private static void recursivelyCollectNamespaceMappings(final Map<String, String>     prefixMap,
                                                             final Class<? extends Object> resourceClass)
@@ -277,12 +277,12 @@ public class BugzillaChangeRequestService
             }
         }
     }
-    
+
     /**
      * HTML representation of change request collection
-     * 
+     *
      * Forwards to changerequest_collection_html.jsp to build the html page
-     * 
+     *
      * @param productId
      * @param where
      * @param prefix
@@ -303,34 +303,34 @@ public class BugzillaChangeRequestService
                                       @QueryParam("oslc.searchTerms") final String searchTerms) throws ServletException, IOException
 	{
 		int page=0;
-        
+
         if (null != pageString) {
             page = Integer.parseInt(pageString);
         }
-        
+
 		int limit=20;
-		
+
         Map<String, String> prefixMap;
-        
+
         try {
             prefixMap = QueryUtils.parsePrefixes(prefix);
         } catch (ParseException e) {
            throw new IOException(e);
         }
-        
+
         addDefaultPrefixes(prefixMap);
-        
+
         Properties properties;
-        
+
         try {
             properties = QueryUtils.parseSelect("dcterms:title", prefixMap);
         } catch (ParseException e) {
             throw new IOException(e);
         }
-        
+
         Map<String, Object> propMap =
             QueryUtils.invertSelectedProperties(properties);
-        
+
         final List<BugzillaChangeRequest> results =
             BugzillaManager.getBugsByProduct(httpServletRequest, productId, page, limit,
                                              where, prefixMap, propMap, orderBy,
@@ -341,29 +341,29 @@ public class BugzillaChangeRequestService
         	httpServletRequest.setAttribute("results", results);
         	httpServletRequest.setAttribute("bugzillaUri", bugzillaUri);
 
-        	httpServletRequest.setAttribute("queryUri", 
+        	httpServletRequest.setAttribute("queryUri",
                     uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
-        	
+
             Object nextPageAttr = httpServletRequest.getAttribute(Constants.NEXT_PAGE);
-            
+
             if (nextPageAttr != null) {
-        		httpServletRequest.setAttribute("nextPageUri", 
+        		httpServletRequest.setAttribute("nextPageUri",
         				uriInfo.getAbsolutePath().toString() + "?oslc.paging=true&amp;page=" + nextPageAttr);
         	}
-        	
+
         	ServiceProvider serviceProvider = ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId);
         	httpServletRequest.setAttribute("serviceProvider", serviceProvider);
 
         	RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_collection_html.jsp");
         	rd.forward(httpServletRequest,httpServletResponse);
         }
-		
-		throw new WebApplicationException(Status.NOT_FOUND);	
+
+		throw new WebApplicationException(Status.NOT_FOUND);
 	}
 
 	/**
 	 * RDF/XML, XML and JSON representation of a single change request
-	 * 
+	 *
 	 * @param productId
 	 * @param changeRequestId
 	 * @param propertiesString
@@ -382,17 +382,17 @@ public class BugzillaChangeRequestService
                                                   @QueryParam("oslc.prefix")     final String prefix) throws IOException, ServletException, URISyntaxException
     {
         Map<String, String> prefixMap;
-        
+
         try {
             prefixMap = QueryUtils.parsePrefixes(prefix);
         } catch (ParseException e) {
            throw new IOException(e);
         }
-        
+
         addDefaultPrefixes(prefixMap);
-        
+
         Properties properties;
-        
+
         if (propertiesString == null) {
             properties = QueryUtils.WILDCARD_PROPERTY_LIST;
         } else {
@@ -402,21 +402,21 @@ public class BugzillaChangeRequestService
                 throw new IOException(e);
             }
         }
-        
+
         final Bug bug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
 
         if (bug != null) {
         	BugzillaChangeRequest changeRequest = null;
 
         	changeRequest = BugzillaChangeRequest.fromBug(bug);
-       	
+
         	changeRequest.setServiceProvider(ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId).getAbout());
         	changeRequest.setAbout(getAboutURI(productId + "/changeRequests/" + changeRequest.getIdentifier()));
         	setETagHeader(getETagFromChangeRequest(changeRequest), httpServletResponse);
 
             httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_SELECTED_PROPERTIES,
                                             QueryUtils.invertSelectedProperties(properties));
-            
+
             return Response.ok(changeRequest).header(Constants.HDR_OSLC_VERSION, Constants.OSLC_VERSION_V2).build();
         }
 
@@ -425,9 +425,9 @@ public class BugzillaChangeRequestService
 
     /**
      * OSLC Compact representation of a single change request
-     * 
+     *
      * Contains a reference to the smallPreview method in this class for the preview document
-     * 
+     *
      * @param productId
      * @param changeRequestId
      * @return
@@ -443,28 +443,28 @@ public class BugzillaChangeRequestService
            throws URISyntaxException, IOException, ServletException
     {
     	final Bug bug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
-        
 
-        if (bug != null) {      	
+
+        if (bug != null) {
             final Compact compact = new Compact();
-            
+
         	BugzillaChangeRequest changeRequest = null;
 
        		changeRequest = BugzillaChangeRequest.fromBug(bug);
- 	
+
             compact.setAbout(getAboutURI(productId + "/changeRequests/" + changeRequest.getIdentifier()));
             compact.setTitle(changeRequest.getTitle());
-            
+
             String iconUri = BugzillaManager.getBugzillaUri() + "/images/favicon.ico";
             compact.setIcon(new URI(iconUri));
- 
+
             //Create and set attributes for OSLC preview resource
             final Preview smallPreview = new Preview();
             smallPreview.setHintHeight("11em");
             smallPreview.setHintWidth("45em");
             smallPreview.setDocument(new URI(compact.getAbout().toString() + "/smallPreview"));
             compact.setSmallPreview(smallPreview);
-            
+
             //Use the HTML representation of a change request as the large preview as well
             final Preview largePreview = new Preview();
             largePreview.setHintHeight("20em");
@@ -476,10 +476,10 @@ public class BugzillaChangeRequestService
 
         throw new WebApplicationException(Status.NOT_FOUND);
     }
-    
+
     /**
      * HTML representation for a single change request  - redirect the request directly to Bugzilla
-     * 
+     *
      * @param productId
      * @param changeRequestId
      * @throws ServletException
@@ -491,22 +491,22 @@ public class BugzillaChangeRequestService
 	@Produces({ MediaType.TEXT_HTML })
 	public Response getHtmlChangeRequest(@PathParam("productId")       final String productId,
 			                         @PathParam("changeRequestId") final String changeRequestId) throws ServletException, IOException, URISyntaxException
-	{	
-        String forwardUri = BugzillaManager.getBugzillaUri() + "show_bug.cgi?id=" + changeRequestId;
+	{
+        String forwardUri = BugzillaManager.getBugzillaUri() + "/show_bug.cgi?id=" + changeRequestId;
     	httpServletResponse.sendRedirect(forwardUri);
-        return Response.seeOther(new URI(forwardUri)).build();			
+        return Response.seeOther(new URI(forwardUri)).build();
 	}
-	
+
 	/**
 	 * OSLC delegated selection dialog for change requests
-	 * 
-	 * If called without a "terms" parameter, forwards to changerequest_selector.jsp to 
+	 *
+	 * If called without a "terms" parameter, forwards to changerequest_selector.jsp to
 	 * build the html for the IFrame
-	 * 
-	 * If called with a "terms" parameter, sends a Bug search to Bugzilla and then 
+	 *
+	 * If called with a "terms" parameter, sends a Bug search to Bugzilla and then
 	 * forwards to changerequest_filtered_json.jsp to build a JSON response
-	 * 
-	 * 
+	 *
+	 *
 	 * @param terms
 	 * @param productId
 	 * @throws ServletException
@@ -528,22 +528,22 @@ public class BugzillaChangeRequestService
 			sendFilteredBugsReponse(httpServletRequest, productId, terms);
 
 		} else {
-			try {	
-                RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_selector.jsp"); 
+			try {
+                RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_selector.jsp");
 	    		rd.forward(httpServletRequest, httpServletResponse);
-				
+
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
 		}
-				
+
 	}
-	
+
 	/**
 	 * OSLC small preview for a single change request
-	 * 
+	 *
 	 * Forwards to changerequest_preview_small.jsp to build the html
-	 * 
+	 *
 	 * @param productId
 	 * @param changeRequestId
 	 * @throws ServletException
@@ -556,33 +556,33 @@ public class BugzillaChangeRequestService
 	public void smallPreview(@PathParam("productId")       final String productId,
 			                 @PathParam("changeRequestId") final String changeRequestId) throws ServletException, IOException, URISyntaxException
 	{
-		
+
         final Bug bug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
-        
+
         if (bug != null) {
-        	
+
         	BugzillaChangeRequest changeRequest = BugzillaChangeRequest.fromBug(bug);
         	changeRequest.setServiceProvider(ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId).getAbout());
         	changeRequest.setAbout(getAboutURI(productId + "/changeRequests/" + changeRequest.getIdentifier()));
-        	
+
         	final String bugzillaUri = BugzillaManager.getBugzillaUri().toString();
         	httpServletRequest.setAttribute("changeRequest", changeRequest);
         	httpServletRequest.setAttribute("bugzillaUri", bugzillaUri);
-        	
+
         	RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_preview_small.jsp");
             rd.forward(httpServletRequest,httpServletResponse);
         	return;
         }
-		
+
         throw new WebApplicationException(Status.NOT_FOUND);
-			
+
 	}
-	
+
 	/**
 	 * OSLC large preview for a single change request
-	 * 
+	 *
 	 * Forwards to changerequest_preview_large.jsp to build the html
-	 * 
+	 *
 	 * @param productId
 	 * @param changeRequestId
 	 * @throws ServletException
@@ -594,31 +594,31 @@ public class BugzillaChangeRequestService
 	@Produces({ MediaType.TEXT_HTML })
 	public void getLargePreview(@PathParam("productId")       final String productId,
 			                         @PathParam("changeRequestId") final String changeRequestId) throws ServletException, IOException, URISyntaxException
-	{	
+	{
 		final Bug bug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
 
         if (bug != null) {
         	BugzillaChangeRequest changeRequest = null;
 
-        	changeRequest = BugzillaChangeRequest.fromBug(bug);           
+        	changeRequest = BugzillaChangeRequest.fromBug(bug);
         	changeRequest.setServiceProvider(ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId).getAbout());
         	changeRequest.setAbout(getAboutURI(productId + "/changeRequests/" + changeRequest.getIdentifier()));
 
         	final String bugzillaUri = BugzillaManager.getBugzillaUri().toString();
-        	
+
         	httpServletRequest.setAttribute("changeRequest", changeRequest);
         	httpServletRequest.setAttribute("bugzillaUri", bugzillaUri);
         	httpServletRequest.setAttribute("bugUri", bugzillaUri + "/show_bug.cgi?id=" + Integer.toString(bug.getID()));
-        	
+
         	RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_preview_large.jsp");
         	rd.forward(httpServletRequest,httpServletResponse);
         }
-		
+
 		throw new WebApplicationException(Status.NOT_FOUND);
-		
+
 	}
 
-	
+
 	/**
 	 * Create a single BugzillaChangeRequest via RDF/XML, XML or JSON POST
 	 * @param productId
@@ -653,11 +653,11 @@ public class BugzillaChangeRequestService
 
     {
     	//Create a new Bug from the incoming change request, retrieve the bug and then convert to a BugzillaChangeRequest
-        final String newBugId = BugzillaManager.createBug(httpServletRequest, changeRequest, productId);     
+        final String newBugId = BugzillaManager.createBug(httpServletRequest, changeRequest, productId);
         final Bug newBug = BugzillaManager.getBugById(httpServletRequest, newBugId);
-        
+
         BugzillaChangeRequest newChangeRequest;
-        
+
 		try {
 			newChangeRequest = BugzillaChangeRequest.fromBug(newBug);
 		} catch (Exception e) {
@@ -670,67 +670,67 @@ public class BugzillaChangeRequestService
 
         return Response.created(about).entity(newChangeRequest).header(Constants.HDR_OSLC_VERSION, Constants.OSLC_VERSION_V2).build();
     }
-    
+
     /**
      * OSLC delegated creation dialog for a single change request
-     * 
+     *
      * Forwards to changerequest_creator.jsp to build the html form
-     * 
+     *
      * @param productId
      * @throws IOException
      * @throws ServletException
      */
     @GET
-    @Path("creator") 
+    @Path("creator")
     @Consumes({MediaType.WILDCARD})
     public void changeRequestCreator(@PathParam("productId") final String productId) throws IOException, ServletException
     {
-    	try {				
+    	try {
 
 			BugzillaConnector bc = BugzillaManager.getBugzillaConnector(httpServletRequest);
 			Product product = BugzillaManager.getProduct(httpServletRequest, productId);
-			
+
 			httpServletRequest.setAttribute("product", product);
-			
-			GetLegalValues getComponentValues = 
+
+			GetLegalValues getComponentValues =
 				new GetLegalValues("component", product.getID());
 			bc.executeMethod(getComponentValues);
 			List<String> components = Arrays.asList(getComponentValues.getValues());
 			httpServletRequest.setAttribute("components", components);
-			
+
 			GetLegalValues getOsValues = new GetLegalValues("op_sys", -1);
 			bc.executeMethod(getOsValues);
 			List<String> operatingSystems = Arrays.asList(getOsValues.getValues());
 			httpServletRequest.setAttribute("operatingSystems", operatingSystems);
-			
+
 			GetLegalValues getPlatformValues = new GetLegalValues("platform", -1);
 			bc.executeMethod(getPlatformValues);
 			List<String> platforms = Arrays.asList(getPlatformValues.getValues());
 			httpServletRequest.setAttribute("platforms", platforms);
-			
+
 			GetLegalValues getVersionValues = new GetLegalValues("version", product.getID());
 			bc.executeMethod(getVersionValues);
 			List<String> versions = Arrays.asList(getVersionValues.getValues());
 			httpServletRequest.setAttribute("versions", versions);
-			
+
 			httpServletRequest.setAttribute("creatorUri", uriInfo.getAbsolutePath().toString());
 	        httpServletRequest.setAttribute("bugzillaUri", BugzillaManager.getBugzillaUri());
 
 	        RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_creator.jsp");
     		rd.forward(httpServletRequest, httpServletResponse);
-			
+
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
 		}
-    	
+
     }
- 
+
 
     /**
-     * Backend creator for the OSLC delegated creation dialog. 
-     * 
+     * Backend creator for the OSLC delegated creation dialog.
+     *
      * Accepts the input in FormParams and returns a small JSON response
-     * 
+     *
      * @param productId
      * @param component
      * @param version
@@ -740,9 +740,9 @@ public class BugzillaChangeRequestService
      * @param description
      */
     @POST
-    @Path("creator") 
+    @Path("creator")
     @Consumes({ MediaType.APPLICATION_FORM_URLENCODED})
-    public void createHtmlChangeRequest(    @PathParam("productId")   final String productId,     
+    public void createHtmlChangeRequest(    @PathParam("productId")   final String productId,
                 						    @FormParam("component")   final String component,
                 						    @FormParam("version")     final String version,
                 						    @FormParam("summary")     final String summary,
@@ -750,8 +750,8 @@ public class BugzillaChangeRequestService
                 						    @FormParam("platform")    final String platform,
                 						    @FormParam("description") final String description)
     {
-    	
-    	
+
+
     	try {
     		BugzillaChangeRequest changeRequest = new BugzillaChangeRequest();
     		changeRequest.setComponent(component);
@@ -760,18 +760,18 @@ public class BugzillaChangeRequestService
     		changeRequest.setOperatingSystem(op_sys);
     		changeRequest.setPlatform(platform);
     		changeRequest.setDescription(description);
-    	
+
     		final String newBugId = BugzillaManager.createBug(httpServletRequest, changeRequest, productId);
-    		
-         
+
+
     		final Bug newBug = BugzillaManager.getBugById(httpServletRequest, newBugId);
     		final BugzillaChangeRequest newChangeRequest = BugzillaChangeRequest.fromBug(newBug);
     		URI about = getAboutURI(productId + "/changeRequests/" + newBugId);
             newChangeRequest.setAbout(about);
-    		
+
     		httpServletRequest.setAttribute("changeRequest", newChangeRequest);
     		httpServletRequest.setAttribute("changeRequestUri", newChangeRequest.getAbout().toString());
-    		
+
     		// Send back to the form a small JSON response
     		httpServletResponse.setContentType("application/json");
     		httpServletResponse.setStatus(Status.CREATED.getStatusCode());
@@ -781,7 +781,7 @@ public class BugzillaChangeRequestService
     				"\"resource\" : \"" + about + "\"}");
     		out.close();
 
-    		
+
     	} catch (Exception e) {
     		e.printStackTrace();
     		throw new WebApplicationException(e);
@@ -791,10 +791,10 @@ public class BugzillaChangeRequestService
 
     /**
      * Updates a single change request via RDF/XML, XML or JSON PUT
-     * 
+     *
      * Currently, update only supports adding OSLC CM link attributes to a
      * Bug in the Bug comments
-     * 
+     *
      * @param eTagHeader
      * @param changeRequestId
      * @param changeRequest
@@ -809,29 +809,29 @@ public class BugzillaChangeRequestService
                                         @PathParam("changeRequestId") final String              changeRequestId,
     		                                                          final BugzillaChangeRequest       changeRequest) throws IOException, ServletException
     {
-    	
+
     	//Only adding links is supported right now
-    	
+
         final Bug originalBug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
-        
+
         if (originalBug != null)  {
         	try {
         		final BugzillaChangeRequest originalChangeRequest = BugzillaChangeRequest.fromBug(originalBug);
         		final String originalETag = getETagFromChangeRequest(originalChangeRequest);
-        		
+
         		changeRequest.setIdentifier(originalChangeRequest.getIdentifier());
-        		
+
                 if ((eTagHeader == null) || (originalETag.equals(eTagHeader))) {
-                	
+
                 	BugzillaManager.updateBug(httpServletRequest,changeRequest);
         	        final Bug updatedBug = BugzillaManager.getBugById(httpServletRequest, changeRequestId);
         	        final BugzillaChangeRequest updatedChangeRequest = BugzillaChangeRequest.fromBug(updatedBug);
-        	        
+
         	        setETagHeader(getETagFromChangeRequest(updatedChangeRequest),httpServletResponse);
                 } else {
                 	throw new WebApplicationException(Status.PRECONDITION_FAILED);
                 }
-        		
+
         	} catch (Exception e) {
         		throw new WebApplicationException(e);
         	}
@@ -849,12 +849,12 @@ public class BugzillaChangeRequestService
     {
     	httpServletResponse.setHeader("ETag", eTagFromChangeRequest);
 	}
-    
+
 
     private static String getETagFromChangeRequest(final ChangeRequest changeRequest)
 	{
     	Long eTag = null;
-    	
+
     	if (changeRequest.getModified() != null) {
     		eTag = changeRequest.getModified().getTime();
     	} else if (changeRequest.getCreated() != null) {
@@ -862,14 +862,14 @@ public class BugzillaChangeRequestService
     	} else {
     		eTag = new Long(0);
     	}
-    	
+
 		return eTag.toString();
 	}
-    
-    
+
+
     /**
      * Convert a list of Bugzilla Bugs to a list of BugzillaChangeRequests
-     * 
+     *
      * @param httpServletRequest
      * @param bugList
      * @param productId
@@ -878,7 +878,7 @@ public class BugzillaChangeRequestService
     protected List<BugzillaChangeRequest> changeRequestsFromBugList(final HttpServletRequest httpServletRequest, final List<Bug> bugList, final String productId)
     {
     	List<BugzillaChangeRequest> results = new ArrayList<BugzillaChangeRequest>();
-    	
+
         for (Bug bug : bugList) {
         	BugzillaChangeRequest changeRequest = null;
         	try {
@@ -886,18 +886,18 @@ public class BugzillaChangeRequestService
         	} catch (Exception e) {
         		throw new WebApplicationException(e);
         	}
-        	
+
         	if (changeRequest != null) {
-        		changeRequest.setServiceProvider(ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId).getAbout());  
+        		changeRequest.setServiceProvider(ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, productId).getAbout());
         		changeRequest.setAbout(getAboutURI(productId + "/changeRequests/"+ changeRequest.getIdentifier()));
         		results.add(changeRequest);
         	}
         }
         return results;
     }
-    
-	
-	
+
+
+
 	protected URI getAboutURI(final String fragment)
 	{
 		URI about;
@@ -908,31 +908,31 @@ public class BugzillaChangeRequestService
 		}
 		return about;
 	}
-	
+
 	/**
 	 * Create and run a Bugzilla search and return the result.
-	 * 
+	 *
 	 * Forwards to changerequest_filtered_json.jsp to create the JSON response
-	 * 
+	 *
 	 * @param httpServletRequest
 	 * @param productId
 	 * @param terms
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void sendFilteredBugsReponse(final HttpServletRequest httpServletRequest, final String productId, final String terms ) 
-			throws ServletException, IOException 
+	private void sendFilteredBugsReponse(final HttpServletRequest httpServletRequest, final String productId, final String terms )
+			throws ServletException, IOException
 	{
 		try {
 			final BugzillaConnector bc = BugzillaManager.getBugzillaConnector(httpServletRequest);
-			
+
 			BugSearch bugSearch = createBugSearch(terms);
 			bc.executeMethod(bugSearch);
 			List<Bug> bugList = bugSearch.getSearchResults();
 			List<BugzillaChangeRequest> results = changeRequestsFromBugList(httpServletRequest, bugList, productId);
 			httpServletRequest.setAttribute("results", results);
 
-	        RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_filtered_json.jsp"); 
+	        RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/cm/changerequest_filtered_json.jsp");
 	    	rd.forward(httpServletRequest, httpServletResponse);
 
 		} catch (Exception e) {
@@ -940,21 +940,21 @@ public class BugzillaChangeRequestService
 		}
 	}
 
-	protected BugSearch createBugSearch(final String summary) 
+	protected BugSearch createBugSearch(final String summary)
 	{
 		BugSearch.SearchQuery summaryQuery = new BugSearch.SearchQuery(
 				BugSearch.SearchLimiter.SUMMARY, summary);
 		BugSearch.SearchQuery limitQuery = new BugSearch.SearchQuery(
 				BugSearch.SearchLimiter.LIMIT, "50");
-			
+
 		BugSearch bugSearch = new BugSearch(summaryQuery, limitQuery);
-			
+
 		return bugSearch;
 	}
-	
+
 	public static String getChangeRequestLinkLabel(int bugId, String summary) {
         return "Bug " + bugId + ": " + summary;
     }
-	
-	
+
+
 }
