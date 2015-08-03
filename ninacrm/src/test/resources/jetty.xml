@@ -18,8 +18,10 @@
         </New>
       </Arg>
     </New> 
-    <Call class="org.eclipse.jetty.util.log.Log" name="info"><Arg>Redirecting stderr/stdout to <Ref id="ServerLogName"/></Arg></Call>
-    <Call class="java.lang.System" name="setErr"><Arg><Ref id="ServerLog"/></Arg></Call>
-    <Call class="java.lang.System" name="setOut"><Arg><Ref id="ServerLog"/></Arg></Call>
+    <Get id="Logger" class="org.eclipse.jetty.util.log.Log" name="log">
+    	<Call name="info"><Arg>Redirecting stderr/stdout to <Ref refid="ServerLogName"/></Arg></Call>
+    </Get>
+    <Set class="java.lang.System" name="Err"><Ref refid="ServerLog"/></Set>
+    <Set class="java.lang.System" name="Out"><Ref refid="ServerLog"/></Set>
 
 </Configure>
