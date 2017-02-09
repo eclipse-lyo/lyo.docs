@@ -22,17 +22,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.oauth.server.OAuthServlet;
-
 import org.apache.ws.commons.util.Base64;
 import org.apache.ws.commons.util.Base64.DecodingException;
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Credentials;
 import org.eclipse.lyo.oslc4j.bugzilla.exception.BugzillaOAuthException;
-import org.eclipse.lyo.oslc4j.bugzilla.exception.RestException;
 import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
-//import org.eclipse.lyo.oslc4j.bugzilla.resources.Error;
-import org.eclipse.lyo.server.oauth.core.OAuthConfiguration;
+
+import net.oauth.server.OAuthServlet;
 
 /**
  * Utilities for working with HTTP requests and responses.

@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
 
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Credentials;
-import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.HttpUtils;
 import org.eclipse.lyo.server.oauth.consumerstore.FileSystemConsumerStore;
 import org.eclipse.lyo.server.oauth.core.consumer.ConsumerStore;

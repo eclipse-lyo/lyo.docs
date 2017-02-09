@@ -17,38 +17,29 @@
 package org.eclipse.lyo.oslc4j.bugzilla.services;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import java.util.List;
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Constants;
-import org.eclipse.lyo.oslc4j.bugzilla.jbugzx.rpc.GetLegalValues;
 import org.eclipse.lyo.oslc4j.bugzilla.resources.BugzillaChangeRequest;
 import org.eclipse.lyo.oslc4j.bugzilla.resources.ChangeRequest;
 import org.eclipse.lyo.oslc4j.bugzilla.servlet.ServiceProviderCatalogSingleton;
@@ -57,18 +48,11 @@ import org.eclipse.lyo.oslc4j.core.annotation.OslcDialog;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcDialogs;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcQueryCapability;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcService;
-import org.eclipse.lyo.oslc4j.core.model.Compact;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
-import org.eclipse.lyo.oslc4j.core.model.Preview;
-import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
-import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
-
-
 
 import com.j2bugzilla.base.Bug;
 import com.j2bugzilla.base.BugzillaConnector;
-import com.j2bugzilla.base.Product;
 import com.j2bugzilla.rpc.BugSearch;
 
 

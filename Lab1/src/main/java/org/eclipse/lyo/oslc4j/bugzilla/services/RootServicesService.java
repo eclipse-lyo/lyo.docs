@@ -17,15 +17,10 @@ package org.eclipse.lyo.oslc4j.bugzilla.services;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
-import org.eclipse.lyo.oslc4j.bugzilla.servlet.ServiceProviderCatalogSingleton;
-import org.eclipse.lyo.oslc4j.core.model.ServiceProviderCatalog;
 
 /**
  * Jazz Root Services Service, see:

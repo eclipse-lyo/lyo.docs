@@ -60,9 +60,9 @@ public class BugzillaHttpClient
     {
         this.rootURL = rootURL;
        
-        authorization = "&Bugzilla_login=" +
+        authorization = "&login=" +
             URLEncoder.encode(credentials.getUsername(), "UTF-8") +
-            "&Bugzilla_password=" +
+            "&password=" +
             URLEncoder.encode(credentials.getPassword(), "UTF-8");
 
         httpClient = getHttpClient();

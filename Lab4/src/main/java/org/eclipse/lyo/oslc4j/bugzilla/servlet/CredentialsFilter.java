@@ -28,15 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.oauth.OAuth;
-import net.oauth.OAuthException;
-import net.oauth.OAuthMessage;
-import net.oauth.OAuthProblemException;
-import net.oauth.server.OAuthServlet;
-
 import org.eclipse.lyo.oslc4j.bugzilla.BugzillaManager;
 import org.eclipse.lyo.oslc4j.bugzilla.Credentials;
-import org.eclipse.lyo.oslc4j.bugzilla.exception.BugzillaOAuthException;
 import org.eclipse.lyo.oslc4j.bugzilla.exception.UnauthorizedException;
 import org.eclipse.lyo.oslc4j.bugzilla.utils.HttpUtils;
 import org.eclipse.lyo.server.oauth.consumerstore.FileSystemConsumerStore;
@@ -51,6 +44,8 @@ import com.j2bugzilla.base.BugzillaConnector;
 import com.j2bugzilla.base.BugzillaException;
 import com.j2bugzilla.base.ConnectionException;
 import com.j2bugzilla.rpc.LogIn;
+
+import net.oauth.OAuthProblemException;
 
 public class CredentialsFilter implements Filter {
 

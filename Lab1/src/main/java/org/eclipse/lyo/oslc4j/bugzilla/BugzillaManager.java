@@ -23,7 +23,6 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Properties;
 
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -38,14 +37,12 @@ import org.eclipse.lyo.oslc4j.client.ServiceProviderRegistryURIs;
 import org.eclipse.lyo.oslc4j.core.model.Link;
 
 import com.j2bugzilla.base.Bug;
-import com.j2bugzilla.base.BugFactory;
 import com.j2bugzilla.base.BugzillaConnector;
 import com.j2bugzilla.base.Product;
 import com.j2bugzilla.rpc.BugSearch;
 import com.j2bugzilla.rpc.CommentBug;
 import com.j2bugzilla.rpc.GetBug;
 import com.j2bugzilla.rpc.GetProduct;
-import com.j2bugzilla.rpc.ReportBug;
 
 
 public class BugzillaManager implements ServletContextListener  {
