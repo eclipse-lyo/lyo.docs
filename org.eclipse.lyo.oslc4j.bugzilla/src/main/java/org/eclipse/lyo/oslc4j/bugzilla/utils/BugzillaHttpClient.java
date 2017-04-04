@@ -74,7 +74,7 @@ public class BugzillaHttpClient
     httpGet(String path) throws IOException
     {
         HttpGet get = new HttpGet(rootURL + "/" + path + authorization);
-        
+        get.addHeader("Referer", rootURL);
         HttpResponse response = httpClient.execute(get, cntxt);
         StatusLine status = response.getStatusLine();
         
