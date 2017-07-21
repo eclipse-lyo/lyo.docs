@@ -39,6 +39,7 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.scheme.SchemeSocketFactory;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
@@ -88,28 +89,10 @@ public class BugzillaHttpClient
     private static HttpClient
     getHttpClient()
     {
+    	
         SSLContext sc = getTrustingSSLContext();
-        SchemeSocketFactory sf = new SSLSocketFactory(sc);
-        
-        Scheme scheme = new Scheme("https", 443, sf);
-        SchemeRegistry schemeRegistry = new SchemeRegistry();
-        
-        schemeRegistry.register(scheme);
-        
-        sf = PlainSocketFactory.getSocketFactory();
-        scheme = new Scheme("http", 80, sf);
-        
-        schemeRegistry.register(scheme);
-        
-        ClientConnectionManager clientConnectionManager =
-            new PoolingClientConnectionManager(schemeRegistry);
-        HttpParams clientParams = new BasicHttpParams();    
-        
-        clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, TIMEOUT);
-        clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, TIMEOUT);
-        clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS, true);
-        
-        return new DefaultHttpClient(clientConnectionManager, clientParams);
+                
+        return HttpClientBuilder.create().useSystemProperties().setSSLContext(sc).build();
     }
     
     private static SSLContext
