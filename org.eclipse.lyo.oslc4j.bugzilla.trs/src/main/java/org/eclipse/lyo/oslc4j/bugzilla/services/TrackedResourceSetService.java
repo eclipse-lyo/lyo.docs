@@ -75,9 +75,9 @@ public class TrackedResourceSetService {
 		result.setBase(URI.create(BugzillaManager.getBugzServiceBase() + "/trs/"+TRSConstants.TRS_TERM_BASE));//$NON-NLS-1$
 		
 		ChangeBugzillaHistories.buildBaseResourcesAndChangeLogs(httpServletRequest);
-		AbstractChangeLog changeLog = (AbstractChangeLog)ChangeBugzillaHistories.getChangeLog("1", httpServletRequest);
+		ChangeLog changeLog = ChangeBugzillaHistories.getChangeLog("1", httpServletRequest);
 		if (changeLog == null) {
-			changeLog = new EmptyChangeLog();
+			changeLog = new ChangeLog();
 		}
 		result.setChangeLog(changeLog);
 		return result;

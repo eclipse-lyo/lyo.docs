@@ -4,12 +4,16 @@
 	<groupId>org.eclipse.lyo.oslc4j.rio</groupId>
 	<artifactId>trs4j-bugzilla-sample</artifactId>
 	<packaging>war</packaging>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>2.2.0-SNAPSHOT</version>
 	<repositories>
-		<repository>
-			<id>lyo-releases</id>
-			<url>https://repo.eclipse.org/content/repositories/lyo-releases/</url>
-		</repository>
+        <repository>
+            <id>lyo-releases</id>
+            <url>https://repo.eclipse.org/content/repositories/lyo-releases/</url>
+        </repository>
+        <repository>
+            <id>lyo-snapshots</id>
+            <url>https://repo.eclipse.org/content/repositories/lyo-snapshots/</url>
+        </repository>
 	</repositories>
 
 	<properties>
@@ -30,35 +34,50 @@
 		<dependency>
 			<groupId>org.eclipse.lyo</groupId>
 			<artifactId>oslc-trs</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
+			<version>${lyo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-json4j-provider</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
+			<version>${lyo.version}</version>
 		</dependency>
+  		<dependency>
+			<groupId>org.eclipse.lyo.core.query</groupId>
+			<artifactId>oslc-query</artifactId>
+			<version>${lyo.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.oslc4j.core</groupId>
+            <artifactId>oslc4j-wink</artifactId>
+            <version>${lyo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.oslc4j.core</groupId>
+            <artifactId>oslc4j-jena-provider</artifactId>
+            <version>${lyo.version}</version>
+        </dependency>
+
 		<dependency>
 			<groupId>com.j2bugzilla</groupId>
 			<artifactId>j2bugzilla</artifactId>
 			<version>2.2.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.eclipse.lyo.server</groupId>
 			<artifactId>oauth-webapp</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
+			<version>${lyo.version}</version>
 			<type>war</type>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse.lyo.server</groupId>
 			<artifactId>oauth-core</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
+			<version>${lyo.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse.lyo.server</groupId>
 			<artifactId>oauth-consumer-store</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
+			<version>${lyo.version}</version>
 		</dependency>
 
         <dependency>
@@ -88,11 +107,6 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
         </dependency>
-  		<dependency>
-			<groupId>org.eclipse.lyo.core.query</groupId>
-			<artifactId>oslc-query</artifactId>
-			<version>2.2.0-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -101,9 +115,9 @@
 
 			<!-- Jetty 9 plugin See also: http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.3.10.v20160621</version>
+				<version>9.4.6.v20170531</version>
 
 				<configuration>
 					<webApp>
