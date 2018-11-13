@@ -1,0 +1,9 @@
+---+ RDFS Properties
+
+These are the RDFS properties that are considered common.
+
+   * *Namespace URI*: =http://www.w3.org/2000/01/rdf-schema#=
+   * *Suggested Namespace Prefix*: =rdfs=
+
+| *Prefixed Name* | *Read-only* | *Value-type* | *Represen-tation* | *Range* | *Description* |
+| =rdfs:member= | unspecified | Resource | Either | unspecified | OSLC domains might define a number of member or contains relationships between resources. The rdfs:member property is suitable for use when only one such relationship needs to be defined, or when no additional semantics need to be implied by the property name |

@@ -1,0 +1,16 @@
+### Resource: Action
+
+* **Name:** `Action`
+* **Description:** An Action provides a representation of the current state of a Resource Set.
+* **Type URI:** <http://open-services.net/ns/core/actions#Action>
+
+#### Action Properties
+
+| *Prefixed Name* | *Occurs* | *Read-only* | *Value-type* | *Representation* | *Range* | *Description* |
+| --------------- | -------- | ----------- | ------------ | ---------------- | ------- | ------------- |
+| *OSLC Core:* Common Properties  |||||||
+| `dcterms:title` | exactly-one | unspecified | XMLLiteral | n/a | n/a | Title (reference: Dublin Core) of the resource represented as rich text in XHTML content.  |
+| `dcterms:description` | zero-or-one | unspecified | XMLLiteral | n/a | n/a | Descriptive text (reference: Dublin Core) about resource represented as rich text in XHTML content. SHOULD include only content that is valid and suitable inside an XHTML &lt;div&gt; element. |
+| `rdf:type` | One or many | unspecified | Resource | Reference | n/a | The resource type URIs.  At least one type **MUST** be `actions:Action`.  |
+| *OSLC Actions:* Start of additional properties  |||||||
+| `actions:request` | 1:* | unspecified | Resource | Either | Any | Instructions for executing the action. It is likely that the target resource will be an `http:Request` but that is not necessarily the case.  Multiple occurrences of this property **MUST** be different ways of achieving the same operation; they are semantically the same, but achieved through different data or technologies. |

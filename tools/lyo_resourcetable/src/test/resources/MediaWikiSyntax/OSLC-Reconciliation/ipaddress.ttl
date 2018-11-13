@@ -1,0 +1,58 @@
+@prefix oslc:      <http://open-services.net/ns/core#> .
+@prefix authoring: <http://open-services.net/ns/authoring#> .
+@prefix xs:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix foaf:      <http://xmlns.com/foaf/0.1/> .
+@prefix cm:        <http://open-services.net/ns/cm#> .
+@prefix qm:        <http://open-services.net/ns/qm#> .
+@prefix oslc_rm:   <http://open-services.net/ns/rm#> .
+@prefix crtv:      <http://open-services.net/ns/crtv#> .
+
+@base <http://open-services.net/wiki#> .
+
+<>
+          a                              oslc:ResourceShape ;
+          oslc:describes                 crtv:IPAddress ;
+          dcterms:title                  "Represents an IP address" ;
+          oslc:property                  <#address> ;
+          oslc:property                  <#contextAddressSpace> ;
+.
+
+<#address>
+          a                              oslc:Property ;
+          oslc:name                      "address" ;
+          oslc:propertyDefinition        crtv:address ;
+          dcterms:title                  "crtv:address" ;
+          oslc:occurs                    oslc:Exactly-one ;
+          oslc:readOnly                  false ;
+          oslc:valueType                 xs:string ;
+          dcterms:description            "The canonical string representation of the IP address." ;
+.
+
+<#contextAddressSpace>
+          a                              oslc:Property ;
+          oslc:name                      "contextAddressSpace" ;
+          oslc:propertyDefinition        crtv:contextAddressSpace ;
+          dcterms:title                  "crtv:contextAddressSpace" ;
+          oslc:occurs                    oslc:Zero-or-one ;
+          oslc:readOnly                  false ;
+          oslc:valueType                 oslc:Resource ;
+          oslc:range                     oslc:Any ;
+          oslc:representation            oslc:Reference ;
+          dcterms:description            "the anchor IP address for an IPAddress in a Network Address Translation (NAT) scenario, that is IPv4 addresses within the set of IANA privately defined address ranges of 10.0.0.0 - 10.255.255.255, 172.16.0.0 - 172.31.255.255, 192.168.0.0 - 192.168.255.255 . Typically refers to a resource of type [crtv:IPAddress](#IPAddress) but it **MAY** refer to other resource types." ;
+.
+
+<#_sections_>
+          a                              rdfs:Seq ;
+          rdf:_1                         <#_section_1> ;
+.
+
+<#_section_1>
+          a                              rdfs:Seq ;
+          dcterms:title                  "**OSLC Reconciliation**: Start of additional properties" ;
+          rdf:_1                         <#address> ;
+          rdf:_2                         <#contextAddressSpace> ;
+.
+

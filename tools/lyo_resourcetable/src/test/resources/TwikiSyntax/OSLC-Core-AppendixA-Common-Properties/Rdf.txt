@@ -1,0 +1,9 @@
+---+ RDF Properties
+
+These are the RDF/XML properties that are considered common.
+
+   * *Namespace URI*: =http://www.w3.org/1999/02/22-rdf-syntax-ns#=
+   * *Suggested Namespace Prefix*: =rdf=
+
+| *Prefixed Name* | *Read-only* | *Value-type* | *Represen-tation* | *Range* | *Description* |
+| =rdf:type= | unspecified | Resource | Reference | n/a | The resource type URIs |

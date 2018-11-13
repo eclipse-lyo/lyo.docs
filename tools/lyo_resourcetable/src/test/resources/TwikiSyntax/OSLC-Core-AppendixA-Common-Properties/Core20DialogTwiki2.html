@@ -1,0 +1,38 @@
+<html>
+<body>
+<table border="1">
+<THEAD>
+<tr>
+<th>Prefixed Name</th><th>Occurs</th><th>Read-only</th><th>Value-type</th><th>Representation</th><th>Range</th><th>Description</th>
+</tr>
+</THEAD>
+<tbody></tbody>
+<tr>
+<td colspan="7"></td>
+</tr>
+<tbody>
+<tr>
+<a href="http://purl.org/dc/terms/title">dcterms:title</a><a href="http://open-services.net/ns/core#Exactly-one">Exactly-one</a><td>true</td><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">XMLLiteral</a><td>N/A</td><td>N/A</td><td>Title string that could be used for display.</td>
+</tr>
+<tr>
+<a href="http://open-services.net/ns/core#label">oslc:label</a><a href="http://open-services.net/ns/core#Zero-or-one">Zero-or-one</a><td>true</td><a href="http://www.w3.org/2001/XMLSchema#string">String</a><td>N/A</td><td>N/A</td><td>Very short label for use in menu items.</td>
+</tr>
+<tr>
+<a href="http://open-services.net/ns/core#dialog">oslc:dialog</a><a href="http://open-services.net/ns/core#Exactly-one">Exactly-one</a><td>true</td><a href="http://open-services.net/ns/core#Resource">Resource</a><a href="http://open-services.net/ns/core#Reference">Reference</a><a href="http://open-services.net/ns/core#Any">Any</a><td>The URI of the dialog.</td>
+</tr>
+<tr>
+<a href="http://open-services.net/ns/core#hintWidth">oslc:hintWidth</a><a href="http://open-services.net/ns/core#Zero-or-one">Zero-or-one</a><td>true</td><a href="http://www.w3.org/2001/XMLSchema#string">String</a><td>N/A</td><td>N/A</td><td>Values *MUST* be expressed in __relative length units__ as defined in the [[http://www.w3.org/TR/2009/CR-CSS2-20090423/syndata.html#length-units ][W3C Cascading Style Sheets Specification (CSS 2.1)]] Em and ex units are interpreted relative to the default system font (at 100% size).</td>
+</tr>
+<tr>
+<a href="http://open-services.net/ns/core#hintHeight">oslc:hintHeight</a><a href="http://open-services.net/ns/core#Zero-or-one">Zero-or-one</a><td>true</td><a href="http://www.w3.org/2001/XMLSchema#string">String</a><td>N/A</td><td>N/A</td><td>Values *MUST* be expressed in __relative length units__ as defined in the [[http://www.w3.org/TR/2009/CR-CSS2-20090423/syndata.html#length-units ][W3C Cascading Style Sheets Specification (CSS 2.1)]] Em and ex units are interpreted relative to the default system font (at 100% size).</td>
+</tr>
+<tr>
+<a href="http://open-services.net/ns/core#resourceType">oslc:resourceType</a><a href="http://open-services.net/ns/core#Zero-or-many">Zero-or-many</a><td>true</td><a href="http://open-services.net/ns/core#Resource">Resource</a><a href="http://open-services.net/ns/core#Reference">Reference</a><a href="http://open-services.net/ns/core#Any">Any</a><td>The expected resource type URI for the resources that will be returned when using this dialog. These would be the URIs found in the result resource's =rdf:type= property.</td>
+</tr>
+<tr>
+<a href="http://open-services.net/ns/core#usage">oslc:usage</a><a href="http://open-services.net/ns/core#Zero-or-many">Zero-or-many</a><td>true</td><a href="http://open-services.net/ns/core#Resource">Resource</a><a href="http://open-services.net/ns/core#Reference">Reference</a><a href="http://open-services.net/ns/core#Any">Any</a><td>An identifier URI for the domain specified usage of this dialog. If a service provides multiple selection or creation dialogs, it may designate the primary or default one that should be used with a property value of =http://open-services/ns/core#default=.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
