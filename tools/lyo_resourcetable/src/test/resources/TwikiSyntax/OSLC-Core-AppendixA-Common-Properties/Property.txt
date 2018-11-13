@@ -1,0 +1,41 @@
+---+++ Value-type: Property
+
+A Property resource describes one allowed or required property of a resource.
+
+   * *Resource*: =oslc:Property=
+   * *Namespace URI*: =http://open-services.net/ns/core#=
+   * *Suggested Namespace Prefix*: =oslc=
+
+| *Prefixed Name* | *Occurs* | *Read-only* | *Value-type* | *Represen-tation* | *Range* | *Description* |
+| =dcterms:description= | zero-or-one | True | XMLLiteral | n/a | n/a | Description of the property. *SHOULD* include only content that is valid and suitable inside an XHTML &lt;div&gt; element. |
+| =dcterms:title= | zero-or-one | True | XMLLiteral | n/a | n/a | Title of the property. *SHOULD* include only content that is valid and suitable inside an XHTML &lt;span&gt; element. |
+| =oslc:allowedValues= | zero-or-one | True | Resource | Reference | =oslc:AllowedValues= | Resource with allowed values for the property being defined. |
+| =oslc:allowedValue= | zero-or-many | True | Same value-type as the property being defined | n/a | n/a | A value allowed for property, inlined into property definition. If there are both =oslc:allowedValue= elements and an =oslc:allowedValue= resource, then the full-set of allowed values is the union of both. |
+| =oslc:defaultValue= | zero-or-one | True | Same as property defined | n/a | n/a | A default value for property, inlined into property definition. |
+| =oslc:hidden= | zero-or-one | True | Boolean | n/a | n/a | A hint that indicates that property *MAY* be hidden when presented in a user interface |
+| =oslc:isMemberProperty= | zero-or-one | True | Boolean | n/a | n/a | If set to true, this indicates that the property is a membership property, as described in the [[OSLCCoreSpecQuery#Member_List_Patterns][Query Syntax Specification: Member List Patterns]]. This is useful when the resource whose shape is being defined is viewed as a container of other resources. For example, look at the last example in Appendix B's [[OSLCCoreSpecRDFXMLExamples#Specifying_the_shape_of_a_query][RDF/XML Representation Examples: Specifying the shape of a query result]], where =blog:comment= is defined as a membership property and comment that matches the query is returned as value of that property. |
+| =oslc:name= | exactly-one | True | String | n/a | n/a | Name of property being defined, i.e. second part of property's Prefixed Name |
+| =oslc:maxSize= | zero-or-one | True | Integer | n/a | n/a | For String properties only, specifies maximum characters allowed. If not set, then there is no maximum or maximum is specified elsewhere. |
+| =oslc:occurs= | exactly-one | True | Resource | Reference | n/a | *MUST* be either =[[http://open-services.net/ns/core#Exactly-one]]= (property is required), =[[http://open-services.net/ns/core#Zero-or-one]]= (property is optional), =[[http://open-services.net/ns/core#Zero-or-many]]= (property is optional), or =[[http://open-services.net/ns/core#One-or-many]]= (property is required) |
+| =oslc:propertyDefinition= | exactly-one | True | Resource | Reference | n/a | URI of the property whose usage is being described. |
+| =oslc:range= | zero-or-many | True | Resource | Reference | n/a | For properties with a resource value-type, Providers MAY also specify the range of possible resource types allowed, each specified by URI. The default range is =[[http://open-services.net/ns/core#Any]]=. |
+| =oslc:readOnly= | zero-or-one | True | Boolean | n/a | n/a | =true= if the property is read-only. If omitted, or set to =false=, then the property is writable. Providers *SHOULD* declare a property read-only when changes to the value of that property will not be accepted after the resource has been created, e.g. on PUT/PATCH requests. Consumers should note that the converse does not apply: Providers *MAY* reject a change to the value of a writable property. |
+| =oslc:representation= | zero-or-one | True | Resource | Reference | n/a | Should be =[[http://open-services.net/ns/core#Reference]]=, =[[http://open-services.net/ns/core#Inline]]= or =[[http://open-services.net/ns/core#Either]]= |
+| =oslc:valueType= | zero-or-many | True | Resource | Reference | n/a | See below for list of allowed values for =oslc:valueType=. If this property is omitted, then the value type is unconstrained. |
+| =oslc:valueShape= | zero-or-one | True | Resource | Reference | =oslc:ResourceShape= | if the value-type is a resource type, then Property *MAY* provide a shape value to indicate the Resource Shape that applies to the resource. |
+
+Allowed values for =oslc:valueType=:
+
+   * *Literal value-types* 
+      * *Boolean* - =http://www.w3.org/2001/XMLSchema#boolean=
+      * *DateTime* - =http://www.w3.org/2001/XMLSchema#dateTime=
+      * *Decimal* - =http://www.w3.org/2001/XMLSchema#decimal=
+      * *Double* - =http://www.w3.org/2001/XMLSchema#double=
+      * *Float* - =http://www.w3.org/2001/XMLSchema#float=
+      * *Integer* - =http://www.w3.org/2001/XMLSchema#integer=
+      * *String* - =http://www.w3.org/2001/XMLSchema#string=
+      * *XMLLiteral* - =[[http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral]]=
+   * *Resource value-types* 
+      * *Resource* - =[[http://open-services.net/ns/core#Resource]]=
+      * *Local Resource* - =[[http://open-services.net/ns/core#LocalResource]]=
+      * *Either Resource or Local Resource* - =[[http://open-services.net/ns/core#AnyResource]]=

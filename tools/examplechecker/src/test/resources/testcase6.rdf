@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:oslc="http://open-services.net/ns/core#"
+    xmlns:oslc_data="http://open-services.net/ns/servicemanagement/1.0/"
+    xmlns:sco="http://jazz.net/ns/ism/provisioning/sco#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:oslc_auto="http://open-services.net/ns/auto#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <oslc:ResponseInfo rdf:about="http://127.0.0.1:8001/itmautomationprovider/services/plans">
+    <oslc:totalCount>1</oslc:totalCount>
+  </oslc:ResponseInfo>
+</rdf:RDF>

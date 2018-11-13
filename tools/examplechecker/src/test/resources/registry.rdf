@@ -1,0 +1,101 @@
+<rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:oslc="http://open-services.net/ns/core#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+<oslc:ServiceProviderCatalog rdf:about="http://localhost:8888/OSLC4JRegistry/catalog/singleton">
+<oslc:domain rdf:resource="http://open-services.net/ns/core#"/>
+<oslc:serviceProvider>
+<oslc:ServiceProvider rdf:about="http://localhost:8888/OSLC4JRegistry/serviceProviders/1">
+<oslc:prefixDefinition>
+<oslc:PrefixDefinition>
+<oslc:prefixBase rdf:resource="http://purl.org/dc/terms/"/>
+<oslc:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dcterms</oslc:prefix>
+</oslc:PrefixDefinition>
+</oslc:prefixDefinition>
+<oslc:prefixDefinition>
+<oslc:PrefixDefinition>
+<oslc:prefixBase rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+<oslc:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf</oslc:prefix>
+</oslc:PrefixDefinition>
+</oslc:prefixDefinition>
+<oslc:service>
+<oslc:Service>
+<oslc:selectionDialog>
+<oslc:Dialog>
+<oslc:resourceType rdf:resource="http://open-services.net/ns/core#ServiceProviderCatalog"/>
+<oslc:hintWidth rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1000px</oslc:hintWidth>
+<oslc:hintHeight rdf:datatype="http://www.w3.org/2001/XMLSchema#string">600px</oslc:hintHeight>
+<oslc:dialog rdf:resource="http://pc059179.md.kth.se:8080/OSLC4JUI/generic/genericSelection.html"/>
+<oslc:usage rdf:resource="http://open-services.net/ns/core#default"/>
+<dcterms:title rdf:parseType="Literal">Service Provider Catalog Selection Dialog</dcterms:title>
+<oslc:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Service Provider Catalog Selection Dialog</oslc:label>
+</oslc:Dialog>
+</oslc:selectionDialog>
+<oslc:queryCapability>
+<oslc:QueryCapability>
+<oslc:resourceShape rdf:resource="http://localhost:8888/OSLC4JRegistry/resourceShapes/serviceProvider"/>
+<oslc:queryBase rdf:resource="http://localhost:8888/OSLC4JRegistry/serviceProviders"/>
+<oslc:resourceType rdf:resource="http://open-services.net/ns/core#ServiceProvider"/>
+<oslc:usage rdf:resource="http://open-services.net/ns/core#default"/>
+<dcterms:title rdf:parseType="Literal">Service Provider Query Capability</dcterms:title>
+<oslc:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Service Provider Query</oslc:label>
+</oslc:QueryCapability>
+</oslc:queryCapability>
+<oslc:queryCapability>
+<oslc:QueryCapability>
+<oslc:resourceShape rdf:resource="http://localhost:8888/OSLC4JRegistry/resourceShapes/serviceProviderCatalog"/>
+<oslc:queryBase rdf:resource="http://localhost:8888/OSLC4JRegistry/catalog"/>
+<oslc:resourceType rdf:resource="http://open-services.net/ns/core#ServiceProviderCatalog"/>
+<oslc:usage rdf:resource="http://open-services.net/ns/core#default"/>
+<dcterms:title rdf:parseType="Literal">Service Provider Catalog Query Capability</dcterms:title>
+<oslc:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Service Provider Catalog Query</oslc:label>
+</oslc:QueryCapability>
+</oslc:queryCapability>
+<oslc:creationFactory>
+<oslc:CreationFactory>
+<oslc:resourceType rdf:resource="http://open-services.net/ns/core#ServiceProvider"/>
+<oslc:creation rdf:resource="http://localhost:8888/OSLC4JRegistry/serviceProviders"/>
+<oslc:resourceShape rdf:resource="http://localhost:8888/OSLC4JRegistry/resourceShapes/serviceProvider"/>
+<oslc:usage rdf:resource="http://open-services.net/ns/core#default"/>
+<dcterms:title rdf:parseType="Literal">Service Provider Creation Factory</dcterms:title>
+<oslc:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Service Provider Creation</oslc:label>
+</oslc:CreationFactory>
+</oslc:creationFactory>
+<oslc:domain rdf:resource="http://open-services.net/ns/core#"/>
+</oslc:Service>
+</oslc:service>
+<oslc:prefixDefinition>
+<oslc:PrefixDefinition>
+<oslc:prefixBase rdf:resource="http://open-services.net/ns/core#"/>
+<oslc:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oslc</oslc:prefix>
+</oslc:PrefixDefinition>
+</oslc:prefixDefinition>
+<dcterms:description rdf:parseType="Literal">
+Reference Implementation OSLC Service Provider Catalog
+</dcterms:description>
+<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</dcterms:identifier>
+<dcterms:publisher>
+<oslc:Publisher>
+<dcterms:title rdf:parseType="Literal">Project Lyo</dcterms:title>
+<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eclipse</dcterms:identifier>
+</oslc:Publisher>
+</dcterms:publisher>
+<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-11-12T23:05:11.875Z</dcterms:created>
+<oslc:prefixDefinition>
+<oslc:PrefixDefinition>
+<oslc:prefixBase rdf:resource="http://www.w3.org/2000/01/rdf-schema#"/>
+<oslc:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdfs</oslc:prefix>
+</oslc:PrefixDefinition>
+</oslc:prefixDefinition>
+<dcterms:title rdf:parseType="Literal">OSLC Service Provider Catalog</dcterms:title>
+</oslc:ServiceProvider>
+</oslc:serviceProvider>
+<dcterms:publisher>
+<oslc:Publisher>
+<dcterms:title rdf:parseType="Literal">Project Lyo</dcterms:title>
+<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eclipse</dcterms:identifier>
+</oslc:Publisher>
+</dcterms:publisher>
+<dcterms:title rdf:parseType="Literal">OSLC Service Provider Catalog</dcterms:title>
+<dcterms:description rdf:parseType="Literal">
+Reference Implementation OSLC IBM Service Provider Catalog
+</dcterms:description>
+</oslc:ServiceProviderCatalog>
+</rdf:RDF>
