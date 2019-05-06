@@ -1,4 +1,4 @@
-Tutorial: Integrating Products with OSLC
+Tutorial: Integrating Products with OSLC - Buzilla Adaptor source code.
 ========================================
 
 [![Discourse status](https://img.shields.io/discourse/https/meta.discourse.org/status.svg)](https://forum.open-services.net/)
