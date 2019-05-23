@@ -6,11 +6,6 @@ Tutorial: Integrating Products with OSLC - Buzilla Adaptor source code.
 
 ## Overview
 
-The main content of this repository is the source code for the Bugzilla tutorial that explains how to implement OSLC ([Open Services for Lifecycle Collaboration](http://open-services.net) consumers and providers by examining realistic use cases and showing how to implement OSLC specifications with lots of examples and working code. 
+The main folder of this repository (*lyo-rest-workshop* folder) contains the source code for the OSLC ([Open Services for Lifecycle Collaboration](http://open-services.net)) tutorials, which walks you through building an adapter that adds OSLC support to the popular Bugzilla defect-tracking software.
 
-The source code can be found under the "lyo-rest-workshop" directory. 
-The tutorial document can be found under the "Lab1" sub-directory.
-
-You can also [Read the tutorial at open-services.net](http://archive.open-services.net/resources/tutorials/integrating-products-with-oslc/).
-
-For more information about Developing OSLC applications visit the [OSLC Developer Guide](http://oslc.github.io/developing-oslc-applications/) site.
+Please follow the tutorials from the [OSLC Developer Guide](https://oslc.github.io/developing-oslc-applications/tutorials.html).
