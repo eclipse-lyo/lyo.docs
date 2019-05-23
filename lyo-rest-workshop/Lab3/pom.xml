@@ -5,7 +5,31 @@
   <artifactId>oslc4j-bugzilla-sample-lab3</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <version.lyo>2.2.0</version.lyo>
+  </properties>
+  <repositories>
+      <repository>
+          <id>lyo-releases</id>
+          <name>Eclipse Lyo Releases</name>
+          <url>https://repo.eclipse.org/content/repositories/lyo-releases/</url>
+          <snapshots>
+              <enabled>false</enabled>
+          </snapshots>
+      </repository>
+      <repository>
+          <id>lyo-snapshots</id>
+          <name>Eclipse Lyo Snapshots</name>
+          <url>https://repo.eclipse.org/content/repositories/lyo-snapshots/</url>
+          <releases>
+              <enabled>false</enabled>
+          </releases>
+      </repository>
+  </repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -28,22 +52,22 @@
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-core</artifactId>
-			<version>[0.1.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-wink</artifactId>
-			<version>[0.1.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-json4j-provider</artifactId>
-			<version>[0.1.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.oslc4j.core</groupId>
 			<artifactId>oslc4j-jena-provider</artifactId>
-			<version>[0.1.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.j2bugzilla</groupId>
@@ -55,20 +79,20 @@
 		<dependency>
 			<groupId>org.eclipse.lyo.server</groupId>
 			<artifactId>oauth-webapp</artifactId>
-			<version>[0.0.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 			<type>war</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.lyo.server</groupId>
 			<artifactId>oauth-core</artifactId>
-			<version>[0.0.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.lyo.server</groupId>
 			<artifactId>oauth-consumer-store</artifactId>
-			<version>[0.0.1-SNAPSHOT,)</version>
+			<version>${version.lyo}</version>
 		</dependency>
 
 		<dependency>
