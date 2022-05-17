@@ -32,6 +32,11 @@
   </repositories>
 	<dependencies>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
@@ -111,11 +116,12 @@
     <finalName>oslc4j-bugzilla-sample</finalName>
       	<plugins>
 
-		<!-- Jetty 7 plugin See also: http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
 		<plugin>
-			<groupId>org.mortbay.jetty</groupId>
+			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-maven-plugin</artifactId>
-			<!--  <version>7.3.0.v20110203</version> -->
+			 <!-- <version>9.4.46.v20220331</version> -->
+			 <!-- <version>9.3.30.v20211001</version> -->
+			 <version>9.2.30.v20200428</version>
 
 			<configuration>
 			    <webAppConfig>
@@ -128,17 +134,12 @@
 				<!-- enable hot deploy -->
 				<reload>automatic</reload>
 				<scanIntervalSeconds>5</scanIntervalSeconds>
-				<scanTargets>
-					<scanTarget>WebContent</scanTarget>
-				</scanTargets>
-					
-    			<systemProperties>
 
+    			<systemProperties>
 					<systemProperty>
 						<name>config.dir</name>
 						<value>${basedir}/src/test/resources</value>
 					</systemProperty>
-
 					<systemProperty>
 						<name>jetty.logs</name>
 						<value>${basedir}/target</value>
@@ -147,10 +148,8 @@
 						<name>jetty.port</name>
 						<value>8080</value>
 					</systemProperty>
-				</systemProperties>
-					
+				</systemProperties>	
 			</configuration>
-
 		</plugin>
   	</plugins>
   </build>
