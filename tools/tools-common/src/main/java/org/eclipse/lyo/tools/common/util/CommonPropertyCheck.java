@@ -73,7 +73,7 @@ public class CommonPropertyCheck {
 		commonPropObjMap.put(crtvObj, CRTV.getURI());
 		commonPropObjMap.put(autoObj, AUTO.NS);
 	}
-	private static final Set<String> propNameBlackList = new HashSet<String> (
+	private static final Set<String> propNameDenylist = new HashSet<String> (
 				Arrays.asList( new String[]{"dcterms:type", "http://purl.org/dc/terms/type",
 						"rdf:rest", "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest",
 						"rdf:Bag", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
@@ -93,7 +93,7 @@ public class CommonPropertyCheck {
 		String nsPrefix = NameSpacePrefix.findNameSpacePrefix(nspm,nameSpace);
 		Boolean exactMatch = false;
 		Boolean inCommonNs = false;
-		Boolean inBlackList = false;
+		Boolean inDenylist = false;
 		Integer predType = 0; // 0 - unknown, 1 - invalid, 2 - valid
 		Set<String> errorMsgs = new HashSet<String>();
 
@@ -139,15 +139,15 @@ public class CommonPropertyCheck {
 								!fieldName.equals(propName)) {
 							String prefix = NameSpacePrefix.findNameSpacePrefix(nspm, commonPropObjMap.get(obj));
 							String suggestedName = prefix+ fieldName;
-							if (!propNameBlackList.contains(suggestedName) && ! inCommonNs) {
+							if (!propNameDenylist.contains(suggestedName) && ! inCommonNs) {
 								errorMsgs.add("\tSuggestion:\t" + suggestedName);
 							}
 						}
 						else //exact match, no need to do any check against commonPropNameMap
 						{
 							exactMatch = true;
-							if (propNameBlackList.contains(nsPrefix + lowerPropName)) {
-								inBlackList = true;
+							if (propNameDenylist.contains(nsPrefix + lowerPropName)) {
+								inDenylist = true;
 							}
 						}
 					}
@@ -183,7 +183,7 @@ public class CommonPropertyCheck {
 				errorMsgs.add( "\tError: the term \"" + nsPrefix + propName + "\" as a " + commonResType + " does not exist in the cached copy of the URI \"" + nameSpace
 								+ "\". If it does exist in the URI, please notify us to update the API \"" + apiClassName + "\"");
 			}
-			if (exactMatch && !inBlackList) {
+			if (exactMatch && !inDenylist) {
 				return errorMsgs;
 			}
 			else {

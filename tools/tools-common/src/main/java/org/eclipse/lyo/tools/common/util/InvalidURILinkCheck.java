@@ -45,7 +45,7 @@ public class InvalidURILinkCheck {
 	private static final int BAD_DOMAIN = 1; // URLName's domain is not accessible, e.g. https://198.51.100.194 
 	private static final int BAD_CONTENT_TYPE = 2; // URLName is accessible but the returned content-type is not rdf or turtle.
 	private static final int BAD_URI = 3; // URLName is not accessible
-	private static final ArrayList<String> uriWhiteList = new ArrayList<String> (
+	private static final ArrayList<String> uriAllowlist = new ArrayList<String> (
      		Arrays.asList( new String[]{"http://www.w3.org/2001/XMLSchema#"}));  //URI that is valid - but not retrievable
 	private static ArrayList<String> hostsToSuppressList = null;
 	private static final String IPADDRESS_PATTERN = 
@@ -120,7 +120,7 @@ public class InvalidURILinkCheck {
 		return errorMsgList;
 	}	
 	
-	private static boolean inURIBlackList(String domainStr, Set<String> badURIs) {
+	private static boolean inURIDenylist(String domainStr, Set<String> badURIs) {
 		String localhostStr = "localhost";
 		String lowerUri = domainStr.toLowerCase();		
 		if (lowerUri.contains(localhostStr)) {
@@ -146,12 +146,12 @@ public class InvalidURILinkCheck {
 		int startIndex = URLName.indexOf("//") + 2;
 		int endIndex = URLName.substring(startIndex).indexOf("/") + 1 ;
 		String domainStr = URLName.substring(0, endIndex + startIndex);
-		NameSpaceWhiteList nsList = new NameSpaceWhiteList();	
+		NameSpaceAllowlist nsList = new NameSpaceAllowlist();
 		
 		if (hostsToSuppressList != null ) {
-			uriWhiteList.addAll(hostsToSuppressList);
+			uriAllowlist.addAll(hostsToSuppressList);
 		}
-		for ( String i: uriWhiteList ) {
+		for ( String i: uriAllowlist ) {
 			String lowerURLName = URLName.toLowerCase();
 			String loweri = i.toLowerCase();
 			if (lowerURLName.contains(loweri)) {
@@ -159,7 +159,7 @@ public class InvalidURILinkCheck {
 			}
 		}
 
-		if (badURIs.contains(domainStr) || inURIBlackList(domainStr, badURIs)) {
+		if (badURIs.contains(domainStr) || inURIDenylist(domainStr, badURIs)) {
 			return BAD_DOMAIN;
 		}
 		else {

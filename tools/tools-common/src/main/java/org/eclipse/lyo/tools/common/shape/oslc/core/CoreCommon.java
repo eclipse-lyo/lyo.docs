@@ -58,7 +58,7 @@ public class CoreCommon {
 		return returnList;
 	}
 
-	public static final Set<String> ResponseInfoPredicateWhiteList = new HashSet<String> (
+	public static final Set<String> ResponseInfoPredicateAllowlist = new HashSet<String> (
 			Arrays.asList( new String[]{ "http://purl.org/dc/terms/title",
 					 "http://purl.org/dc/terms/description",
 					 "http://open-services.net/ns/core#nextPage",

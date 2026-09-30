@@ -45,7 +45,7 @@ public class PredicateTypeCheck {
 	private static HashMap<String, String>	resourceShapeSet = null;
 	private final static String coreNS = org.eclipse.lyo.tools.common.vocabulary.oslc.core.OSLC.NS;
 	private final static String toolsNS = "http://open-services.net/ns/authoring/tools#";
-	private final static Set<String> whiteList = new HashSet<String> (
+	private final static Set<String> allowlist = new HashSet<String> (
 			Arrays.asList( new String[]{XSD.xstring.toString()}));
 	private final static ArrayList<String> resourceTypeList = new ArrayList<String> (
 			Arrays.asList( new String[]{coreNS + "Resource"}));
@@ -128,7 +128,7 @@ public class PredicateTypeCheck {
 				else if (predicatetypeSet.containsKey(predicateStr) ){
 					//System.out.println("====== containKey" + predicateStr );
 					if( tmpLiteral.getDatatypeURI() == null ) {
-						if (!whiteList.contains(predicatetypeSet.get(predicateStr))) {
+						if (!allowlist.contains(predicatetypeSet.get(predicateStr))) {
 
 							errorList.add("\tSuggestion:\tadd rdf:datatype=\"" + predicatetypeSet.get(predicateStr) + "\"");
 						}
