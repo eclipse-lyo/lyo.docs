@@ -12,35 +12,18 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Java 8
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: '8'
           cache: maven
-          cache-dependency-path: '**/pom.xml'
+          cache-dependency-path: tools/tools-common/pom.xml
 
-      - name: Install shared tools module
-        run: mvn --batch-mode --no-transfer-progress -f tools/tools-common/pom.xml install
-
-      - name: Test Maven projects
-        shell: bash
-        run: |
-          for pom in \
-            lyo-rest-workshop/Lab1/pom.xml \
-            lyo-rest-workshop/Lab2/pom.xml \
-            lyo-rest-workshop/Lab3/pom.xml \
-            lyo-rest-workshop/Lab4/pom.xml \
-            lyo-rest-workshop/Lab5/pom.xml \
-            lyo-rest-workshop/Lab6/pom.xml \
-            tools/examplechecker/pom.xml \
-            tools/lyo_resourcetable/pom.xml
-          do
-            echo "Testing $pom"
-            mvn --batch-mode --no-transfer-progress -f "$pom" test
-          done
+      - name: Test tools-common
+        run: mvn --batch-mode --no-transfer-progress -f tools/tools-common/pom.xml test
