@@ -98,7 +98,7 @@ public class InvalidPredicateCheck {
 	            	Statement tmpStmt = tmpStmts.next();
 	            	Property pred = tmpStmt.getPredicate();
 	            	if (!tmpStmt.getPredicate().toString().equals(RDF.type.toString()) && 
-	            			!CoreCommon.ResponseInfoPredicateWhiteList.contains(pred.toString())) {
+					!CoreCommon.ResponseInfoPredicateAllowlist.contains(pred.toString())) {
 	            		errorMsg.add(pred.toString());
 	            	}
 	            }

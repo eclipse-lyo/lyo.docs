@@ -75,7 +75,7 @@ public class CheckForCommonMistakes {
 		ClassifiedErrorMessage errMsg = null;
 		OSLCToolLogger.info("Checking for unterminated and invalid namespace prefix URIs in prefix mappings");
 		Map<String, String> nspm = m.getNsPrefixMap();
-		NameSpaceWhiteList nsWhiteLister = new NameSpaceWhiteList();
+		NameSpaceAllowlist nsAllowlister = new NameSpaceAllowlist();
 		int nspCount = 0;
 		for (Iterator<Entry<String, String>> nspi = nspm.entrySet().iterator(); nspi
 				.hasNext();) {
@@ -89,7 +89,7 @@ public class CheckForCommonMistakes {
 				nsuri + "\tends with an unusual character");
 				errorMsgList.add(errMsg);
 			}
-			if (!nsWhiteLister.checkNameSpace(nsuri) ) {
+			if (!nsAllowlister.checkNameSpace(nsuri) ) {
 				errMsg = new ClassifiedErrorMessage(
 						ClassifiedErrorMessage.PRIORITY_ERROR, "", "Suspicious namespace URI: " + nsuri);
 				errorMsgList.add(errMsg);

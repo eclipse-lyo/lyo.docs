@@ -15,9 +15,9 @@
 *******************************************************************************/
 package org.eclipse.lyo.tools.common.util;
 
-public class NameSpaceWhiteList {
+public class NameSpaceAllowlist {
 
-	private String[] whiteList = {
+	private String[] allowlist = {
 			// common name space
 			"http://purl.org/dc/terms/",
 			"http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -31,7 +31,7 @@ public class NameSpaceWhiteList {
 			"http://www.w3.org/2011/http-methods#",
 			"http://www.w3.org/2011/content#",
 			"http://open-services.net/ns/authoring#",
-			// name space white list from http://open-services.net/wiki/core/Vocabulary-index/
+			// name space allowlist from http://open-services.net/wiki/core/Vocabulary-index/
 			"http://open-services.net/ns/core#",
 			"http://open-services.net/ns/cm#",
 			"http://open-services.net/ns/qm#",
@@ -42,7 +42,7 @@ public class NameSpaceWhiteList {
 			"http://open-services.net/ns/perfmon#",
 			"http://open-services.net/ns/metrics#",
 			"http://open-services.net/ns/crtv#",
-			// name space white list from https://jazz.net/ns/
+			// name space allowlist from https://jazz.net/ns/
 			"http://jazz.net/ns/dm/diagram#",
 			"http://jazz.net/ns/dm/document#",
 			"http://jazz.net/ns/dm/linktypes#",
@@ -68,7 +68,7 @@ public class NameSpaceWhiteList {
 			"http://jazz.net/ns/ism/event/omnibus/misc#",
 			"http://jazz.net/ns/ism/event/omnibus/tbsm#",
 			"http://jazz.net/ns/ism/registry#",
-			// name space white list from
+			// name space allowlist from
 			// https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Wde14c82a1d28_4726_a1e3_68030f57eeab/page/Tivoli%20namespace%20registry
 			"http://jazz.net/ns/ism#",
 			"http://jazz.net/ns/ism/registry#",
@@ -98,12 +98,12 @@ public class NameSpaceWhiteList {
 			"http://jazz.net/ns/ism/storage/tsm#"
 };
 
-	public NameSpaceWhiteList() {
+	public NameSpaceAllowlist() {
 		}
 
 	public boolean checkNameSpace(String nameSpace)
 	{
-		for (String s: whiteList)
+		for (String s: allowlist)
 		{
 			if (s.equals(nameSpace) )
 			{
@@ -115,7 +115,7 @@ public class NameSpaceWhiteList {
 
 	public boolean checkNameSpaceDomain(String domainStr)
 	{
-		for (String s: whiteList)
+		for (String s: allowlist)
 		{
 			if (s.contains(domainStr) )
 			{
